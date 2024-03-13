@@ -1,8 +1,6 @@
 package com.dxc.userservice.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -21,12 +19,15 @@ public class User{
 	
 	@Id
 	@GeneratedValue
-	private Integer userId;
-	private String firstName;
-	private String lastName;
-	private String phoneNo;
+	private Integer companyId;
+	private String companyName;
+    private String address;
+    private String country;
+    private String state;
+    private String pinCode;
+	private String repFirstName;
+	private String repLastName;
 	private String email;
 	private String password;
-	private String role;
 	
 }

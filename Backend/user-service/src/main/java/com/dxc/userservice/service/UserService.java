@@ -33,12 +33,15 @@ public class UserService {
             String hashedPassword = hashPassword(password);
             
 			var user = User.builder()
-					.firstName(request.getFirstName())
-					.lastName(request.getLastName())
-					.phoneNo(request.getPhoneNo())
+					.companyName(request.getCompanyName())
+					.address(request.getAddress())
+					.country(request.getCountry())
+					.state(request.getState())
+					.pinCode(request.getPincode())
+					.repFirstName(request.getRepFirstName())
+					.repLastName(request.getRepLastName())
 					.email(request.getEmail())
 					.password(hashedPassword)
-					.role(request.getRole())
 					.build();
 			userRepository.save(user);
 			return new ResponseEntity<>("User added successfully!", HttpStatus.OK);
