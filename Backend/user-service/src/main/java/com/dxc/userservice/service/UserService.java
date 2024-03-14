@@ -22,6 +22,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private EmailSenderService emailSenderService;
+	
 	public ResponseEntity<String> addUser(RegistrationRequest request) {
 		try {
 			
@@ -44,6 +47,16 @@ public class UserService {
 					.password(hashedPassword)
 					.build();
 			userRepository.save(user);
+			
+			// Send confirmation email
+            String subject = "Registration Confirmation";
+            String body = 
+            		"Dear " + user.getRepFirstName() + ",\n\nWe are delighted to inform you that your registration"
+            				+ " as an accountant for "+ user.getCompanyName() + " has been successfully completed in"
+            			    + " our Accounting System Application.\n\nThank you for choosing our services."
+            			    + "\n\nBest regards,\nThe Accounting System Team";
+            emailSenderService.sendConfirmationEmail(user.getEmail(), subject, body);
+			
 			return new ResponseEntity<>("User added successfully!", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
