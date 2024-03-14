@@ -1,0 +1,47 @@
+<div class="body">
+<div class="card">
+  <div class="card-body">
+      <h1 class="card-title text-center">Invoice Details</h1>
+<form>
+  <div class="mb-3">
+    <label for="name" class="form-label">Customer Name</label>
+    <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+    
+  </div>
+  <div class="mb-3">
+    <label for="number" class="form-label">Invoive Number</label>
+    <input type="text" class="form-control" id="number">
+  </div>
+  <div class="mb-3">
+    <label for="date" class="form-label">Date</label>
+    <input type="date" class="form-control" id="date">
+  </div>
+  <div class="mb-3">
+    <label for="product" class="form-label">Product Description</label>
+    <input type="text" class="form-control" id="product" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="quantity" class="form-label">Quantity</label>
+    <input type="number" min="0" class="form-control" id="quantity">
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price per Unit</label>
+    <input type="number" class="form-control" id="price">
+  </div>
+  <div class="mb-3">
+    <label for="amount" class="form-label">Total Amount</label>
+    <input type="number" min="0" class="form-control" id="amount">
+  </div>
+  <div class="mb-3">
+    <label for="status" class="form-label">Payment Status</label>
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Select Status</option>
+    <option value="paid">Paid</option>
+    <option value="pending">Pending</option>
+  </select>
+</div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+</div>

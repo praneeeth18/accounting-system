@@ -1,0 +1,83 @@
+{
+  "signup": [
+    {
+      "id": "1f2d",
+      "companyname": "Amazon Private Limited",
+      "companyemail": "amazon@gmail.com",
+      "password": "amazon123",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "502c",
+      "companyname": "Flipkart Private Limited",
+      "companyemail": "filp@gmail.com",
+      "password": "flip123@45",
+      "address": "A-23, Cyber City, Phase 2",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "c6e2",
+      "companyname": "Mecsafe Private Limited",
+      "companyemail": "mec@gmail.com",
+      "password": "mec@123",
+      "address": "A-88, Engineer Enclave",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110034",
+      "country": "India"
+    },
+    {
+      "id": "8166",
+      "companyname": "Maxlife Limited",
+      "companyemail": "max@gmail.com",
+      "password": "max@123",
+      "address": "A-88, Engineer Enclave",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "3c66",
+      "companyname": "",
+      "companyemail": "",
+      "password": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": "",
+      "country": ""
+    },
+    {
+      "id": "c2aa",
+      "companyname": "def",
+      "companyemail": "def@gmail.com",
+      "password": "def@123",
+      "address": "A-23, Cyber City, Phase 2",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110034",
+      "country": "India"
+    },
+    {
+      "id": "4099",
+      "companyname": "Amazon Public Limited",
+      "companyemail": "amazon@1234",
+      "password": "ama@123",
+      "firstname": "Muskaan",
+      "lastname": "Maan",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    }
+  ]
+}
