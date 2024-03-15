@@ -1,5 +1,7 @@
 package com.dxc.userservice.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,12 +23,12 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody RegistrationRequest request) {
+	public ResponseEntity<Map<String, String>> register(@RequestBody RegistrationRequest request) {
 		return userService.addUser(request);
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
 		return userService.login(request);
 	}
 
