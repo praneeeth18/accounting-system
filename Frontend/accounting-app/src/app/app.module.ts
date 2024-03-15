@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { IndexComponent } from './index/index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    IndexComponent
+    IndexComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
