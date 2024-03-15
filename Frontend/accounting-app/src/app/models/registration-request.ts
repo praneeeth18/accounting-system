@@ -7,6 +7,5 @@ export interface RegistrationRequest {
     address: string,
     state: string,
     country: string,
-    city: string,
     pincode: number,
 }
