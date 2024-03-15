@@ -6,6 +6,7 @@ export interface RegistrationRequest {
     repLastName: string,
     address: string,
     state: string,
+    city: string,
     country: string,
     pincode: number,
 }

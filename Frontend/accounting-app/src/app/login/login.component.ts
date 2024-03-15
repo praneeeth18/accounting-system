@@ -60,13 +60,12 @@ export class LoginComponent {
           alert("Login Success");
           console.log(response);
           this.loginForm.reset();
-          // this.router.navigate(['dashboard']);
+          this.router.navigate(['dashboard']);
         },
         error: (error) => {
           alert("Login Failed: " + error.message);
         }
       });
     }
-    console.log("Login works!");
   }
 }
