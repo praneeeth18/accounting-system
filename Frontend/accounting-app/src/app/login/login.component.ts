@@ -63,10 +63,10 @@ export class LoginComponent {
           // this.router.navigate(['dashboard']);
         },
         error: (error) => {
-          alert("Login Failed: " + error.message);
+          alert("Login Unsuccessfull!");
+          console.log(error);
         }
       });
     }
-    console.log("Login works!");
   }
 }

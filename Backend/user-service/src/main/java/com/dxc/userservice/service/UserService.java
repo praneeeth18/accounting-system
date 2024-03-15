@@ -3,6 +3,8 @@ package com.dxc.userservice.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import com.dxc.userservice.repository.UserRepository;
 
 
 @Service
-public class UserService {
+public class UserService implements UserManagementServiceInterface {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -25,11 +27,14 @@ public class UserService {
 	@Autowired
 	private EmailSenderService emailSenderService;
 	
-	public ResponseEntity<String> addUser(RegistrationRequest request) {
+	@Override
+	public ResponseEntity<Map<String, String>> addUser(RegistrationRequest request) {
+		Map<String, String> response = new HashMap<>();
 		try {
 			
 			if (userRepository.existsByEmail(request.getEmail())) {
-                return new ResponseEntity<>("Email already exists!", HttpStatus.BAD_REQUEST);
+				response.put("error", "Email already exists!");
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
 			
 			String password = request.getPassword();
@@ -40,6 +45,7 @@ public class UserService {
 					.address(request.getAddress())
 					.country(request.getCountry())
 					.state(request.getState())
+					.city(request.getCity())
 					.pinCode(request.getPincode())
 					.repFirstName(request.getRepFirstName())
 					.repLastName(request.getRepLastName())
@@ -56,31 +62,41 @@ public class UserService {
             			    + " our Accounting System Application.\n\nThank you for choosing our services."
             			    + "\n\nBest regards,\nThe Accounting System Team";
             emailSenderService.sendConfirmationEmail(user.getEmail(), subject, body);
+            
+            response.put("message", "Candidate added successfully!");
 			
-			return new ResponseEntity<>("User added successfully!", HttpStatus.OK);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("User registration unsuccessfull!", HttpStatus.BAD_REQUEST);
+			response.put("error", "User registration unsuccessful!");
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	public ResponseEntity<String> login(LoginRequest request) {
+	@Override
+	public ResponseEntity<Map<String, String>> login(LoginRequest request) {
+		Map<String, String> response = new HashMap<>();
         try {
             Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
             if (optionalUser.isEmpty()) {
-                return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
+            	response.put("error", "User not found!");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
             User user = optionalUser.get();
             String hashedPassword = hashPassword(request.getPassword());
             if (!user.getPassword().equals(hashedPassword)) {
-                return new ResponseEntity<>("Invalid credentials!", HttpStatus.UNAUTHORIZED);
+            	response.put("error", "Invalid credentials!");
+                return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
             }
 
-            return new ResponseEntity<>("Login successful!", HttpStatus.OK);
+            response.put("message", "Login successful!");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+            
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("Login failed!", HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("error", "Login failed!");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 	

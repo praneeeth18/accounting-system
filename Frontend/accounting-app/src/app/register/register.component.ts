@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
+import { RegistrationRequest } from '../models/registration-request';
 
 @Component({
   selector: 'app-register',
@@ -47,17 +48,29 @@ export class RegisterComponent {
       return; // If the form is invalid, do not proceed with signup
     }
 
-    const registrationRequest = this.signupForm.value;
-    this.userService.register(registrationRequest).subscribe(
-      response => {
+    const registrationRequest: RegistrationRequest = {
+      companyName: this.signupForm.value.companyname,
+      email: this.signupForm.value.companyemail,
+      password: this.signupForm.value.password,
+      repFirstName: this.signupForm.value.firstname,
+      repLastName: this.signupForm.value.lastname,
+      address: this.signupForm.value.address,
+      city: this.signupForm.value.city,
+      state: this.signupForm.value.state,
+      pincode: this.signupForm.value.pincode,
+      country: this.signupForm.value.country
+    };
+    this.userService.register(registrationRequest).subscribe({
+      next: response => {
         alert('Sign Up Successful');
+        console.log(response);
         this.signupForm.reset();
         this.router.navigate(['login']);
       },
-      error => {
+      error: error => {
         console.error('Sign Up Failed:', error);
         alert('Sign Up Failed. Please try again.');
       }
-    );
+    });
   }
 }
