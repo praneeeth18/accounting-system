@@ -19,7 +19,7 @@ import com.dxc.userservice.repository.UserRepository;
 
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface{
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -27,6 +27,7 @@ public class UserService {
 	@Autowired
 	private EmailSenderService emailSenderService;
 	
+	@Override
 	public ResponseEntity<Map<String, String>> addUser(RegistrationRequest request) {
 		Map<String, String> response = new HashMap<>();
 		try {
@@ -44,6 +45,7 @@ public class UserService {
 					.address(request.getAddress())
 					.country(request.getCountry())
 					.state(request.getState())
+					.city(request.getCity())
 					.pinCode(request.getPincode())
 					.repFirstName(request.getRepFirstName())
 					.repLastName(request.getRepLastName())
@@ -70,6 +72,7 @@ public class UserService {
 		}
 	}
 	
+	@Override
 	public ResponseEntity<Map<String, String>> login(LoginRequest request) {
 		Map<String, String> response = new HashMap<>();
         try {

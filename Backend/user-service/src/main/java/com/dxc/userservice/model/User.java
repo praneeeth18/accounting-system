@@ -24,6 +24,7 @@ public class User{
     private String address;
     private String country;
     private String state;
+    private String city;
     private String pinCode;
 	private String repFirstName;
 	private String repLastName;
