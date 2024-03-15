@@ -10,6 +10,8 @@ import { IndexComponent } from './index/index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SalesTableComponent } from './sales-table/sales-table.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     RegisterComponent,
     IndexComponent,
-    DashboardComponent
+    DashboardComponent,
+    SalesTableComponent,
+    InvoiceDetailsComponent
   ],
   imports: [
     BrowserModule,
