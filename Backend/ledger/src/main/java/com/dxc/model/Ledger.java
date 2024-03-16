@@ -16,35 +16,19 @@ public class Ledger {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int entryid;
-	private String companyid;
 	private Date transactiondate;
 	private String description;
+	private String transactiontype;
 	private double amount;
 	private double balance;
 	public Ledger() {
 		super();
-	}
-	public Ledger(int entryid, String companyid, Date transactiondate, String description, double amount,
-			double balance) {
-		super();
-		this.entryid = entryid;
-		this.companyid = companyid;
-		this.transactiondate = transactiondate;
-		this.description = description;
-		this.amount = amount;
-		this.balance = balance;
 	}
 	public int getEntryid() {
 		return entryid;
 	}
 	public void setEntryid(int entryid) {
 		this.entryid = entryid;
-	}
-	public String getCompanyid() {
-		return companyid;
-	}
-	public void setCompanyid(String companyid) {
-		this.companyid = companyid;
 	}
 	public Date getTransactiondate() {
 		return transactiondate;
@@ -57,6 +41,12 @@ public class Ledger {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getTransactiontype() {
+		return transactiontype;
+	}
+	public void setTransactiontype(String transactiontype) {
+		this.transactiontype = transactiontype;
 	}
 	public double getAmount() {
 		return amount;
@@ -72,10 +62,9 @@ public class Ledger {
 	}
 	@Override
 	public String toString() {
-		return "Ledger [entryid=" + entryid + ", companyid=" + companyid + ", transactiondate=" + transactiondate
-				+ ", description=" + description + ", amount=" + amount + ", balance=" + balance + "]";
+		return "Ledger [entryid=" + entryid + ", transactiondate=" + transactiondate + ", description=" + description
+				+ ", transactiontype=" + transactiontype + ", amount=" + amount + ", balance=" + balance + "]";
 	}
 	
 	
-
 }
