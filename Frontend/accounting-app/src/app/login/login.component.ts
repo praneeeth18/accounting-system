@@ -59,11 +59,20 @@ export class LoginComponent {
         next: (response) => {
           alert("Login Success");
           console.log(response);
+
+          if (response && response.email) {
+            sessionStorage.setItem('currentUserEmail', response.email);
+          }
+
           this.loginForm.reset();
           this.router.navigate(['dashboard']);
         },
         error: (error) => {
-          alert("Login Failed: " + error.message);
+          if (error.error && error.error.message) {
+            alert('Login Failed: ' + error.error.message);
+          } else {
+            alert('Login failed. Please try again.');
+          }
         }
       });
     }

@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
     IndexComponent,
     DashboardComponent,
     SalesTableComponent,
-    InvoiceDetailsComponent
+    InvoiceDetailsComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,

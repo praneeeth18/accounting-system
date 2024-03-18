@@ -59,15 +59,21 @@ export class RegisterComponent {
       };
     
       this.userService.register(registrationRequest).subscribe(
-        response => {
-          alert('Sign Up Successful');
-          console.log(response);
-          this.signupForm.reset();
-          this.router.navigate(['login']);
-        },
-        error => {
-          console.error('Sign Up Failed:', error);
-          alert('Sign Up Failed. Please try again.');
+        {
+          next: (response) => {
+            alert('Sign Up Successful');
+            console.log(response);
+            this.signupForm.reset();
+            this.router.navigate(['login']);
+          },
+          error: (error) => {
+            console.error('Sign Up Failed:', error);
+            if (error.error && error.error.message) {
+              alert('Sign Up Failed: ' + error.error.message);
+            } else {
+              alert('Sign Up Failed. Something went wrong.');
+            }
+          }
         }
       );
     }

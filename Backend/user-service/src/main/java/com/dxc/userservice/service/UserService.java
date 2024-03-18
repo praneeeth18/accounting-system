@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.dxc.userservice.model.LoginRequest;
 import com.dxc.userservice.model.RegistrationRequest;
 import com.dxc.userservice.model.User;
+import com.dxc.userservice.model.UserDetailsDTO;
 import com.dxc.userservice.repository.UserRepository;
 
 
@@ -33,7 +34,7 @@ public class UserService implements UserServiceInterface{
 		try {
 			
 			if (userRepository.existsByEmail(request.getEmail())) {
-				response.put("error", "Email already exists!");
+				response.put("message", "Email already exists!");
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
 			
@@ -73,27 +74,28 @@ public class UserService implements UserServiceInterface{
 	}
 	
 	@Override
-	public ResponseEntity<Map<String, String>> login(LoginRequest request) {
+	public ResponseEntity<?> login(LoginRequest request) {
 		Map<String, String> response = new HashMap<>();
         try {
             Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
             if (optionalUser.isEmpty()) {
-            	response.put("error", "User not found!");
+            	response.put("message", "User not found!");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
             User user = optionalUser.get();
             String hashedPassword = hashPassword(request.getPassword());
             if (!user.getPassword().equals(hashedPassword)) {
-            	response.put("error", "Invalid credentials!");
+            	response.put("message", "Invalid credentials!");
                 return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
             }
 
             response.put("message", "Login successful!");
+            response.put("email", user.getEmail());
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            response.put("error", "Login failed!");
+            response.put("message", "Login failed!");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -104,4 +106,32 @@ public class UserService implements UserServiceInterface{
         return Base64.getEncoder().encodeToString(hashedBytes);
     }
 
+	
+	public ResponseEntity<?> getUserDetailsByEmail(String email) {
+		try {
+			Optional<User> optionalUser = userRepository.findByEmail(email);
+			if (optionalUser.isEmpty()) {
+                return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
+            }
+			
+			User user = optionalUser.get();
+			
+			UserDetailsDTO userDTO = new UserDetailsDTO();
+            userDTO.setCompanyId(user.getCompanyId());
+            userDTO.setCompanyName(user.getCompanyName());
+            userDTO.setAddress(user.getAddress());
+            userDTO.setCountry(user.getCountry());
+            userDTO.setState(user.getState());
+            userDTO.setCity(user.getCity());
+            userDTO.setPinCode(user.getPinCode());
+            userDTO.setRepFirstName(user.getRepFirstName());
+            userDTO.setRepLastName(user.getRepLastName());
+            userDTO.setEmail(user.getEmail());
+            
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Error fetching details!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+    }
 }

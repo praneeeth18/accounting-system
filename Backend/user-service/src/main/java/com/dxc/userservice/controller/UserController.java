@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 		return userService.login(request);
+	}
+	
+	@GetMapping("/getUserDetails/{email}")
+	public ResponseEntity<?> getUserDetailsByEmail(@PathVariable String email) {
+		return userService.getUserDetailsByEmail(email);
 	}
 
 }

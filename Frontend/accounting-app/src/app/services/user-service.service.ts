@@ -21,4 +21,8 @@ export class UserServiceService {
   login(login: LoginRequest): Observable<any> {
     return this.http.post(baseURL + 'login', login);
   }
+
+  getUserDetails(email: string): Observable<any> {
+    return this.http.get(baseURL + `getUserDetails/${email}`);
+  }
 }

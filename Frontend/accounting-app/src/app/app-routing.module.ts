@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'index', pathMatch:'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'dashboard', component:DashboardComponent},
   {path:'invoice-details', component:InvoiceDetailsComponent},
-  {path:'sales-table', component:SalesTableComponent}
+  {path:'sales-table', component:SalesTableComponent},
+  {path:'profile', component:CompanyProfileComponent}
 ];
 
 @NgModule({
