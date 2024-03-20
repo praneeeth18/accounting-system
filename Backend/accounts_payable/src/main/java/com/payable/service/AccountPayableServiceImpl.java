@@ -1,5 +1,6 @@
 package com.payable.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,17 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 	public AccountPayable getAccountPayableById(Long payableId) {
 		return accountPayableDao.findById(payableId).orElse(null);
 	}
-
+		
+	
 	@Override
 	public AccountPayable createAccountPayable(AccountPayable accountPayable) {
+		
+		if (accountPayable.getDate() == null) {
+			accountPayable.setDate(LocalDate.now());
+        }else if (accountPayable.getDate().isEmpty()) {
+        	accountPayable.setDate(LocalDate.now());
+        }
+		
 		accountPayable.setTotalAmount(accountPayable.getQuantity() * accountPayable.getPrice());
         return accountPayableDao.save(accountPayable);
 	}

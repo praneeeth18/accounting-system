@@ -1,5 +1,7 @@
 package com.payable.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,12 +15,14 @@ public class AccountPayable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long payableId;
     private String invoiceNumber;
+    private LocalDate date;
     private String customerName;
     private String productDescription;
     private int quantity;
     private double price;
     private double totalAmount;
     private String status;
+    
 	public Long getpayableId() {
 		return payableId;
 	}
@@ -30,6 +34,12 @@ public class AccountPayable {
 	}
 	public void setInvoiceNumber(String invoiceNumber) {
 		this.invoiceNumber = invoiceNumber;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	public String getCustomerName() {
 		return customerName;
@@ -70,7 +80,7 @@ public class AccountPayable {
 	
 	@Override
 	public String toString() {
-		return "AccountPayable [payableId=" + payableId + ", invoiceNumber=" + invoiceNumber + ", customerName=" + customerName
+		return "AccountPayable [payableId=" + payableId + ", invoiceNumber=" + invoiceNumber + ", date=" + date + ", customerName=" + customerName
 				+ ", productDescription=" + productDescription + ", quantity=" + quantity + ", price=" + price
 				+ ", totalAmount=" + totalAmount + ", status=" + status + "]";
 	}   
