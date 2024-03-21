@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CompanyProfileComponent } from './company-profile/company-profile.compo
     DashboardComponent,
     SalesTableComponent,
     InvoiceDetailsComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    LedgerEntryComponent
   ],
   imports: [
     BrowserModule,
