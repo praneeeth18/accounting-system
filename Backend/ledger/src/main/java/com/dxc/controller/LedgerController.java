@@ -3,6 +3,7 @@ package com.dxc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dxc.model.Ledger;
 import com.dxc.service.LedgerServices;
 
-
 @RestController
 @RequestMapping
+@CrossOrigin(origins="http://localhost:4200")
 public class LedgerController {
 	
 	@Autowired
@@ -26,59 +27,38 @@ public class LedgerController {
         return ledgerservice.getAllLedger();
     }
 	
-	@GetMapping("/prevbalance")
-	public double getPrevBalance() {
-		return ledgerservice.getPreviousBalance();
-	}
-	
-	String trtype;
+	String transacttype;
 	double prevBal;
 	
 	 @PostMapping("/ledger")
-	    public Ledger entryLedger(@RequestBody Ledger ledger) {
-		 
-	    	System.out.println(ledger.toString());
+	 public Ledger entryLedger(@RequestBody Ledger ledger) {
 	    	
-	    	prevBal=ledgerservice.getPreviousBalance();
+	    prevBal=ledgerservice.getPreviousBalance();
 	    	
 	    	if(prevBal==0){
-	   
-		    		trtype=ledger.getTransactiontype();
+		    		transacttype=ledger.getTransactiontype();
 		    		
-		    		if(trtype!= null && trtype.equals("CREDIT")) {
-		    			System.out.println(trtype);
+		    		if(transacttype!= null && transacttype.equals("CREDIT")) {
 		    			ledger.setBalance(ledger.getAmount());
-		    			System.out.println(ledger.getBalance());
 		    		}
 		    		
-		    		else if(trtype!= null && trtype.equals("DEBIT")) {
-		    			System.out.println(trtype);
+		    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
 		    			ledger.setBalance(ledger.getBalance()-ledger.getAmount());
-		    			System.out.println(ledger.getBalance());
 		    		}	
 	    	}
 	    	
 	    	else if(prevBal!=0) {
+	    		transacttype=ledger.getTransactiontype();
 	    		
-	    		System.out.println(prevBal);
-	    		trtype=ledger.getTransactiontype();
-	    		
-	    		if(trtype!= null && trtype.equals("CREDIT")) {
-	    			System.out.println(trtype);
+	    		if(transacttype!= null && transacttype.equals("CREDIT")) {
 	    			ledger.setBalance(prevBal + ledger.getAmount());
-	    			System.out.println(ledger.getBalance());
 	    		}
 	    		
-	    		else if(trtype!= null && trtype.equals("DEBIT")) {
-	    			System.out.println(trtype);
+	    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
 	    			ledger.setBalance(prevBal - ledger.getAmount());
-	    			System.out.println(ledger.getBalance());
 	    		}
 	    	}
 		 
 	        return ledgerservice.createLedgerEntry(ledger);
 	    }
-	 
-	 
-
 }
