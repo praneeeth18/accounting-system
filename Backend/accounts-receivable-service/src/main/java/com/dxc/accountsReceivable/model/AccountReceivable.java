@@ -29,6 +29,6 @@ public class AccountReceivable {
     private double amount;
     private String status;
 
-//    private String customerName;
-//    private int companyId;
+    private String customerName;
+    private int companyId;
 }
