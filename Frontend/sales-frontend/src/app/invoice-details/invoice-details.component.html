@@ -1,0 +1,132 @@
+<div class="wrapper">
+
+    
+    <aside id="sidebar">
+        <div class="d-flex">
+            <button class="toggle-btn" type="button">
+                <i class="lni lni-grid-alt"></i>
+            </button>
+            <div class="sidebar-logo">
+                <a routerLink="/dashboard">Dashboard</a>
+            </div>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a routerLink="/dashboard" class="sidebar-link">
+                    <i class="lni lni-agenda"></i>
+                    <span>Ledger</span>
+                </a>
+            </li>
+        <!--    <li class="sidebar-item">
+                <a routerLink="/sales-table" class="sidebar-link">
+                    <i class="lni lni-agenda"></i>
+                    <span>Sales</span>
+                </a>
+            </li>-->
+            <li class="sidebar-item">
+                <a routerLink="/invoice-details" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <i class="lni lni-target-revenue"></i>
+                    <span>Sales</span>
+                </a>
+                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a routerLink="/sales-table" class="sidebar-link">Sale Details</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="sidebar-item">
+                <a routerLink="/dashboard" class="sidebar-link">
+                    <i class="lni lni-wallet"></i>
+                    <span>Purchases</span>
+                </a>
+        
+            
+            <li class="sidebar-item">
+                <a routerLink="/dashboard" class="sidebar-link">
+                    <i class="lni lni-customer"></i>
+                    <span>Customer</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a routerLink="/dashboard" class="sidebar-link">
+                    <i class="lni lni-revenue"></i>
+                    <span>Vendor</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a routerLink="/dashboard" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Company Profile</span>
+                    </a>
+                </li>
+            <li class="sidebar-item">
+            <a routerLink="/login" class="sidebar-link">
+                <i class="lni lni-exit"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+        </div>
+    </aside>
+
+
+<div class="main p-3">
+<div class="card">
+<div class="card-body">
+  <h1 class="card-title text-center">Invoice Details</h1>
+<form [formGroup]="invoiceForm" (ngSubmit)="invoice()">
+<div class="mb-3">
+<label for="name" class="form-label">Customer Name</label>
+<input type="text" formControlName="customername" class="form-control" id="name" aria-describedby="emailHelp" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer Name is required</span>
+
+</div>
+<div class="mb-3">
+<label for="number" class="form-label">Invoice Number</label>
+<input type="text" formControlName="invoicenumber" class="form-control" id="number" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice Number is required</span>
+</div>
+<div class="mb-3">
+<label for="date" class="form-label">Date</label>
+<input type="date" formControlName="date" class="form-control" id="date" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['date'].dirty && invoiceForm.hasError('required', 'date')">*Date is required</span>
+</div>
+<div class="mb-3">
+<label for="product" class="form-label">Product Description</label>
+<input type="text" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('required', 'proddesc')">*Product Description is required</span>
+</div>
+<div class="mb-3">
+<label for="quantity" class="form-label">Quantity</label>
+<input type="number" min="1" formControlName="quantity" class="form-control" id="quantity" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('required', 'quantity')">*Quantity is required</span>
+</div>
+<div class="mb-3">
+<label for="price" class="form-label">Price per Unit</label>
+<input type="number" min="1" formControlName="price" class="form-control" id="price" required>
+<span class="text-danger" *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('required', 'price')">*Price is required</span>
+</div>
+
+<div class="mb-3">
+<label for="status" class="form-label">Payment Status</label>&nbsp;
+<select class="form-select" formControlName="status" aria-label="Default select example" class="required">
+<option value="" disabled="disabled">Select Status</option>
+<option value="paid">Paid</option>
+<option value="pending">Pending</option>
+</select>
+
+</div>
+<button type="submit" class="btn btn-primary" [disabled]="!invoiceForm.valid">Submit</button>
+</form>
+</div>
+</div>
+</div>

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
+import { Invoice } from '../models/invoice';
 
 declare function sidebar() : any;
 
@@ -13,7 +15,7 @@ declare function sidebar() : any;
 export class InvoiceDetailsComponent {
 
   public invoiceForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private invoiceSerivce: AccountsReceivableServiceService) {}
 
   ngOnInit(): void {
     this.invoiceForm = this.formBuilder.group({
@@ -30,16 +32,28 @@ export class InvoiceDetailsComponent {
   }
 
   invoice() {
-    this.http.post<any>("http://localhost:3000/invoice",this.invoiceForm.value)
-    .subscribe(res=>{
-      alert("Invoice Generated Successfully");
-      this.invoiceForm.reset();
-      this.router.navigate(['sales-table']);
-
-    }, err=>{
-      alert("Something went wrong");
-    }
-    )
-  }
+    if(this.invoiceForm.valid) {
+     const invoiceDetailsRequest: Invoice = {
+       invoiceNumber: this.invoiceForm.value.invoicenumber,
+       customerName: this.invoiceForm.value.customername,
+       dueDate: this.invoiceForm.value.date,
+       productDescription: this.invoiceForm.value.proddesc,
+       quantity: this.invoiceForm.value.quantity,
+       price: this.invoiceForm.value.price,
+       status: this.invoiceForm.value.status,
+       companyId: 1
+     };
+     this.invoiceSerivce.createInvoice(invoiceDetailsRequest).subscribe({
+       next: (response) => {
+         alert('Invoice added sucussfully!');
+         console.log(response);
+         this.invoiceForm.reset();
+       },
+       error: (error) => {
+         console.error(error);
+       }
+     })
+    } 
+   }
 
 }

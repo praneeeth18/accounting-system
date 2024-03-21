@@ -2,6 +2,7 @@ package com.dxc.accountsReceivable.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 		try {
 			accountReceivable.setAmount(accountReceivable.getQuantity() * accountReceivable.getPrice());
 			accountReceivableRepository.save(accountReceivable);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
+			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Entry created!"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
@@ -32,11 +33,34 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	@Override
 	public ResponseEntity<List<AccountReceivable>> getAllAccountReceivable() {
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(accountReceivableRepository.findAll());
+//			return ResponseEntity.status(HttpStatus.OK).body(accountReceivableRepository.findAll());
+			List<AccountReceivable> entries = accountReceivableRepository.findAll();
+			if (entries.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>()); // Return 404 if no data found
+            }
+			return ResponseEntity.status(HttpStatus.OK).body(entries);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<>());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+
+	@Override
+	public ResponseEntity<List<AccountReceivable>> findByCompanyId(int companyId) {
+		try {
+			List<AccountReceivable> entries = accountReceivableRepository.findByCompanyId(companyId);
+			if (entries.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>()); // Return 404 if no data found
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(entries);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	
+	
+	
 
 }

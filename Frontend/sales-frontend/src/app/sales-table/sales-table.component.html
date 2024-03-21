@@ -1,0 +1,127 @@
+
+
+<body>
+    
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a routerLink="/dashboard">Dashboard</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a routerLink="/dashboard" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Ledger</span>
+                    </a>
+                </li>
+            <!--    <li class="sidebar-item">
+                    <a routerLink="/sales-table" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Sales</span>
+                    </a>
+                </li>-->
+                <li class="sidebar-item">
+                    <a routerLink="/sales-table" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-target-revenue"></i>
+                        <span>Sales</span>
+                    </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a routerLink="/sales-table" class="sidebar-link">Sale Details</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="sidebar-item">
+                    <a routerLink="/dashboard" class="sidebar-link">
+                        <i class="lni lni-wallet"></i>
+                        <span>Purchases</span>
+                    </a>
+            
+                
+                <li class="sidebar-item">
+                    <a routerLink="/dashboard" class="sidebar-link">
+                        <i class="lni lni-customer"></i>
+                        <span>Customer</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a routerLink="/dashboard" class="sidebar-link">
+                        <i class="lni lni-revenue"></i>
+                        <span>Vendor</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a routerLink="/dashboard" class="sidebar-link">
+                            <i class="lni lni-user"></i>
+                            <span>Company Profile</span>
+                        </a>
+                    </li>
+                <li class="sidebar-item">
+                <a routerLink="/login" class="sidebar-link">
+                    <i class="lni lni-exit"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+            </div>
+        </aside>
+   
+      
+      
+       
+      
+      
+        <div class="main p-3">
+            <div class="text-center">
+                <h1>Sale Details</h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Invoice No.</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Product Description</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">View</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                      <tr *ngFor="let item of invoice">
+                       
+                        <td>{{item.invoicenumber}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.customername}}</td>
+                        <td>{{item.proddesc}}</td>
+                        <td>{{item.quantity * item.price}}</td>
+                        <td>{{item.status}}</td>
+                        <td><button (click)="invoiceView(item.id)" class="btn btn-success"
+                            style="margin-left: 10px;">View</button>
+                            </td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+
+                  <button routerLink="/invoice-details" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
+            </div>
+        </div>
+ 
+    </div>
+
+</body>
+

@@ -1,0 +1,203 @@
+{
+  "signup": [
+    {
+      "id": "1",
+      "companyname": "Amazon Private Limited",
+      "companyemail": "amazon@gmail.com",
+      "password": "amazon123",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "2",
+      "companyname": "Flipkart Private Limited",
+      "companyemail": "filp@gmail.com",
+      "password": "flip123@45",
+      "address": "A-23, Cyber City, Phase 2",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "3",
+      "companyname": "Mecsafe Private Limited",
+      "companyemail": "mec@gmail.com",
+      "password": "mec@123",
+      "address": "A-88, Engineer Enclave",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110034",
+      "country": "India"
+    },
+    {
+      "id": "4",
+      "companyname": "Maxlife Limited",
+      "companyemail": "max@gmail.com",
+      "password": "max@123",
+      "address": "A-88, Engineer Enclave",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "5",
+      "companyname": "def",
+      "companyemail": "def@gmail.com",
+      "password": "def@123",
+      "address": "A-23, Cyber City, Phase 2",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110034",
+      "country": "India"
+    },
+    {
+      "id": "6",
+      "companyname": "Amazon Public Limited",
+      "companyemail": "amazon@1234",
+      "password": "ama@123",
+      "firstname": "Muskaan",
+      "lastname": "Maan",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "7",
+      "companyname": "Hello World",
+      "companyemail": "hello@gmail.com",
+      "password": "Hello@123",
+      "firstname": "Muskaan",
+      "lastname": "Maan",
+      "address": "A-88, Engineer Enclave",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110034",
+      "country": "India"
+    },
+    {
+      "id": "8",
+      "companyname": "Tesla",
+      "companyemail": "tesla@gmail.com",
+      "password": "Tesla@123",
+      "firstname": "Elon",
+      "lastname": "Musk",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    },
+    {
+      "id": "9",
+      "companyname": "Infosys",
+      "companyemail": "infosys@gmail.com",
+      "password": "Info@123",
+      "firstname": "Sam",
+      "lastname": "Holland",
+      "address": "A44/2, Cyber Hub, Phase 1",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pincode": "230066",
+      "country": "India"
+    }
+  ],
+  "invoice": [
+    {
+      "id": "1",
+      "customername": "Muskaan",
+      "invoicenumber": "A001",
+      "date": "2024-03-05",
+      "proddesc": "Nykaa",
+      "quantity": 2,
+      "price": 56,
+      "status": "paid"
+    },
+    {
+      "id": "2",
+      "customername": "Mehak",
+      "invoicenumber": "A002",
+      "date": "2024-03-16",
+      "proddesc": "Handbag",
+      "quantity": 1,
+      "price": 5000,
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "customername": "Aryan",
+      "invoicenumber": "A003",
+      "date": "2024-03-16",
+      "proddesc": "Footwear",
+      "quantity": 1,
+      "price": 500,
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "customername": "Max",
+      "invoicenumber": "A004",
+      "date": "2024-03-12",
+      "proddesc": "Pedigree",
+      "quantity": 2,
+      "price": 480,
+      "status": "paid"
+    },
+    {
+      "id": "5",
+      "customername": "Amazon",
+      "invoicenumber": "A005",
+      "date": "2024-03-21",
+      "proddesc": "Jeans",
+      "quantity": 3,
+      "price": 400,
+      "status": "pending"
+    },
+    {
+      "id": "6",
+      "customername": "Tesla",
+      "invoicenumber": "A006",
+      "date": "2024-03-18",
+      "proddesc": "Car",
+      "quantity": 1,
+      "price": 2000000,
+      "status": "pending"
+    },
+    {
+      "id": "7",
+      "customername": "Plum",
+      "invoicenumber": "A008",
+      "date": "2024-03-18",
+      "proddesc": "Retinol",
+      "quantity": 3,
+      "price": 400,
+      "status": "pending"
+    },
+    {
+      "id": "8",
+      "customername": "Tech Mahindra",
+      "invoicenumber": "A007",
+      "date": "2024-03-20",
+      "proddesc": "Hardware",
+      "quantity": 3,
+      "price": 1000,
+      "status": "pending"
+    },
+    {
+      "id": "9",
+      "customername": "George",
+      "invoicenumber": "A008",
+      "date": "2024-03-13",
+      "proddesc": "Iphone",
+      "quantity": 2,
+      "price": 145000,
+      "status": "paid"
+    }
+  ]
+}

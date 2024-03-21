@@ -1,0 +1,30 @@
+.body {
+    background: linear-gradient(to bottom, #6f72ba 0%, #232756 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 91vh;
+}
+
+.card {
+    width: 400px;
+    border-radius: 10%;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #c0ec5c;
+    color: black;
+    font-style: bold;
+}
+
+.image img{
+    width: 400px;
+    height: 430px;
+    border-radius: 10%;
+  }
+
+  .card-body{
+    height: 100%;
+  }
