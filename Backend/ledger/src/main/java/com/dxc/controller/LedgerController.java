@@ -3,6 +3,8 @@ package com.dxc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import com.dxc.service.LedgerServices;
 @CrossOrigin(origins="http://localhost:4200")
 public class LedgerController {
 	
+	ResponseEntity response;
+	boolean flag;
+	
 	@Autowired
 	private  LedgerServices ledgerservice;
 	
@@ -27,38 +32,16 @@ public class LedgerController {
         return ledgerservice.getAllLedger();
     }
 	
-	String transacttype;
-	double prevBal;
-	
-	 @PostMapping("/ledger")
-	 public Ledger entryLedger(@RequestBody Ledger ledger) {
-	    	
-	    prevBal=ledgerservice.getPreviousBalance();
-	    	
-	    	if(prevBal==0){
-		    		transacttype=ledger.getTransactiontype();
-		    		
-		    		if(transacttype!= null && transacttype.equals("CREDIT")) {
-		    			ledger.setBalance(ledger.getAmount());
-		    		}
-		    		
-		    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
-		    			ledger.setBalance(ledger.getBalance()-ledger.getAmount());
-		    		}	
-	    	}
-	    	
-	    	else if(prevBal!=0) {
-	    		transacttype=ledger.getTransactiontype();
-	    		
-	    		if(transacttype!= null && transacttype.equals("CREDIT")) {
-	    			ledger.setBalance(prevBal + ledger.getAmount());
-	    		}
-	    		
-	    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
-	    			ledger.setBalance(prevBal - ledger.getAmount());
-	    		}
-	    	}
-		 
-	        return ledgerservice.createLedgerEntry(ledger);
-	    }
+	@PostMapping("/ledger")
+    public ResponseEntity<?> getLedger(@RequestBody Ledger ledger) {
+		flag=ledgerservice.createLedger(ledger);
+		if(flag) {
+			response=new ResponseEntity<String>("Entry added to the database", HttpStatus.ACCEPTED);
+		}
+		else {
+			response = new ResponseEntity<String>("Check the details ", HttpStatus.BAD_REQUEST);
+		}
+		return response;
+    }
+	 
 }

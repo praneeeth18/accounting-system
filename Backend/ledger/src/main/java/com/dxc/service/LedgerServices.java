@@ -8,8 +8,6 @@ public interface LedgerServices {
 	
 	public List<Ledger> getAllLedger();
 	
-	public Ledger createLedgerEntry(Ledger ledger);
-
-	public double getPreviousBalance();
+	public boolean createLedger(Ledger ledger);
 	
 }
