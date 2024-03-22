@@ -34,6 +34,7 @@ export class InvoiceDetailsComponent {
   invoice() {
     if(this.invoiceForm.valid) {
      const invoiceDetailsRequest: Invoice = {
+       id: 1,
        invoiceNumber: this.invoiceForm.value.invoicenumber,
        customerName: this.invoiceForm.value.customername,
        dueDate: this.invoiceForm.value.date,

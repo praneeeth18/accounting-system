@@ -8,6 +8,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 import { SalesTableComponent } from './sales-table/sales-table.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'index', pathMatch:'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'invoice-details', component:InvoiceDetailsComponent},
   {path:'sales-table', component:SalesTableComponent},
   {path:'profile', component:CompanyProfileComponent},
-  {path:'ledgerEntry', component: LedgerEntryComponent}
+  {path:'ledgerEntry', component: LedgerEntryComponent},
+  {path:'invoice-view/:id', component:InvoiceViewComponent}
 ];
 
 @NgModule({

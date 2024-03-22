@@ -16,4 +16,11 @@ export class AccountsReceivableServiceService {
     return this.httpClient.post(this.baseURL + 'createAccountReceivable', invoiceDetails);
   }
 
+  getInvoiceByCompanyId(companyId: number): Observable<any> {
+    return this.httpClient.get(this.baseURL + `getEntryByCompanyId/${companyId}`);
+  }
+
+  getInvoiceByReceivableId(receivableId: number): Observable<any> {
+    return this.httpClient.get(this.baseURL + `getEntryByReceivableId/${receivableId}`);
+  }
 }

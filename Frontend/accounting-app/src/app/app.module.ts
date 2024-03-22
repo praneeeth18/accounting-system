@@ -14,6 +14,7 @@ import { SalesTableComponent } from './sales-table/sales-table.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
     SalesTableComponent,
     InvoiceDetailsComponent,
     CompanyProfileComponent,
-    LedgerEntryComponent
+    LedgerEntryComponent,
+    InvoiceViewComponent
   ],
   imports: [
     BrowserModule,

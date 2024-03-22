@@ -1,6 +1,7 @@
 
 
 <body>
+  
     
     <div class="wrapper">
         <aside id="sidebar">
@@ -38,10 +39,11 @@
                         <li class="sidebar-item">
                             <a routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
                         </li>
+                      
                     </ul>
                 </li>
-
-
+  
+  
                 <li class="sidebar-item">
                     <a routerLink="/dashboard" class="sidebar-link">
                         <i class="lni lni-wallet"></i>
@@ -65,7 +67,7 @@
             <div class="sidebar-footer">
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
-                        <a routerLink="/profile" class="sidebar-link">
+                        <a routerLink="/dashboard" class="sidebar-link">
                             <i class="lni lni-user"></i>
                             <span>Company Profile</span>
                         </a>
@@ -79,49 +81,52 @@
         </ul>
             </div>
         </aside>
-   
-      
-      
+    
+  
+  
+  
+  
+  <div class="main p-3">
+  <div class="invoice-container">
+      <h1 class="text-center">Invoice Details</h1>
+    <!--  <div class="company-details">
+        <h2>Company Details</h2>
+        <p><strong>Company Name:</strong> {{ company.companyname }}</p>
+        <p><strong>Email:</strong> {{ company.companyemail }}</p>
+        <p><strong>Address:</strong> {{ company.address }}, {{ company.city }}, {{ company.state }}, {{ company.country }}, {{ company.pincode }}</p>
+      </div>-->
+      <div class="invoice-details">
        
+        <p><strong>Invoice Number:</strong> {{ invoice.invoiceNumber }}</p>
+        <p><strong>Date:</strong> {{ invoice.dueDate }}</p>
+        <p><strong>Customer Name:</strong> {{ invoice.customerName }}</p>
+      </div>
+      <div class="product-details">
+        <h2>Product Details</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product Description</th>
+              <th scope="col">Price/Unit</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ invoice.productDescription }}</td>
+              <td>{{ invoice.price }}</td>
+              <td>{{ invoice.quantity }}</td>
+              <td>{{ invoice.quantity * invoice.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     <button class="btn btn-primary" (click)="downloadInvoice()">Download Invoice</button>
+  </div>
+    
       
-      
-        <div class="main p-3">
-            <div class="text-center">
-                <h1>Sale Details</h1>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Invoice No.</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Product Description</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">View</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                      <tr *ngFor="let item of invoice">
-                       
-                        <td>{{item.invoiceNumber}}</td>
-                        <td>{{item.dueDate}}</td>
-                        <td>{{item.customerName}}</td>
-                        <td>{{item.productDescription}}</td>
-                        <td>{{item.quantity * item.price}}</td>
-                        <td>{{item.status}}</td>
-                        <td><button (click)="invoiceView(item.receivableId)" class="btn btn-success"
-                            style="margin-left: 10px;">View</button>
-                            </td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
-
-                  <button routerLink="/invoice-details" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
-            </div>
-        </div>
- 
-    </div>
-
-</body>
-
+  </div>
+    
+  </div>
+  </body>

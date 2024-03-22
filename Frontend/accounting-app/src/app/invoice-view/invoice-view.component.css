@@ -1,16 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-
-.body {
-    background: linear-gradient(to bottom, #6f72ba 0%, #232756 100%);
+::after,
+::before {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150vh;
 }
 
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -26,21 +34,6 @@ body {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     background-color: #fafbfe;
-}
-
-::after,
-::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
-li {
-    list-style: none;
 }
 
 #sidebar {
@@ -146,11 +139,4 @@ a.sidebar-link:hover {
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
     transform: rotate(45deg);
     transition: all .2s ease-out;
-}
-
-.custom-container {
-    height: 500px; /* Optional: Adjust height for vertical centering */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
