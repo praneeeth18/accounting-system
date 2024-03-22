@@ -37,4 +37,9 @@ public class AccountReceivableController {
 	public ResponseEntity<List<AccountReceivable>> getEntryByCompanyId(@PathVariable int companyId) {
 		return accountReceivableServiceImpl.findByCompanyId(companyId);
 	}
+	
+	@GetMapping("/getEntryByReceivableId/{id}")
+	public ResponseEntity<AccountReceivable> getInvoiceById(@PathVariable long id) {
+		return accountReceivableServiceImpl.getInvoiceById(id);
+	}
 }

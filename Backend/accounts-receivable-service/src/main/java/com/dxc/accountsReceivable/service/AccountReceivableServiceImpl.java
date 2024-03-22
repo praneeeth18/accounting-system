@@ -59,6 +59,24 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 		}
 	}
 
+	@Override
+	public ResponseEntity<AccountReceivable> getInvoiceById(long id) {
+		try {
+			// Find the invoice by ID
+	        AccountReceivable invoice = accountReceivableRepository.findById(id).orElse(null);
+	        
+	        // Check if the invoice exists
+	        if (invoice != null) {
+	            return ResponseEntity.status(HttpStatus.OK).body(invoice); // Return the invoice if found
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if not found
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
 	
 	
 	
