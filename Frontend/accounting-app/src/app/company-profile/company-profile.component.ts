@@ -28,5 +28,6 @@ export class CompanyProfileComponent implements OnInit{
       console.log('User email not found in sessionStorage');
     }
   }
+  
 
 }

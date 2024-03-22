@@ -1,0 +1,6 @@
+.custom-container {
+    height: 100vh; /* Optional: Adjust height for vertical centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
