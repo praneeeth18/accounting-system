@@ -60,9 +60,12 @@ export class LoginComponent {
           alert("Login Success");
           console.log(response);
 
-          if (response && response.email) {
-            sessionStorage.setItem('currentUserEmail', response.email);
-          }
+          // if (response && response.email) {
+          //   sessionStorage.setItem('currentUserEmail', response.email);
+          // }
+          sessionStorage.setItem('currentUser', JSON.stringify(response.user));
+          sessionStorage.setItem('currentUserEmail', response.user.email);
+          sessionStorage.setItem('companyId', response.user.companyId.toString());
 
           this.loginForm.reset();
           this.router.navigate(['dashboard']);

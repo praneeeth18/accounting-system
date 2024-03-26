@@ -19,15 +19,24 @@ export class SalesTableComponent {
   ngOnInit(){
 
     sidebar();
-    this.invoiceSerivce.getInvoiceByCompanyId(1).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.invoice = response; // Assign the response data to the invoice property
-      },
-      error: (error) => {
-        console.error('Error fetching invoices:', error);
-      }
-    })
+    const companyId = sessionStorage.getItem('companyId');
+    if (companyId) {
+      // Parse companyId to number
+      const companyIdNumber = parseInt(companyId, 10);
+      
+      // Call the service method with the retrieved companyId
+      this.invoiceSerivce.getInvoiceByCompanyId(companyIdNumber).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.invoice = response; // Assign the response data to the invoice property
+        },
+        error: (error) => {
+          console.error('Error fetching invoices:', error);
+        }
+      });
+    } else {
+      alert('Company ID does not exist');
+    }
   }
 
   invoiceView(id:number){
