@@ -20,12 +20,14 @@ h1 {
     font-size: 1.5rem;
 }
 
-body {
+.aside{
     font-family: 'Poppins', sans-serif;
 }
 
 .wrapper {
     display: flex;
+    height: 100%;
+    flex: 0 0 auto;
 }
 
 .main {

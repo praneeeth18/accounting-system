@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../services/user-service.service';
 
-declare function sidebar() : any;
+
 
 @Component({
   selector: 'app-company-profile',
@@ -16,7 +16,7 @@ export class CompanyProfileComponent implements OnInit{
 
   ngOnInit(): void {
 
-    sidebar();
+  
     // Retrieve email from sessionStorage
     const email = sessionStorage.getItem('currentUserEmail');
     // Retrieve user details from localStorage

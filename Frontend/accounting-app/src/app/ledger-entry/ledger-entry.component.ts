@@ -19,8 +19,8 @@ export class LedgerEntryComponent implements OnInit {
   ngOnInit(): void {
     this.ledgerForm = this.fb.group({
       transactionDate: [null,Validators.required],
-      description: ['', Validators.required,Validators.pattern(/[a-zA-Z]{5,10}/)],
-      amount: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      description: ['', [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]],
+      amount: [null, Validators.required],
       transactionType: ['', Validators.required],
     });
     

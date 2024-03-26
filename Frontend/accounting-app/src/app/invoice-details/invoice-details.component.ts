@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 import { Invoice } from '../models/invoice';
 
-declare function sidebar() : any;
+
 
 @Component({
   selector: 'app-invoice-details',
@@ -28,7 +28,7 @@ export class InvoiceDetailsComponent {
       status:['', Validators.required]
     })
 
-    sidebar();
+    
   }
 
   invoice() {

@@ -9,7 +9,8 @@
 }
 
 .card {
-    width: 400px;
+  width: 400px;
+  border-radius: 10%;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -18,11 +19,11 @@
     font-style: bold;
 }
 
-.card_image {
-    width: 100%;
-    height: 430px;
-    
-  }
+.image img{
+  width: 400px;
+  height: 430px;
+  border-radius: 10%;
+}
 
   .card-body{
     height: 100%;

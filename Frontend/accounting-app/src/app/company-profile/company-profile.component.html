@@ -1,102 +1,20 @@
-<div class="wrapper">
 
-    
-    <aside id="sidebar">
-        <div class="d-flex">
-            <button class="toggle-btn" type="button">
-                <i class="lni lni-grid-alt"></i>
-            </button>
-            <div class="sidebar-logo">
-                <a routerLink="/dashboard">Dashboard</a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a routerLink="/dashboard" class="sidebar-link">
-                    <i class="lni lni-agenda"></i>
-                    <span>Ledger</span>
-                </a>
-            </li>
-        <!--    <li class="sidebar-item">
-                <a routerLink="/sales-table" class="sidebar-link">
-                    <i class="lni lni-agenda"></i>
-                    <span>Sales</span>
-                </a>
-            </li>-->
-            <li class="sidebar-item">
-                <a routerLink="/invoice-details" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="lni lni-target-revenue"></i>
-                    <span>Sales</span>
-                </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a routerLink="/sales-table" class="sidebar-link">Sale Details</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="sidebar-item">
-                <a routerLink="/dashboard" class="sidebar-link">
-                    <i class="lni lni-wallet"></i>
-                    <span>Purchases</span>
-                </a>
-        
-            
-            <li class="sidebar-item">
-                <a routerLink="/dashboard" class="sidebar-link">
-                    <i class="lni lni-customer"></i>
-                    <span>Customer</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a routerLink="/dashboard" class="sidebar-link">
-                    <i class="lni lni-revenue"></i>
-                    <span>Vendor</span>
-                </a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a routerLink="/invoice-details" class="sidebar-link">
-                        <i class="lni lni-user"></i>
-                        <span>Company Profile</span>
-                    </a>
-                </li>
-            <li class="sidebar-item">
-            <a routerLink="/login" class="sidebar-link">
-                <i class="lni lni-exit"></i>
-                <span>Logout</span>
-            </a>
-        </li>
-    </ul>
-        </div>
-    </aside>
-
-
-    <div class="main p-3">
-        <div class="custom-container">
-            <div class="card" style="width: 20rem;">
-                <div class="card-body">
-                  <h4 class="card-title">Profile Details:</h4>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Company Name: {{ currentUser?.companyName }}</li>
-                    <li class="list-group-item">First Name: {{ currentUser?.repFirstName }}</li>
-                    <li class="list-group-item">Last Name: {{ currentUser?.repLastName }}</li>
-                    <li class="list-group-item">Email: {{ currentUser?.email }}</li>
-                    <li class="list-group-item">Address: {{ currentUser?.address}}</li>
-                    <li class="list-group-item">City: {{ currentUser?.city}}</li>
-                    <li class="list-group-item">State: {{ currentUser?.state}}</li>
-                    <li class="list-group-item">Country: {{ currentUser?.country}}</li>
-                    <li class="list-group-item">Pincode: {{ currentUser?.pinCode}}</li>
-                  </ul>
-                </div>
-            </div>
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Profile Details:</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Company Name: {{ currentUser?.companyName }}</li>
+            <li class="list-group-item">First Name: {{ currentUser?.repFirstName }}</li>
+            <li class="list-group-item">Last Name: {{ currentUser?.repLastName }}</li>
+            <li class="list-group-item">Email: {{ currentUser?.email }}</li>
+            <li class="list-group-item">Address: {{ currentUser?.address}}</li>
+            <li class="list-group-item">City: {{ currentUser?.city}}</li>
+            <li class="list-group-item">State: {{ currentUser?.state}}</li>
+            <li class="list-group-item">Country: {{ currentUser?.country}}</li>
+            <li class="list-group-item">Pincode: {{ currentUser?.pinCode}}</li>
+          </ul>
         </div>
     </div>
 </div>

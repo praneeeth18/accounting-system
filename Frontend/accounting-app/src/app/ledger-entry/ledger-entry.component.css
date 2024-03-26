@@ -1,44 +1,16 @@
-.ledgerentry {
-    border: 1px solid #ccc; 
-    padding: 20px; 
-    width: 400px; 
-    margin: 10px auto;
-     background: linear-gradient(to bottom, #c9f44b 0%, #3a6625 100%);
-    bottom: 100px;
-    
+
+
+.custom-container {
+  /* Optional: Adjust height for vertical centering */
+  height: 100%;
+  display: flex;
+
 }
-  
-  .ledgerentry form {
-    display: flex;
-    flex-direction: column;
-  
-  }
-  
-  .ledgerentry label {
-    margin-bottom: 10px;
-  }
-  
-  .ledgerentry input[type="date"],
-  .ledgerentry input[type="text"],
-  .ledgerentry input[type="number"],
-  .ledgerentry select {
-    width: 100%;
-    padding: 2px;
-    margin-bottom: 15px;
-    box-sizing: border-box; 
-    bottom: 200px;
-  }
-  
-  .ledgerentry button {
-    background-color:rgb(26, 26, 27); 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .ledgerentry button:hover {
-    background-color: rgb(75, 42, 153); 
-  }
-  
+
+
+.card {
+  margin: 0 auto; /* Center the card horizontally */
+  width: 50%; /* Set width of the card */
+
+  overflow-y: auto; 
+}

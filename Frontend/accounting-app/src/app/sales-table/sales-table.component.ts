@@ -3,7 +3,7 @@ import { Invoice } from '../models/invoice';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 import { Router } from '@angular/router';
 
-declare function sidebar() : any;
+
 
 @Component({
   selector: 'app-sales-table',
@@ -18,7 +18,7 @@ export class SalesTableComponent {
 
   ngOnInit(){
 
-    sidebar();
+    
     const companyId = sessionStorage.getItem('companyId');
     if (companyId) {
       // Parse companyId to number

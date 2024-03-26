@@ -15,6 +15,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
     InvoiceDetailsComponent,
     CompanyProfileComponent,
     LedgerEntryComponent,
-    InvoiceViewComponent
+    InvoiceViewComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

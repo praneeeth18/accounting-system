@@ -6,7 +6,7 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 
-declare function sidebar() : any;
+
 
 @Component({
   selector: 'app-invoice-view',
