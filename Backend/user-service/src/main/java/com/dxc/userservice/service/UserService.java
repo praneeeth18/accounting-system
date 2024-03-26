@@ -75,7 +75,7 @@ public class UserService implements UserServiceInterface{
 	
 	@Override
 	public ResponseEntity<?> login(LoginRequest request) {
-		Map<String, String> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
         try {
             Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
             if (optionalUser.isEmpty()) {
@@ -91,8 +91,9 @@ public class UserService implements UserServiceInterface{
             }
 
             response.put("message", "Login successful!");
-            response.put("email", user.getEmail());
-            response.put("companyId", user.getCompanyId().toString());
+//            response.put("email", user.getEmail());
+//            response.put("companyId", user.getCompanyId().toString());
+            response.put("user", user);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
