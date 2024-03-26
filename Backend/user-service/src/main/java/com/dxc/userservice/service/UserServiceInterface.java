@@ -11,4 +11,5 @@ public interface UserServiceInterface {
 
 	ResponseEntity<Map<String, String>> addUser(RegistrationRequest request);
 	ResponseEntity<?> login(LoginRequest request);
+	ResponseEntity<?> getCompanyById(int id);
 }

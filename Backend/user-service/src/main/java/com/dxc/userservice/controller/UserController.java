@@ -38,5 +38,10 @@ public class UserController {
 	public ResponseEntity<?> getUserDetailsByEmail(@PathVariable String email) {
 		return userService.getUserDetailsByEmail(email);
 	}
+	
+	@GetMapping("/getDetailsByCompanyId/{id}")
+	public ResponseEntity<?> getDetailsByCompanyId(@PathVariable int id) {
+		return userService.getCompanyById(id);
+	}
 
 }

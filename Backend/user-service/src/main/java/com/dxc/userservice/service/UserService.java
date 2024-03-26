@@ -92,6 +92,7 @@ public class UserService implements UserServiceInterface{
 
             response.put("message", "Login successful!");
             response.put("email", user.getEmail());
+            response.put("companyId", user.getCompanyId().toString());
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,4 +135,33 @@ public class UserService implements UserServiceInterface{
 			return new ResponseEntity<>("Error fetching details!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
     }
+
+	@Override
+	public ResponseEntity<?> getCompanyById(int id) {
+		try {
+	        Optional<User> optionalUser = userRepository.findById(id);
+	        if (optionalUser.isEmpty()) {
+	            return new ResponseEntity<>("Company not found!", HttpStatus.NOT_FOUND);
+	        }
+
+	        User company = optionalUser.get();
+
+	        UserDetailsDTO companyDTO = new UserDetailsDTO();
+	        companyDTO.setCompanyId(company.getCompanyId());
+	        companyDTO.setCompanyName(company.getCompanyName());
+	        companyDTO.setAddress(company.getAddress());
+	        companyDTO.setCountry(company.getCountry());
+	        companyDTO.setState(company.getState());
+	        companyDTO.setCity(company.getCity());
+	        companyDTO.setPinCode(company.getPinCode());
+	        companyDTO.setRepFirstName(company.getRepFirstName());
+	        companyDTO.setRepLastName(company.getRepLastName());
+	        companyDTO.setEmail(company.getEmail());
+
+	        return new ResponseEntity<>(companyDTO, HttpStatus.OK);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ResponseEntity<>("Error fetching company details!", HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
 }
