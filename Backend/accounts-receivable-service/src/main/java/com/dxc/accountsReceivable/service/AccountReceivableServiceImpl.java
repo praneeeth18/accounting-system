@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.dxc.accountsReceivable.feign.AccountReceivableFeignInterface;
 import com.dxc.accountsReceivable.model.AccountReceivable;
 import com.dxc.accountsReceivable.repository.AccountReceivableRepository;
 
@@ -17,10 +18,18 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	
 	@Autowired
 	private AccountReceivableRepository accountReceivableRepository;
+	
+	@Autowired
+	private AccountReceivableFeignInterface userServiceInterface;
 
 	@Override
 	public ResponseEntity<?> createReceivable(AccountReceivable accountReceivable) {
 		try {
+			// Check if the company ID exists
+	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountReceivable.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+	        }
 			accountReceivable.setAmount(accountReceivable.getQuantity() * accountReceivable.getPrice());
 			accountReceivableRepository.save(accountReceivable);
 			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Entry created!"));
