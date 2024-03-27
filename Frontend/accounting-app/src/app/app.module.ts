@@ -16,6 +16,7 @@ import { CompanyProfileComponent } from './company-profile/company-profile.compo
 import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { FooterComponent } from './footer/footer.component';
+import { PurchasesComponent } from './purchases/purchases.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FooterComponent } from './footer/footer.component';
     CompanyProfileComponent,
     LedgerEntryComponent,
     InvoiceViewComponent,
-    FooterComponent
+    FooterComponent,
+    PurchasesComponent
   ],
   imports: [
     BrowserModule,

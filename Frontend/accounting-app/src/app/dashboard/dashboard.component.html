@@ -10,10 +10,19 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a routerLink="/ledgerEntry" class="sidebar-link">
+                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-agenda"></i>
                         <span>Ledger</span>
                     </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a routerLink="/sales-table" class="sidebar-link">Legder Table</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a routerLink="/invoice-details" class="sidebar-link">Add new Entry</a>
+                        </li>
+                    </ul>
                 </li>
             <!--    <li class="sidebar-item">
                     <a routerLink="/sales-table" class="sidebar-link">
@@ -39,23 +48,51 @@
 
 
                 <li class="sidebar-item">
-                    <a routerLink="/dashboard" class="sidebar-link">
+                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-wallet"></i>
                         <span>Purchases</span>
                     </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-table" class="sidebar-link">Purchase Details</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-entry" class="sidebar-link">Generate New Invoice</a>
+                        </li>
+                    </ul>
+                </li>
             
                 
                 <li class="sidebar-item">
-                    <a routerLink="/dashboard" class="sidebar-link">
+                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-customer"></i>
                         <span>Customer</span>
                     </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-table" class="sidebar-link">Customer Details</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-entry" class="sidebar-link">Add new Customer</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a routerLink="/dashboard" class="sidebar-link">
+                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-revenue"></i>
                         <span>Vendor</span>
                     </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-table" class="sidebar-link">Vendor Details</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a routerLink="/purchase-entry" class="sidebar-link">Add new Vendor</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <div class="sidebar-footer">
