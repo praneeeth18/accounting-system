@@ -65,7 +65,7 @@ export class LoginComponent {
           // }
           sessionStorage.setItem('currentUser', JSON.stringify(response.user));
           sessionStorage.setItem('currentUserEmail', response.user.email);
-          sessionStorage.setItem('companyId', response.user.companyId.toString());
+          sessionStorage.setItem('companyId', response.user.companyId);
 
           this.loginForm.reset();
           this.router.navigate(['dashboard']);

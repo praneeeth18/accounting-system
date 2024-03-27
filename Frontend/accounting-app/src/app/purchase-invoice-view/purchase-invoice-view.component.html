@@ -1,0 +1,44 @@
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+  <div class="invoice-container">
+      <h1 class="text-center">Invoice Details</h1>
+    <!--  <div class="company-details">
+        <h2>Company Details</h2>
+        <p><strong>Company Name:</strong> {{ company.companyname }}</p>
+        <p><strong>Email:</strong> {{ company.companyemail }}</p>
+        <p><strong>Address:</strong> {{ company.address }}, {{ company.city }}, {{ company.state }}, {{ company.country }}, {{ company.pincode }}</p>
+      </div>-->
+      <div class="invoice-details">
+       
+        <p><strong>Invoice Number:</strong> {{ purchase.invoiceNumber }}</p>
+        <p><strong>Date:</strong> {{ purchase.dueDate }}</p>
+        <p><strong>Vendor Name:</strong> {{ purchase.vendorName }}</p>
+      </div>
+      <div class="product-details">
+        <h2>Product Details</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product Description</th>
+              <th scope="col">Price/Unit</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ purchase.productDescription }}</td>
+              <td>{{ purchase.price }}</td>
+              <td>{{ purchase.quantity }}</td>
+              <td>{{ purchase.quantity * purchase.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+     <button class="btn btn-primary" (click)="downloadInvoice()">Download Invoice</button>
+  </div>
+    
+      
+  </div>
+    
+  

@@ -1,5 +1,4 @@
 
-
 .custom-container {
     /* Optional: Adjust height for vertical centering */
     height: 100%;
@@ -7,14 +6,12 @@
 
 }
 
-
-.card {
+.invoice-container{
     margin: 0 auto; /* Center the card horizontally */
-    width: 50%; /* Set width of the card */
- 
+    width: 50rem; /* Set width of the card */
+    flex: 1; /* Let the card occupy remaining space */
     overflow-y: auto; 
-}
-
-.purchaseEntry {
-    background: linear-gradient(to bottom, #c9f44b 0%, #3a6625 100%);
+    
+    padding-left: 2%;
+    padding-right: 2%;
 }

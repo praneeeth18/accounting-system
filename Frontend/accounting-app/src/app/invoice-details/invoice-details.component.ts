@@ -33,8 +33,7 @@ export class InvoiceDetailsComponent {
 
   invoice() {
     if(this.invoiceForm.valid) {
-     const invoiceDetailsRequest: Invoice = {
-       id: 1,
+     const invoiceDetailsRequest = {
        invoiceNumber: this.invoiceForm.value.invoicenumber,
        customerName: this.invoiceForm.value.customername,
        dueDate: this.invoiceForm.value.date,
@@ -42,15 +41,17 @@ export class InvoiceDetailsComponent {
        quantity: this.invoiceForm.value.quantity,
        price: this.invoiceForm.value.price,
        status: this.invoiceForm.value.status,
-       companyId: 1
+       companyId: sessionStorage.getItem('companyId')
      };
      this.invoiceSerivce.createInvoice(invoiceDetailsRequest).subscribe({
        next: (response) => {
          alert('Invoice added sucussfully!');
          console.log(response);
          this.invoiceForm.reset();
+         this.router.navigate(['sales-table']);
        },
        error: (error) => {
+         alert('Unsucessfull!' + error);
          console.error(error);
        }
      })
