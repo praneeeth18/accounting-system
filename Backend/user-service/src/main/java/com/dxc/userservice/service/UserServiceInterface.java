@@ -6,10 +6,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.dxc.userservice.model.LoginRequest;
 import com.dxc.userservice.model.RegistrationRequest;
+import com.dxc.userservice.model.UserDetailsDTO;
 
 public interface UserServiceInterface {
 
-	ResponseEntity<Map<String, String>> addUser(RegistrationRequest request);
-	ResponseEntity<?> login(LoginRequest request);
-	ResponseEntity<?> getCompanyById(int id);
+	public ResponseEntity<Map<String, String>> addUser(RegistrationRequest request);
+	public ResponseEntity<Map<String, Object>> login(LoginRequest request);
+	public ResponseEntity<UserDetailsDTO> getUserDetailsByEmail(String email);
+	public ResponseEntity<UserDetailsDTO> getCompanyById(int id);
 }

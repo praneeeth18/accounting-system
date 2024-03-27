@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,16 @@ import com.dxc.userservice.repository.UserRepository;
 @Service
 public class UserService implements UserServiceInterface{
 	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private EmailSenderService emailSenderService;
+	private final UserRepository userRepository;
+    private final EmailSenderService emailSenderService;
+
+    private static final String MESSAGE = "message";
+    
+    public UserService(UserRepository userRepository, EmailSenderService emailSenderService) {
+        this.userRepository = userRepository;
+        this.emailSenderService = emailSenderService;
+    }
+
 	
 	@Override
 	public ResponseEntity<Map<String, String>> addUser(RegistrationRequest request) {
@@ -34,7 +38,7 @@ public class UserService implements UserServiceInterface{
 		try {
 			
 			if (userRepository.existsByEmail(request.getEmail())) {
-				response.put("message", "Email already exists!");
+				response.put(MESSAGE, "Email already exists!");
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
 			
@@ -55,7 +59,6 @@ public class UserService implements UserServiceInterface{
 					.build();
 			userRepository.save(user);
 			
-			// Send confirmation email
             String subject = "Registration Confirmation";
             String body = 
             		"Dear " + user.getRepFirstName() + ",\n\nWe are delighted to inform you that your registration"
@@ -64,7 +67,7 @@ public class UserService implements UserServiceInterface{
             			    + "\n\nBest regards,\nThe Accounting System Team";
             emailSenderService.sendConfirmationEmail(user.getEmail(), subject, body);
 			
-            response.put("message", "User added successfully!");
+            response.put(MESSAGE, "User added successfully!");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,30 +77,28 @@ public class UserService implements UserServiceInterface{
 	}
 	
 	@Override
-	public ResponseEntity<?> login(LoginRequest request) {
+	public ResponseEntity<Map<String, Object>> login(LoginRequest request) {
 		Map<String, Object> response = new HashMap<>();
         try {
             Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
             if (optionalUser.isEmpty()) {
-            	response.put("message", "User not found!");
+            	response.put(MESSAGE, "User not found!");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
             User user = optionalUser.get();
             String hashedPassword = hashPassword(request.getPassword());
             if (!user.getPassword().equals(hashedPassword)) {
-            	response.put("message", "Invalid credentials!");
+            	response.put(MESSAGE, "Invalid credentials!");
                 return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
             }
 
-            response.put("message", "Login successful!");
-//            response.put("email", user.getEmail());
-//            response.put("companyId", user.getCompanyId().toString());
+            response.put(MESSAGE, "Login successful!");
             response.put("user", user);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            response.put("message", "Login failed!");
+            response.put(MESSAGE, "Login failed!");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -109,40 +110,41 @@ public class UserService implements UserServiceInterface{
     }
 
 	
-	public ResponseEntity<?> getUserDetailsByEmail(String email) {
-		try {
-			Optional<User> optionalUser = userRepository.findByEmail(email);
-			if (optionalUser.isEmpty()) {
-                return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
-            }
-			
-			User user = optionalUser.get();
-			
-			UserDetailsDTO userDTO = new UserDetailsDTO();
-            userDTO.setCompanyId(user.getCompanyId());
-            userDTO.setCompanyName(user.getCompanyName());
-            userDTO.setAddress(user.getAddress());
-            userDTO.setCountry(user.getCountry());
-            userDTO.setState(user.getState());
-            userDTO.setCity(user.getCity());
-            userDTO.setPinCode(user.getPinCode());
-            userDTO.setRepFirstName(user.getRepFirstName());
-            userDTO.setRepLastName(user.getRepLastName());
-            userDTO.setEmail(user.getEmail());
-            
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>("Error fetching details!", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-    }
+	@Override
+	public ResponseEntity<UserDetailsDTO> getUserDetailsByEmail(String email) {
+	    try {
+	        Optional<User> optionalUser = userRepository.findByEmail(email);
+	        if (optionalUser.isEmpty()) {
+	            return ResponseEntity.notFound().build();
+	        }
+
+	        User user = optionalUser.get();
+
+	        UserDetailsDTO userDTO = new UserDetailsDTO();
+	        userDTO.setCompanyId(user.getCompanyId());
+	        userDTO.setCompanyName(user.getCompanyName());
+	        userDTO.setAddress(user.getAddress());
+	        userDTO.setCountry(user.getCountry());
+	        userDTO.setState(user.getState());
+	        userDTO.setCity(user.getCity());
+	        userDTO.setPinCode(user.getPinCode());
+	        userDTO.setRepFirstName(user.getRepFirstName());
+	        userDTO.setRepLastName(user.getRepLastName());
+	        userDTO.setEmail(user.getEmail());
+
+	        return ResponseEntity.ok(userDTO);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+	}
 
 	@Override
-	public ResponseEntity<?> getCompanyById(int id) {
-		try {
+	public ResponseEntity<UserDetailsDTO> getCompanyById(int id) {
+	    try {
 	        Optional<User> optionalUser = userRepository.findById(id);
 	        if (optionalUser.isEmpty()) {
-	            return new ResponseEntity<>("Company not found!", HttpStatus.NOT_FOUND);
+	            return ResponseEntity.notFound().build();
 	        }
 
 	        User company = optionalUser.get();
@@ -159,10 +161,11 @@ public class UserService implements UserServiceInterface{
 	        companyDTO.setRepLastName(company.getRepLastName());
 	        companyDTO.setEmail(company.getEmail());
 
-	        return new ResponseEntity<>(companyDTO, HttpStatus.OK);
+	        return ResponseEntity.ok(companyDTO);
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return new ResponseEntity<>("Error fetching company details!", HttpStatus.INTERNAL_SERVER_ERROR);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    }
 	}
+
 }

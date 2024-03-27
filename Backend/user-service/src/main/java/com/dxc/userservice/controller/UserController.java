@@ -2,7 +2,6 @@ package com.dxc.userservice.controller;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dxc.userservice.model.LoginRequest;
 import com.dxc.userservice.model.RegistrationRequest;
+import com.dxc.userservice.model.UserDetailsDTO;
 import com.dxc.userservice.service.UserService;
 
 @RestController
@@ -21,8 +21,11 @@ import com.dxc.userservice.service.UserService;
 @CrossOrigin(origins="http://localhost:4200/")
 public class UserController {
 	
-	@Autowired
-	UserService userService;
+	private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 	
 	@PostMapping("/register")
 	public ResponseEntity<Map<String, String>> register(@RequestBody RegistrationRequest request) {
@@ -30,17 +33,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request) {
 		return userService.login(request);
 	}
 	
 	@GetMapping("/getUserDetails/{email}")
-	public ResponseEntity<?> getUserDetailsByEmail(@PathVariable String email) {
+	public ResponseEntity<UserDetailsDTO> getUserDetailsByEmail(@PathVariable String email) {
 		return userService.getUserDetailsByEmail(email);
 	}
 	
 	@GetMapping("/getDetailsByCompanyId/{id}")
-	public ResponseEntity<?> getDetailsByCompanyId(@PathVariable int id) {
+	public ResponseEntity<UserDetailsDTO> getDetailsByCompanyId(@PathVariable int id) {
 		return userService.getCompanyById(id);
 	}
 
