@@ -2,12 +2,14 @@ package com.payable.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.payable.model.AccountPayable;
 
 public interface AccountPayableService {	
-	List<AccountPayable> getAllAccountPayable();
-	AccountPayable getAccountPayableById(Long payableId);
-	AccountPayable createAccountPayable(AccountPayable accountPayable);
-    void deleteAccountPayable(Long payableId);
+	public ResponseEntity<?> createPayable(AccountPayable accountPayable);
+	public ResponseEntity<List<AccountPayable>> getAllAccountPayable();
+	public ResponseEntity<List<AccountPayable>> findByCompanyId(int companyId);
+	public ResponseEntity<AccountPayable> getInvoiceById(long id);
 
 }
