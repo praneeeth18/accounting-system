@@ -1,0 +1,44 @@
+<!--<div class="container">
+   <table>
+       <tr>
+           <th>vendorId</th>
+           <th>vendorName</th>
+           <th>vendorEmail</th>
+       </tr>
+       <tr *ngFor="let vendor of vendorList">
+           <td>{{vendor.vendorId}}</td>
+           <td>{{vendor.vendorName}}</td>
+           <td>{{vendor.vendorEmail}}</td>
+       </tr>
+       <td colspan="4" style="text-align: center;">
+ <button type="submit" routerLink="/vendor" ><b>Add Vendor</b></button>
+ </td>
+   </table>
+</div>
+-->
+<div class="container">
+    <table>
+        <tr>
+            <th>vendorId</th>
+            <th>vendorName</th>
+            <th>vendorEmail</th>
+            <th>Actions</th> 
+        </tr>
+        <tr *ngFor="let vendor of vendorList">
+            <td>{{vendor.vendorId}}</td>
+            <td>{{vendor.vendorName}}</td>
+            <td>{{vendor.vendorEmail}}</td>
+            <td>
+            
+                <button class="btn btn-success"(click)="editVendor(vendor.vendorId)">Edit</button>
+               
+                <button  class="btn btn-danger" (click)="deleteVendor(vendor.vendorId)">Delete</button>
+            </td>
+        </tr>
+        <td colspan="4" style="text-align: center;">
+             <button type="submit" routerLink="/vendor"><b>Add Vendor</b></button>
+        </td>
+    </table>
+ </div>
+ 
+

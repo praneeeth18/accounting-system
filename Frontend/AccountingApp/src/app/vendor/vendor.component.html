@@ -1,0 +1,43 @@
+<div class="form-group">
+    <h2 align="center"><i><u><b>Vendor Details</b></u></i></h2>
+    <br>
+    <form class="form" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+       
+        <label for="vendorName"><b>Vendor Name :</b></label>
+        <input 
+            type="text"
+            id="vendorName"
+            formControlName="vendorName"
+            pattern="[a-zA-Z]{2,}"
+         
+            placeholder="Enter the Vendor name">
+        <div
+            class="text-danger"
+            *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['required']"
+          >
+            *Name is required
+        </div>
+      
+        <div
+            class="text-danger"
+            *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['pattern']"
+          >
+            *Only Alphabet are required in vendor Name
+        </div>
+
+        <label for="vendorEmail"><b>Vendor Email :</b></label>
+        <input 
+            type="email"
+            name="vendorEmail" 
+            formControlName="vendorEmail"
+         
+            placeholder="Enter the vendor email ">
+        <div
+            class="text-danger"
+            *ngIf="vendorForm.get('vendorEmail')?.dirty && vendorForm.get('vendorEmail')?.errors?.['required']"
+          >
+            *Email is required
+        </div>
+        <button type="submit"><b>Add Vendor</b></button>
+    </form>
+</div>

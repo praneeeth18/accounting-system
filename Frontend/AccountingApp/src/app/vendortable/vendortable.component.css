@@ -1,0 +1,42 @@
+.container {
+    margin: 20px;
+}
+ 
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+button:hover {
+    background-color: #0056b3;
+}
+ 
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-left: 250px;
+}
+ 
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+ 
+th {
+    background-color: #171515;
+    color: #f4efef;
+}
+ 
+tr:nth-child(even) {
+    background-color: #bac8e8;
+}
+ 
+tr:hover {
+    background-color: #6788d6;
+}
+ 

@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 align="center">Customer Data</h2>
+    <table>
+        <tr>
+            <th>customer Id</th>
+            <th>customer Name</th>
+            <th>customer Email</th>
+            <th>customer Address</th>
+        </tr>
+        <tr *ngFor="let customer of customerList">
+            <td>{{customer.customerId}}</td>
+            <td>{{customer.customerName}}</td>
+            <td>{{customer.customerEmail}}</td>
+            <td>{{customer.customerAddress}}</td>
+        </tr>
+
+        <td colspan="4" style="text-align: center;">
+            <button type="submit" routerLink="/customer" ><b>Add Customer</b></button>
+        </td>
+
+    </table>
+ </div>
+  

@@ -1,0 +1,53 @@
+.form-group {
+  width: 400px;
+    margin: 0 auto; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    background: linear-gradient(to bottom, #c9f44b 0%, #3a6625 100%)
+  }
+  
+  .form-group h2 {
+    text-align: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .text-danger {
+    color: red;
+    font-size: 14px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0b0b0c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+  }
+  
