@@ -1,0 +1,26 @@
+
+.sidebar {
+    background: linear-gradient(to bottom, #6f72ba 0%, #232756 100%);
+    color: white;
+    height:498px;
+    padding: 10px;
+    width: 200px;
+    position: absolute;
+    bottom: 20px;
+    left: 7px;
+   
+}
+ 
+.sidebar a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s;
+}
+ 
+ 
+.sidebar a:hover {
+    background-color: #333;
+}
+ 
