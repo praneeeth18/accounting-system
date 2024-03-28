@@ -12,6 +12,9 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { PurchaseTableComponent } from './purchase-table/purchase-table.component';
 import { PurchaseInvoiceViewComponent } from './purchase-invoice-view/purchase-invoice-view.component';
+import { EditvendorComponent } from './editvendor/editvendor.component';
+import { VendorComponent } from './vendor/vendor.component';
+import { VendortableComponent } from './vendortable/vendortable.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'index', pathMatch:'full'},
@@ -26,7 +29,10 @@ const routes: Routes = [
   {path:'invoice-view/:id', component:InvoiceViewComponent},
   {path:'purchase-entry', component:PurchasesComponent},
   {path:'purchase-table', component:PurchaseTableComponent},
-  {path:'purchase-view/:id', component:PurchaseInvoiceViewComponent}
+  {path:'purchase-view/:id', component:PurchaseInvoiceViewComponent},
+  {path:'vendor', component:VendorComponent},
+  {path:'vendortable',component:VendortableComponent},
+  {path:'edit/:vendorId',component:EditvendorComponent}
 ];
 
 @NgModule({

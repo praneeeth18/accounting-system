@@ -1,0 +1,38 @@
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <h1 class="card-title text-center">Vendor Details</h1>
+            <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+
+                <div class="mb-3">
+                    <label for="vendorName" class="form-label">Vendor Name</label>
+                    <input type="text" class="form-control" id="vendorName" formControlName="vendorName"
+                        pattern="[a-zA-Z]{2,}" placeholder="Enter the Vendor name">
+                    <span class="text-danger"
+                        *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['required']">
+                        *Name is required
+                    </span>
+
+                    <span class="text-danger"
+                        *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['pattern']">
+                        *Only Alphabet are required in vendor Name
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="vendorEmail" class="form-label">Vendor Email</label>
+                    <input class="form-control" type="email" name="vendorEmail" formControlName="vendorEmail"
+                        placeholder="Enter the vendor email ">
+                    <span class="text-danger"
+                        *ngIf="vendorForm.get('vendorEmail')?.dirty && vendorForm.get('vendorEmail')?.errors?.['required']">
+                        *Email is required
+                    </span>
+                </div>
+                <div class="d-grid mb-3 col-6 mx-auto">
+                    <button type="submit" class="btn btn-dark" [disabled]="!vendorForm.valid">Add Vendor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <h1 class="card-title text-center">Edit Vendor</h1>
+            <form [formGroup]="vendorForm" (ngSubmit)="updateVendor()">
+                <div *ngIf="vendor">
+                    <div class="mb-3">
+                    <label for="vendorName" class="form-label">Vendor Name</label>
+                    <input class="form-control" type="text" [(ngModel)]="vendor.vendorName" name="vendorName" formControlName="vendorName">
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="vendorEmail" class="form-label">Vendor Email</label>
+                    <input class="form-control" type="email" name="vendorEmail" [(ngModel)]="vendor.vendorEmail"
+                        formControlName="vendorEmail">
+                    </div>
+
+                </div>
+                <div class="d-grid mb-3 col-6 mx-auto">
+                <button type="submit" class="btn btn-dark">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,9 @@ import { FooterComponent } from './footer/footer.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { PurchaseTableComponent } from './purchase-table/purchase-table.component';
 import { PurchaseInvoiceViewComponent } from './purchase-invoice-view/purchase-invoice-view.component';
+import { VendortableComponent } from './vendortable/vendortable.component';
+import { VendorComponent } from './vendor/vendor.component';
+import { EditvendorComponent } from './editvendor/editvendor.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { PurchaseInvoiceViewComponent } from './purchase-invoice-view/purchase-i
     FooterComponent,
     PurchasesComponent,
     PurchaseTableComponent,
-    PurchaseInvoiceViewComponent
+    PurchaseInvoiceViewComponent,
+    VendortableComponent,
+    VendorComponent,
+    EditvendorComponent
   ],
   imports: [
     BrowserModule,
