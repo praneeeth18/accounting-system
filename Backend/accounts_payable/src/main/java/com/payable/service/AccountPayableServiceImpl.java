@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.payable.dao.AccountPayableDao;
+import com.payable.feign.UserServiceFeingInterface;
 import com.payable.model.AccountPayable;
 
 @Service
@@ -18,11 +19,18 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 	@Autowired
 	private AccountPayableDao accountPayableDao;
 	
+	@Autowired 
+	private UserServiceFeingInterface userServiceInterface;
+	
 	@Override
 	public ResponseEntity<?> createPayable(AccountPayable accountPayable) {
 		try {
 			
-	        
+			// Check if the company ID exists
+	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountPayable.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+	        }
 			accountPayable.setTotalAmount(accountPayable.getQuantity() * accountPayable.getPrice());
 			accountPayableDao.save(accountPayable);
 			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Entry created!"));
