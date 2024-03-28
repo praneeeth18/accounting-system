@@ -1,0 +1,27 @@
+.custom-container {
+    height: 100%;
+    display: flex;
+   
+}
+
+.app-dashboard {
+    flex: 0 0 auto; /* Set width of sidebar */
+    height: 100%; /* Ensure the sidebar covers the entire height of the container */
+
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table-container {
+    flex: 1; /* Let the container occupy the remaining space */
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: flex-start; /* Vertically center the content */
+}
+
+.table {
+    width: 50rem; /* Set desired width of the table */
+    overflow-y: auto; /* Add vertical scrollbar if necessary */
+}

@@ -1,0 +1,17 @@
+
+.custom-container {
+    /* Optional: Adjust height for vertical centering */
+    height: 100%;
+    display: flex;
+
+}
+
+.customer-container{
+    margin: 0 auto; /* Center the card horizontally */
+    width: 50rem; /* Set width of the card */
+    flex: 1; /* Let the card occupy remaining space */
+    overflow-y: auto; 
+    
+    padding-left: 2%;
+    padding-right: 2%;
+}

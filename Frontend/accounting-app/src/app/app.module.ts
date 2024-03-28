@@ -22,6 +22,10 @@ import { PurchaseInvoiceViewComponent } from './purchase-invoice-view/purchase-i
 import { VendortableComponent } from './vendortable/vendortable.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { EditvendorComponent } from './editvendor/editvendor.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerTableComponent } from './customer-table/customer-table.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { EditvendorComponent } from './editvendor/editvendor.component';
     PurchaseInvoiceViewComponent,
     VendortableComponent,
     VendorComponent,
-    EditvendorComponent
+    EditvendorComponent,
+    CustomerDetailsComponent,
+    CustomerTableComponent,
+    CustomerViewComponent,
+    EditCustomerComponent
   ],
   imports: [
     BrowserModule,

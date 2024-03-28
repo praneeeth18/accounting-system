@@ -1,0 +1,32 @@
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <h1 class="card-title text-center"> Update Customer Details</h1>
+            <form [formGroup]="customerForm" (ngSubmit)="update()">
+                <div class="mb-3">
+                    <label for="inputcustomername" class="form-label">Customer Name</label>
+                    <input type="text" [(ngModel)]="customer.customername" formControlName="customername"
+                        class="form-control" id="inputcustomername" aria-describedby="emailHelp" required>
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="Address" class="form-label">Customer Address</label>
+                    <input type="text" [(ngModel)]="customer.address" formControlName="address" class="form-control"
+                        id="Address" required>
+
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Customer Email</label>
+                    <input type="email" [(ngModel)]="customer.email" formControlName="email" class="form-control"
+                        id="email" required>
+
+                </div>
+
+                <button class="col-md-12" type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

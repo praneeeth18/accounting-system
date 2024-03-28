@@ -15,6 +15,10 @@ import { PurchaseInvoiceViewComponent } from './purchase-invoice-view/purchase-i
 import { EditvendorComponent } from './editvendor/editvendor.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { VendortableComponent } from './vendortable/vendortable.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerTableComponent } from './customer-table/customer-table.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'index', pathMatch:'full'},
@@ -32,7 +36,11 @@ const routes: Routes = [
   {path:'purchase-view/:id', component:PurchaseInvoiceViewComponent},
   {path:'vendor', component:VendorComponent},
   {path:'vendortable',component:VendortableComponent},
-  {path:'edit/:vendorId',component:EditvendorComponent}
+  {path:'edit/:vendorId',component:EditvendorComponent},
+  {path:'edit-customer/:id', component:EditCustomerComponent},
+  {path:'customer-view/:id', component:CustomerViewComponent},
+  {path:'customer-details', component:CustomerDetailsComponent},
+  {path:'customer-table', component:CustomerTableComponent}
 ];
 
 @NgModule({
