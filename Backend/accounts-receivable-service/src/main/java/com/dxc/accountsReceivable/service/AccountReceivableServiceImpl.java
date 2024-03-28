@@ -16,11 +16,15 @@ import com.dxc.accountsReceivable.repository.AccountReceivableRepository;
 @Service
 public class AccountReceivableServiceImpl implements AccountReceivableService{
 	
-	@Autowired
-	private AccountReceivableRepository accountReceivableRepository;
-	
-	@Autowired
-	private AccountReceivableFeignInterface userServiceInterface;
+	private final AccountReceivableRepository accountReceivableRepository;
+    private final AccountReceivableFeignInterface userServiceInterface;
+
+    @Autowired
+    public AccountReceivableServiceImpl(AccountReceivableRepository accountReceivableRepository,
+                                         AccountReceivableFeignInterface userServiceInterface) {
+        this.accountReceivableRepository = accountReceivableRepository;
+        this.userServiceInterface = userServiceInterface;
+    }
 
 	@Override
 	public ResponseEntity<?> createReceivable(AccountReceivable accountReceivable) {
@@ -42,7 +46,6 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	@Override
 	public ResponseEntity<List<AccountReceivable>> getAllAccountReceivable() {
 		try {
-//			return ResponseEntity.status(HttpStatus.OK).body(accountReceivableRepository.findAll());
 			List<AccountReceivable> entries = accountReceivableRepository.findAll();
 			if (entries.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>()); // Return 404 if no data found
