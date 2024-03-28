@@ -19,6 +19,7 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { CustomerTableComponent } from './customer-table/customer-table.component';
+import { LedgerTableComponent } from './ledger-table/ledger-table.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'index', pathMatch:'full'},
@@ -40,7 +41,9 @@ const routes: Routes = [
   {path:'edit-customer/:id', component:EditCustomerComponent},
   {path:'customer-view/:id', component:CustomerViewComponent},
   {path:'customer-details', component:CustomerDetailsComponent},
-  {path:'customer-table', component:CustomerTableComponent}
+  {path:'customer-table', component:CustomerTableComponent},
+  {path:'ledger-entry',component:LedgerEntryComponent},
+  {path:'ledger-table',component:LedgerTableComponent}
 ];
 
 @NgModule({

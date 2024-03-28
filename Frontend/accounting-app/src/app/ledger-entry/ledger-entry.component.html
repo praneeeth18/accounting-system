@@ -1,82 +1,90 @@
 <div class="custom-container">
   <app-dashboard></app-dashboard>
   <div class="card mt-4 mb-4">
-<div class="card-body">
-<h1 class="card-title text-center">Ledger Entry</h1>
-    
-    <form [formGroup]="ledgerForm" (ngSubmit)="onSubmit()">
-  
-      <div class="mb-3">
-      <label for="transactionDate" class="form-label">Transaction Date</label>
-      <input class="form-control"
-        type="date"
-        id="transactionDate"
-        formControlName="transactionDate"
-        required
-      />
-      <span class="text-danger" *ngIf="ledgerForm.get('transactionDate')?.invalid && (ledgerForm.get('transactionDate')?.dirty || ledgerForm.get('transactionDate')?.touched)">
-        *Date is Required
-      </span>
+      <div class="card-body ledgerEntry">
+          <h1 class="card-title text-center">Ledger Entry</h1>
+          <form (ngSubmit)="onSubmit()">
 
-    </div>
-      
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <input class="form-control"
-        type="text"
-        id="description"
-        formControlName="description"
-        placeholder="Description about sales/purchase"
-        required
-      />
-      <span class="text-danger" *ngIf="ledgerForm.get('description')?.dirty && ledgerForm.get('description')?.errors?.['required']">
-        Description is required
-      </span>
-      <span class="text-danger" *ngIf="ledgerForm.get('description')?.dirty && ledgerForm.get('description')?.errors?.['pattern']">
-        Only alphabets are allowed in description 
-      </span>
+              <div class="mb-3">
+                  <label for="transactiondate" class="form-label">Transaction Date</label><br>
+                  <input 
+                      class="form-control"
+                      type="date"
+                      name="transactiondate"
+                      id="transactiondate"
+                      [(ngModel)]="ledger.transactiondate"
+                      required
+                      #transactionDate="ngModel"
+                      aria-describedby="emailHelp"
+                  />
+                  <span *ngIf="transactionDate?.invalid && (transactionDate?.dirty || transactionDate?.touched)" class="error">
+                      <span class="text-danger" *ngIf="transactionDate?.errors?.['required']">Transaction Date is required.</span>
+                    </span>
+              </div>
 
-    </div>
-  
-    <div class="mb-3">
-      <label for="transactionType" class="form-label">Transaction Type</label>
-      <select 
-        class="form-select"
-       formControlName="transactionType"
-        id="transactionType" 
-        required
-      >
-        <option value="" disabled selected>Select Transaction Type</option>
-        <option value="Credit">Credit</option>
-        <option value="Debit">Debit</option>
-      </select>
-      <span class="text-danger" *ngIf="ledgerForm.get('transactionType')?.invalid && (ledgerForm.get('transactionType')?.dirty || ledgerForm.get('transactionType')?.touched)">
-        *Transaction type is required
-      </span>
+              <div class="mb-3">
+                  <label for="description" class="form-label">Description</label><br>
+                  <input 
+                      class="form-control"
+                      type="text"
+                      name="description"
+                      id="description"
+                      pattern="[a-z A-Z]{5,30}"
+                      placeholder="Description about sales/purchase"
+                      [(ngModel)]="ledger.description"
+                      #description="ngModel"
+                      required
+                      aria-describedby="emailHelp"
+                  />
+                  <span *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="error">
+                      <span class="text-danger" *ngIf="description?.errors?.['required']">Description is required.</span>
+                      <span class="text-danger" *ngIf="description?.errors?.['pattern']">Description must be between 5 to 30 characters.</span>
+                    </span>
+              </div>
 
-    </div>
-      
-    <div class="mb-3">
-      <label for="amount" class="form-label">Amount</label>
-      <input class="form-control"
-        type="number"
-        formControlName="amount"
-        id="amount" 
-        placeholder="Enter Amount"
-        min="0"
-        required
-      >
-     <span class="text-danger" *ngIf="ledgerForm.get('amount')?.dirty && ledgerForm.get('amount')?.errors?.['required']">
-        *Please Enter the Amount
-     </span>
-      <span class="text-danger" *ngIf="ledgerForm.get('amount')?.dirty && ledgerForm.get('amount')?.errors?.['min']">
-        *Please Enter a positive number
-      </span> 
-    </div>
+              <div class="mb-3">
+                  <label for="transactiontype" class="form-label">Transaction Type</label>
+                  <select 
+                      class="form-control"
+                      name="transactiontype"
+                      id="transactiontype" 
+                      [(ngModel)]="ledger.transactiontype"
+                      required
+                      #transactionType="ngModel"  
+                  >
+                      <option value="" disabled selected>Select Transaction Type</option>
+                      <option value="CREDIT">Credit</option>
+                      <option value="DEBIT">Debit</option>
+                  </select>
+                  <span class="text-danger" *ngIf="transactionType?.invalid && (transactionType?.dirty || transactionType?.touched)" class="error">
+                      <span class="text-danger" *ngIf="transactionType?.errors?.['required']">Transaction Type is required.</span>
+                    </span>
+              </div>
 
-    <div class="d-grid mb-3 col-6 mx-auto">
-      <button class="btn btn-dark" type="submit" [disabled]="!ledgerForm.valid">Add</button>
-   </div>
-    </form>   
+              <div class="mb-3">
+                  <label for="amount" class="form-label">Amount</label><br>
+                  <input 
+                      class="form-control"
+                      type="number" 
+                      id="amount" 
+                      name="amount"
+                      placeholder="Enter Amount"
+                      min="0"
+                      [(ngModel)]="ledger.amount"
+                      required
+                      #amount="ngModel"
+                      aria-describedby="emailHelp"
+                  >
+                  <span *ngIf="amount?.invalid && (amount?.dirty || amount?.touched)" class="error">
+                      <span class="text-danger" *ngIf="amount?.errors?.['required']">Amount is required.</span>
+                      <span class="text-danger" *ngIf="amount?.errors?.['min']">Amount must be greater than or equal to 0.</span>
+                    </span>
+              </div>
+
+              <div class="d-grid mb-3 col-6 mx-auto">
+                  <button type="submit" class="btn btn-dark">Add</button>
+              </div>
+          </form>
+      </div>
   </div>
-  
+</div>
