@@ -25,4 +25,8 @@ export class UserServiceService {
   getUserDetails(email: string): Observable<any> {
     return this.http.get(baseURL + `getUserDetails/${email}`);
   }
+
+  logout() {
+    sessionStorage.clear();
+  }
 }

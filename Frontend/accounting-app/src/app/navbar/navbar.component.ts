@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('currentUser') !== null;
+  }
+
+  getUsername(): string {
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    return currentUser.repFirstName; // Adjust the key based on your user object structure
+  }
 }

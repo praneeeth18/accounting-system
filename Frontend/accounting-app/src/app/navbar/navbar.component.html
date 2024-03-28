@@ -3,10 +3,12 @@
       <a class="navbar-brand" href="#">Accounting App</a>
      
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a routerLink="/index" class="nav-link active" aria-current="page" href="#">Home</a>
+          <li *ngIf="isLoggedIn()" class="nav-item">
+            <a class="nav-link" routerLink="/profile">Welcome, {{ getUsername() || 'User' }}</a>
           </li>
-          
+          <li *ngIf="!isLoggedIn()" class="nav-item">
+            <a routerLink="/login" class="nav-link" href="#">Sign In</a>
+          </li>
         </ul>
         
     
