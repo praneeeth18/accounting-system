@@ -12,9 +12,9 @@
   overflow-y: auto; 
 }
 
-.ledgerEntry {
+/*.ledgerEntry {
   background: linear-gradient(to bottom, #c9f44b 0%, #3a6625 100%);
-}
+}*/
 input{
   border-radius: 5px;
 }

@@ -41,6 +41,10 @@ export class SalesTableComponent {
 
   invoiceView(id:number){
     console.log(id);
-    this.router.navigate(['invoice-view', id]);
+    this.router.navigate(['invoice-view', id], { skipLocationChange: true });
   }
+
+  updateInvoice(id:number){
+    this.router.navigate(['update-invoice', id], { skipLocationChange: true });
+    }
 }

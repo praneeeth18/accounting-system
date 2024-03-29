@@ -35,7 +35,7 @@ export class EditvendorComponent implements OnInit{
       updateVendor(){
           this.vendorService.updateVendor(this.vendor) .subscribe(res=>{
             alert("Vendor Updated Successfully");
-            this.router.navigate(['vendortable']);
+            this.router.navigate(['vendortable'], { skipLocationChange: true });
        
           }, err=>{
             alert("Something went wrong");

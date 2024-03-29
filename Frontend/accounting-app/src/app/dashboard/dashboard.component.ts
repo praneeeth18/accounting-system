@@ -21,6 +21,6 @@ export class DashboardComponent {
 
   logout() {
     this.userService.logout();
-    this.router.navigate(['login']);
+    this.router.navigate(['login'], { skipLocationChange: true });
   }
 }

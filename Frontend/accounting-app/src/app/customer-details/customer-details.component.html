@@ -6,24 +6,30 @@
             <form [formGroup]="customerForm" (ngSubmit)="customer()">
                 <div class="mb-3">
                     <label for="inputcustomername" class="form-label">Customer Name</label>
-                    <input type="text" formControlName="customername" class="form-control" id="inputcustomername"
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="customername" class="form-control" id="inputcustomername"
                         aria-describedby="emailHelp" required>
-
+                        <span class="text-danger" *ngIf="customerForm.controls['customername'].dirty && customerForm.hasError('required', 'customername')">*Customer Name is required</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customername'].dirty && customerForm.hasError('pattern', 'customername')">*Customer Name must contain only Alphabets</span>
+                        
                 </div>
 
 
                 <div class="mb-3">
                     <label for="Address" class="form-label">Customer Address</label>
                     <input type="text" formControlName="address" class="form-control" id="Address" required>
-
+                    <span class="text-danger" *ngIf="customerForm.controls['address'].dirty && customerForm.hasError('required', 'address')">*Address is required</span>
+                   
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Customer Email</label>
-                    <input type="email" formControlName="email" class="form-control" id="email" required>
-
+                    <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" formControlName="email" class="form-control" id="email" placeholder="characters@characters.domain" required>
+                    <span class="text-danger" *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('required', 'email')">*Email is required</span>
+                    <span class="text-danger" *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('pattern', 'email')">*Email is invalid</span>
+                    
                 </div>
-
-                <button type="submit" class="btn btn-primary">Add New Customer</button>
+                <div class="d-grid mb-3 col-6 mx-auto">
+                <button type="submit" class="btn btn-dark" [disabled]="!customerForm.valid">Add New Customer</button>
+           </div>
             </form>
         </div>
     </div>

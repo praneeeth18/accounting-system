@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 import { Invoice } from '../models/invoice';
+import { dateNotInFuture } from '../custom-validators';
 
 
 
@@ -12,7 +13,7 @@ import { Invoice } from '../models/invoice';
   templateUrl: './invoice-details.component.html',
   styleUrl: './invoice-details.component.css'
 })
-export class InvoiceDetailsComponent {
+export class InvoiceDetailsComponent implements OnInit{
 
   public invoiceForm !: FormGroup;
   constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private invoiceSerivce: AccountsReceivableServiceService) {}
@@ -21,7 +22,7 @@ export class InvoiceDetailsComponent {
     this.invoiceForm = this.formBuilder.group({
       customername: ['', Validators.required],
       invoicenumber:['', Validators.required],
-      date:['', Validators.required],
+      date:[null, [Validators.required, dateNotInFuture()]],
       proddesc: ['', Validators.required],
       quantity: ['', Validators.required],
       price:['', Validators.required],
@@ -30,6 +31,10 @@ export class InvoiceDetailsComponent {
 
     
   }
+
+
+
+  
 
   invoice() {
     if(this.invoiceForm.valid) {
@@ -48,7 +53,7 @@ export class InvoiceDetailsComponent {
          alert('Invoice added sucussfully!');
          console.log(response);
          this.invoiceForm.reset();
-         this.router.navigate(['sales-table']);
+         this.router.navigate(['sales-table'], { skipLocationChange: true });
        },
        error: (error) => {
          alert('Unsucessfull!' + error);

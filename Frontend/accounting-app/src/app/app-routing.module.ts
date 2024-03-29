@@ -20,10 +20,11 @@ import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { CustomerTableComponent } from './customer-table/customer-table.component';
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
+import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:'index', pathMatch:'full'},
-  {path:'index', component:IndexComponent},
+  {path:'', redirectTo:'', pathMatch:'full'},
+  {path:'', component:IndexComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'dashboard', component:DashboardComponent},
@@ -43,7 +44,8 @@ const routes: Routes = [
   {path:'customer-details', component:CustomerDetailsComponent},
   {path:'customer-table', component:CustomerTableComponent},
   {path:'ledger-entry',component:LedgerEntryComponent},
-  {path:'ledger-table',component:LedgerTableComponent}
+  {path:'ledger-table',component:LedgerTableComponent},
+  {path:'update-invoice/:id', component:UpdateInvoiceComponent}
 ];
 
 @NgModule({

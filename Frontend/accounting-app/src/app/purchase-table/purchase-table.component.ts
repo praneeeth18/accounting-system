@@ -36,7 +36,7 @@ export class PurchaseTableComponent implements OnInit{
 
   purchaseView(id:number) {
     console.log(id);
-    this.router.navigate(['purchase-view', id]);
+    this.router.navigate(['purchase-view', id], { skipLocationChange: true });
   }
 
   

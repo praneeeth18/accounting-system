@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Vendor } from '../models/vendor';
 import { VendorService } from '../services/vendor.service';
@@ -9,18 +9,21 @@ import { VendorService } from '../services/vendor.service';
   templateUrl: './vendor.component.html',
   styleUrl: './vendor.component.css'
 })
-export class VendorComponent  {
+export class VendorComponent implements OnInit{
   vendorForm!:FormGroup
   vendor: Vendor[] = [];
 
   constructor(private fb: FormBuilder, private http: HttpClient,private vendorService :VendorService){
+  }
 
+  ngOnInit(): void {
+    
    this.vendorForm = this.fb.group({
-    vendorName: ['', [Validators.required, Validators.pattern('[a-zA-Z]{2,}')]],
+    vendorName: ['', Validators.required],
     vendorEmail: ['', Validators.required]
   });
-   
   }
+
   onSubmit() {
     if (this.vendorForm.valid) {
       this.vendorService.createVendor(this.vendorForm.value).subscribe(

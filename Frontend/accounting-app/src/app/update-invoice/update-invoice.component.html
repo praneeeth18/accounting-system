@@ -1,0 +1,90 @@
+<div class="custom-container">
+    <app-dashboard></app-dashboard>
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <h1 class="card-title text-center">Invoice Details</h1>
+            <form [formGroup]="invoiceForm" (ngSubmit)="invoice()">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Customer Name</label>
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="customername"
+                        [(ngModel)]="invoice1.customername" class="form-control" id="name" aria-describedby="emailHelp"
+                        required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer
+                        Name is required</span>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('pattern', 'customername')">*Customer
+                        Name must contain only Alphabets</span>
+
+                </div>
+                <div class="mb-3">
+                    <label for="number" class="form-label">Invoice Number</label>
+                    <input type="text" formControlName="invoicenumber" [(ngModel)]="invoice1.invoicenumber"
+                        class="form-control" id="number" readonly required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice
+                        Number is required</span>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" formControlName="date" [(ngModel)]="invoice1.date" class="form-control" id="date"
+                        readonly required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['date'].dirty && invoiceForm.hasError('required', 'date')">*Date
+                        is required</span>
+                </div>
+                <div class="mb-3">
+                    <label for="product" class="form-label">Product Description</label>
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc"
+                        [(ngModel)]="invoice1.proddesc" class="form-control" id="product" aria-describedby="emailHelp"
+                        required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('required', 'proddesc')">*Product
+                        Description is required</span>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('pattern', 'proddesc')">*Product
+                        Description must contain only Alphabets</span>
+
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" min="1" formControlName="quantity" [(ngModel)]="invoice1.quantity"
+                        class="form-control" id="quantity" required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('required', 'quantity')">*Quantity
+                        is required</span>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('min', 'quantity')">*Quantity
+                        cannot be 0 or negative</span>
+
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price per Unit</label>
+                    <input type="number" min="0" formControlName="price" [(ngModel)]="invoice1.price"
+                        class="form-control" id="price" required>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('required', 'price')">*Price
+                        is required</span>
+                    <span class="text-danger"
+                        *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('min', 'price')">*Price
+                        cannot be negative</span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Payment Status</label>&nbsp;
+                    <select class="form-select" formControlName="status" [(ngModel)]="invoice1.status"
+                        aria-label="Default select example" class="required">
+                        <option value="" disabled="disabled">Select Status</option>
+                        <option value="paid">Paid</option>
+                        <option value="pending">Pending</option>
+                    </select>
+
+                </div>
+                <div class="d-grid mb-3 col-6 mx-auto">
+                    <button type="submit" class="btn btn-dark" [disabled]="!invoiceForm.valid">Update Invoice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

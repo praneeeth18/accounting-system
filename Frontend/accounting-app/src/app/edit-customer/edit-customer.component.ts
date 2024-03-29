@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../models/customer';
 import { CustomerService } from '../services/customer.service';
@@ -22,9 +22,9 @@ export class EditCustomerComponent implements OnInit {
   ngOnInit(): void { 
 
     this.customerForm = this.formBuilder.group({
-      customername: [''],
-      address:['' ],
-      email:['' ]
+      customername: ['', Validators.required],
+      address:['', Validators.required],
+      email:['', Validators.required]
      
     });
     this.id = this.route.snapshot.params['id'];
@@ -40,7 +40,7 @@ update() {
   this.customerService.updateCustomer(this.customer)
   .subscribe(res=>{
     alert("customer Update Successfully");
-    this.router.navigate(['customer-table']);
+    this.router.navigate(['customer-table'], { skipLocationChange: true });
 
   }, err=>{
     alert("Something went wrong");

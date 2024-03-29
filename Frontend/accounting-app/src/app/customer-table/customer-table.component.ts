@@ -32,7 +32,7 @@ export class CustomerTableComponent implements OnInit {
   }
   customerView(id: number) {
     console.log(id);
-    this.router.navigate(['customer-view', id]);
+    this.router.navigate(['customer-view', id], { skipLocationChange: true });
   }
   delete(id: number) {
     this.customerService.deleteCustomer(id).subscribe(data => {
@@ -44,7 +44,7 @@ export class CustomerTableComponent implements OnInit {
 
   edit(id:number){
      console.log(id);
-    this.router.navigate(['edit-customer', id]);
+    this.router.navigate(['edit-customer', id], { skipLocationChange: true });
    }
 
 }

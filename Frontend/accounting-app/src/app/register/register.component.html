@@ -14,7 +14,7 @@
     
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Company Email</label>
-                    <input formControlName="companyemail" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="form-control" id="inputEmail4">
+                    <input formControlName="companyemail" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="form-control" id="inputEmail4" placeholder="characters@characters.domain">
                     <span class="text-danger" *ngIf="signupForm.controls['companyemail'].dirty && signupForm.hasError('required', 'companyemail')">*Company Email Id is required</span>
                 </div>
     
@@ -65,7 +65,7 @@
                 </div>
             </form>
             <div class="card-body text-center">
-                        <a routerLink="/login">Already Registered? Sign In Here!</a>
+                        <a skipLocationChange routerLink="/login">Already Registered? Sign In Here!</a>
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ export class VendortableComponent implements OnInit {
     );
   }
 editVendor(vendorId:number){
-  this.router.navigate(['/edit',vendorId])
+  this.router.navigate(['/edit',vendorId], { skipLocationChange: true })
 }
   
 }

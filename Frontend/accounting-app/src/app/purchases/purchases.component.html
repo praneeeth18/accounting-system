@@ -18,6 +18,8 @@
                     <label for="date" class="form-label">Date</label>
                     <input type="date" formControlName="date" class="form-control" id="date" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['date'].dirty && purchaseForm.hasError('required', 'date')">*Date is required</span>
+                    <span class="text-danger" *ngIf="purchaseForm.get('date')?.errors?.['futureDate']">*Future date is not allowed</span>
+
                 </div>
                 <div class="mb-3">
                     <label for="product" class="form-label">Product Description</label>

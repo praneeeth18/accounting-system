@@ -64,7 +64,7 @@ export class RegisterComponent {
             alert('Sign Up Successful');
             console.log(response);
             this.signupForm.reset();
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], { skipLocationChange: true });
           },
           error: (error) => {
             console.error('Sign Up Failed:', error);

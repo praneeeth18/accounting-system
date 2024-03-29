@@ -27,6 +27,7 @@ import { CustomerTableComponent } from './customer-table/customer-table.componen
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
+import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LedgerTableComponent } from './ledger-table/ledger-table.component';
     CustomerTableComponent,
     CustomerViewComponent,
     EditCustomerComponent,
-    LedgerTableComponent
+    LedgerTableComponent,
+    UpdateInvoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -4,10 +4,10 @@
      
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
           <li *ngIf="isLoggedIn()" class="nav-item">
-            <a class="nav-link" routerLink="/profile">Welcome, {{ getUsername() || 'User' }}</a>
+            <a skipLocationChange class="nav-link" routerLink="/profile">Welcome, {{ getUsername() || 'User' }}</a>
           </li>
           <li *ngIf="!isLoggedIn()" class="nav-item">
-            <a routerLink="/login" class="nav-link" href="#">Sign In</a>
+            <a skipLocationChange routerLink="/login" class="nav-link" href="#">Sign In</a>
           </li>
         </ul>
         

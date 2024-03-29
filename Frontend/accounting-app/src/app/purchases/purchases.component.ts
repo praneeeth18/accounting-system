@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountsPayableServiceService } from '../services/accounts-payable-service.service';
+import { dateNotInFuture } from '../custom-validators';
 
 @Component({
   selector: 'app-purchases',
@@ -17,7 +18,7 @@ export class PurchasesComponent {
     this.purchaseForm = this.formBuilder.group({
       vendorName: ['', Validators.required],
       invoiceNumber:['', Validators.required],
-      date:['', Validators.required],
+      date:[null, [Validators.required, dateNotInFuture()]],
       proddesc: ['', Validators.required],
       quantity: ['', Validators.required],
       price:['', Validators.required],
@@ -42,7 +43,7 @@ export class PurchasesComponent {
           alert('Invoice added sucussfully!');
           console.log(response);
           this.purchaseForm.reset();
-          this.router.navigate(['purchase-table']);
+          this.router.navigate(['purchase-table'], { skipLocationChange: true });
         },
         error: (error) => {
           alert('Unsucessfull!' + error);

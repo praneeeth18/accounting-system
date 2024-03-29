@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,9 +15,9 @@ export class CustomerDetailsComponent implements OnInit{
  
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
-      customername: [''],
-      address:['' ],
-      email:['' ]
+      customername: ['', Validators.required],
+      address:['', Validators.required],
+      email:['', Validators.required]
      
     })
  
@@ -29,7 +29,7 @@ export class CustomerDetailsComponent implements OnInit{
     .subscribe(res=>{
       alert("customer Generated Successfully");
       this.customerForm.reset();
-      this.router.navigate(['customer-table']);
+      this.router.navigate(['customer-table'], { skipLocationChange: true });
  
     }, err=>{
       alert("Something went wrong");

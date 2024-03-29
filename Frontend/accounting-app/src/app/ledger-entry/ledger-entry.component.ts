@@ -22,7 +22,7 @@ export class LedgerEntryComponent implements OnInit{
       this.ledgerService.createledger(this.ledger).subscribe(data=>{
         console.log(data);
         alert("Entry added successfully");
-        this.router.navigate(['/ledger-table'])
+        this.router.navigate(['/ledger-table'], { skipLocationChange: true })
       },
       error=>{
         console.log(error);

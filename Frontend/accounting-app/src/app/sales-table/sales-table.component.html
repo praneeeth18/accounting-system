@@ -16,6 +16,7 @@
                         <th scope="col">Total Amount</th>
                         <th scope="col">Status</th>
                         <th scope="col">View</th>
+                        <th scope="col">Update</th>
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -30,12 +31,14 @@
                         <td><button (click)="invoiceView(item.receivableId)" class="btn btn-success"
                             style="margin-left: 10px;">View</button>
                             </td>
+                            <td>  <button (click)="updateInvoice(item.id)" class="btn btn-primary"
+                              style="margin-left: 10px;">Update</button></td>
                       </tr>
                      
                     </tbody>
                   </table>
 
-                  <button routerLink="/invoice-details" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
+                  <button skipLocationChange routerLink="/invoice-details" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
             </div>
         </div>
  

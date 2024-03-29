@@ -8,25 +8,27 @@
                 <div class="mb-3">
                     <label for="vendorName" class="form-label">Vendor Name</label>
                     <input type="text" class="form-control" id="vendorName" formControlName="vendorName"
-                        pattern="[a-zA-Z]{2,}" placeholder="Enter the Vendor name">
+                        pattern="[a-zA-Z\s]{2,60}" placeholder="Enter the Vendor name">
                     <span class="text-danger"
                         *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['required']">
                         *Name is required
                     </span>
 
-                    <span class="text-danger"
-                        *ngIf="vendorForm.get('vendorName')?.dirty && vendorForm.get('vendorName')?.errors?.['pattern']">
-                        *Only Alphabet are required in vendor Name
-                    </span>
+                    <span class="text-danger" *ngIf="vendorForm.controls['vendorName'].dirty && vendorForm.hasError('pattern', 'vendorName')">*Vendor Name must contain only Alphabets</span>
+
                 </div>
 
                 <div class="mb-3">
                     <label for="vendorEmail" class="form-label">Vendor Email</label>
-                    <input class="form-control" type="email" name="vendorEmail" formControlName="vendorEmail"
-                        placeholder="Enter the vendor email ">
+                    <input class="form-control" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" name="vendorEmail" formControlName="vendorEmail"
+                    placeholder="characters@characters.domain">
                     <span class="text-danger"
                         *ngIf="vendorForm.get('vendorEmail')?.dirty && vendorForm.get('vendorEmail')?.errors?.['required']">
                         *Email is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="vendorForm.get('vendorEmail')?.dirty && vendorForm.get('vendorEmail')?.errors?.['pattern']">
+                        *Email should be in proper format
                     </span>
                 </div>
                 <div class="d-grid mb-3 col-6 mx-auto">
