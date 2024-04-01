@@ -28,6 +28,7 @@ import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UpdateInvoiceComponent } from './update-invoice/update-invoice.componen
     CustomerViewComponent,
     EditCustomerComponent,
     LedgerTableComponent,
-    UpdateInvoiceComponent
+    UpdateInvoiceComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

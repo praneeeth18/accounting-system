@@ -68,7 +68,8 @@ export class LoginComponent {
           sessionStorage.setItem('companyId', response.user.companyId);
 
           this.loginForm.reset();
-          this.router.navigate(['dashboard'], { skipLocationChange: true });
+          // this.router.navigate(['dashboard'], { skipLocationChange: true });
+          this.router.navigate(['/homepage'], { skipLocationChange: true });
         },
         error: (error) => {
           if (error.error && error.error.message) {

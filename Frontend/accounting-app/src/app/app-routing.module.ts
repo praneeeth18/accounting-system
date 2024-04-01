@@ -21,6 +21,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { CustomerTableComponent } from './customer-table/customer-table.component';
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'', pathMatch:'full'},
@@ -45,7 +46,8 @@ const routes: Routes = [
   {path:'customer-table', component:CustomerTableComponent},
   {path:'ledger-entry',component:LedgerEntryComponent},
   {path:'ledger-table',component:LedgerTableComponent},
-  {path:'update-invoice/:id', component:UpdateInvoiceComponent}
+  {path:'update-invoice/:id', component:UpdateInvoiceComponent},
+  {path:'homepage', component:HomepageComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,25 @@
+.body {
+    background: linear-gradient(to bottom, #6f72ba 0%, #232756 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+}
+
+
+.custom-container {
+    /* Optional: Adjust height for vertical centering */
+    height: 100%;
+    display: flex;
+
+}
+
+
+.welcome-section {
+    text-align: center;
+    background-color: rgb(164, 150, 122);
+    padding: 20px;
+    /* margin-top: -20px; */
+}
