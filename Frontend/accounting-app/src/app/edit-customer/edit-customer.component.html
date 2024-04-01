@@ -6,27 +6,27 @@
             <form [formGroup]="customerForm" (ngSubmit)="update()">
                 <div class="mb-3">
                     <label for="inputcustomername" class="form-label">Customer Name</label>
-                    <input type="text" pattern="[a-zA-Z\s]{2,60}" [(ngModel)]="customer.customername" formControlName="customername"
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" [(ngModel)]="customer.customerName" formControlName="customerName"
                         class="form-control" id="inputcustomername" aria-describedby="emailHelp" required>
-                        <span class="text-danger" *ngIf="customerForm.controls['customername'].dirty && customerForm.hasError('required', 'customername')">*Customer Name is required</span>
-                        <span class="text-danger" *ngIf="customerForm.controls['customername'].dirty && customerForm.hasError('pattern', 'customername')">*Customer Name must contain only Alphabets</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customerName'].dirty && customerForm.hasError('required', 'customerName')">*Customer Name is required</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customerName'].dirty && customerForm.hasError('pattern', 'customerName')">*Customer Name must contain only Alphabets</span>
                         
                 </div>
 
 
                 <div class="mb-3">
                     <label for="Address" class="form-label">Customer Address</label>
-                    <input type="text" [(ngModel)]="customer.address" formControlName="address" class="form-control"
+                    <input type="text" [(ngModel)]="customer.customerAddress" formControlName="customerAddress" class="form-control"
                         id="Address" required>
-                        <span class="text-danger" *ngIf="customerForm.controls['address'].dirty && customerForm.hasError('required', 'address')">*Address is required</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customerAddress'].dirty && customerForm.hasError('required', 'customerAddress')">*Address is required</span>
                    
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Customer Email</label>
-                    <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" [(ngModel)]="customer.email" formControlName="email" placeholder="characters@characters.domain" class="form-control"
+                    <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" [(ngModel)]="customer.customerEmail" formControlName="customerEmail" placeholder="characters@characters.domain" class="form-control"
                         id="email" required>
-                        <span class="text-danger" *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('required', 'email')">*Email is required</span>
-                        <span class="text-danger" *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('pattern', 'email')">*Email is invalid</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customerEmail'].dirty && customerForm.hasError('required', 'customerEmail')">*Email is required</span>
+                        <span class="text-danger" *ngIf="customerForm.controls['customerEmail'].dirty && customerForm.hasError('pattern', 'customerEmail')">*Email is invalid</span>
                         
                 </div>
                 <div class="d-grid mb-3 col-6 mx-auto">

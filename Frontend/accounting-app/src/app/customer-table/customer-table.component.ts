@@ -26,25 +26,28 @@ export class CustomerTableComponent implements OnInit {
 
   getCustomerDetails() {
 
-    this.customerService.getCustomerList().subscribe(data => {
+    this.customerService.getCustomer().subscribe(data => {
       this.customer = data;
     });
   }
-  customerView(id: number) {
-    console.log(id);
-    this.router.navigate(['customer-view', id], { skipLocationChange: true });
+  customerView(customerId: number) {
+    console.log(customerId);
+    this.router.navigate(['customer-view', customerId], { skipLocationChange: true });
   }
-  delete(id: number) {
-    this.customerService.deleteCustomer(id).subscribe(data => {
-      console.log(data);
-      this.getCustomerDetails();
-    });
-    
+  deleteCustomer(customerId: number) {
+    this.customerService.deleteCustomerById(customerId).subscribe(
+      data => {
+        console.log("Customer deleted successfully");
+        alert("Customer deleted successfully");
+        // Optionally, you can remove the deleted vendor from the list
+        this.customer = this.customer.filter((vendor: { customerId: number; }) => vendor.customerId !== customerId);
+      },
+      error => console.log(error)
+    );
   }
-
-  edit(id:number){
-     console.log(id);
-    this.router.navigate(['edit-customer', id], { skipLocationChange: true });
+  edit(customerId:number){
+     console.log(customerId);
+    this.router.navigate(['edit-customer', customerId], { skipLocationChange: true });
    }
 
 }

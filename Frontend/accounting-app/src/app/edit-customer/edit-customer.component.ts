@@ -12,7 +12,7 @@ import { CustomerService } from '../services/customer.service';
 })
 export class EditCustomerComponent implements OnInit {
   public customerForm !: FormGroup;
-  id!: number; 
+  customerId!: number; 
   customer: Customer = new Customer();
 
 
@@ -22,14 +22,15 @@ export class EditCustomerComponent implements OnInit {
   ngOnInit(): void { 
 
     this.customerForm = this.formBuilder.group({
-      customername: ['', Validators.required],
-      address:['', Validators.required],
-      email:['', Validators.required]
+      customerName: ['', Validators.required],
+      customerAddress:['', Validators.required],
+      customerEmail:['', Validators.required]
      
     });
-    this.id = this.route.snapshot.params['id'];
+ 
+    this.customerId = this.route.snapshot.params['id'];
     this.customer = new Customer();
-    this.customerService.getCustomerById(this.id).subscribe(data => {
+    this.customerService.getCustomerById(this.customerId).subscribe(data => {
       this.customer = data;
     });
     
