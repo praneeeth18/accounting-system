@@ -89,6 +89,45 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 		}
 	}
 
+	@Override
+	public ResponseEntity<?> updateReceivable(Long receivableId, AccountReceivable updatedReceivable) {
+	    try {
+	        // Check if the receivableId exists
+	        if (!accountReceivableRepository.existsById(receivableId)) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receivable with ID " + receivableId + " not found.");
+	        }
+
+	        // Check if the company ID exists
+	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(updatedReceivable.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+	        }
+
+	        // Update the receivable
+	        AccountReceivable existingReceivable = accountReceivableRepository.findById(receivableId).orElse(null);
+	        if (existingReceivable != null) {
+	            existingReceivable.setInvoiceNumber(updatedReceivable.getInvoiceNumber());
+	            existingReceivable.setProductDescription(updatedReceivable.getProductDescription());
+	            existingReceivable.setQuantity(updatedReceivable.getQuantity());
+	            existingReceivable.setPrice(updatedReceivable.getPrice());
+	            existingReceivable.setDueDate(updatedReceivable.getDueDate());
+	            existingReceivable.setAmount(updatedReceivable.getQuantity() * updatedReceivable.getPrice());
+	            existingReceivable.setStatus(updatedReceivable.getStatus());
+	            existingReceivable.setCustomerName(updatedReceivable.getCustomerName());
+	            existingReceivable.setCompanyId(updatedReceivable.getCompanyId());
+
+	            accountReceivableRepository.save(existingReceivable);
+	            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Receivable updated successfully."));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receivable with ID " + receivableId + " not found.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating the receivable.");
+	    }
+	}
+
+
 	
 	
 	

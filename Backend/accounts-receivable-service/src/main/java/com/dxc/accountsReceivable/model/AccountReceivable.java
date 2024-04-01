@@ -31,4 +31,5 @@ public class AccountReceivable {
 
     private String customerName;
     private int companyId;
+    
 }

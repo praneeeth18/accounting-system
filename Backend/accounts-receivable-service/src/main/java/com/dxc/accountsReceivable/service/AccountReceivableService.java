@@ -12,4 +12,5 @@ public interface AccountReceivableService {
 	public ResponseEntity<List<AccountReceivable>> getAllAccountReceivable();
 	public ResponseEntity<List<AccountReceivable>> findByCompanyId(int companyId);
 	public ResponseEntity<AccountReceivable> getInvoiceById(long id);
+	public ResponseEntity<?> updateReceivable(Long receivableId, AccountReceivable updatedReceivable);
 }

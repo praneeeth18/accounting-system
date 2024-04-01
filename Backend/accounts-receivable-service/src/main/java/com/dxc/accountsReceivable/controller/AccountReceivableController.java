@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,4 +43,9 @@ public class AccountReceivableController {
 	public ResponseEntity<AccountReceivable> getInvoiceById(@PathVariable long id) {
 		return accountReceivableServiceImpl.getInvoiceById(id);
 	}
+	
+	@PutMapping("/updateReceivable/{receivableId}")
+    public ResponseEntity<?> updateReceivable(@PathVariable Long receivableId, @RequestBody AccountReceivable updatedReceivable) {
+        return accountReceivableServiceImpl.updateReceivable(receivableId, updatedReceivable);
+    }
 }
