@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Invoice } from '../models/invoice';
 import { dateNotInFuture } from '../custom-validators';
 import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.component';
+import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 
 @Component({
   selector: 'app-update-invoice',
@@ -14,10 +15,10 @@ import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.comp
 export class UpdateInvoiceComponent implements OnInit{
 
   id!: number;
-  invoice1: any;
+  invoice1: any = {};
 //  invoice1: Invoice = new Invoice();
   public invoiceForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
+  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private invoiceSerivce: AccountsReceivableServiceService) {}
 
 
 
@@ -37,8 +38,18 @@ export class UpdateInvoiceComponent implements OnInit{
     this.invoiceService.getInvoiceById(this.id).subscribe(data => {
       this.invoice1 = data;
     });*/
-
-    
+    this.id = this.route.snapshot.params['id'];
+    this.invoiceSerivce.getInvoiceByReceivableId(this.id).subscribe({
+      next: (response) => {
+        this.invoice1 = response;
+        this.invoiceForm.patchValue({
+          status: this.invoice1.status
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching invoice:', error);
+      }
+    })
   }
 
   
@@ -54,5 +65,27 @@ export class UpdateInvoiceComponent implements OnInit{
       alert("Something went wrong");
     }
     )*/
+    const invoiceDetailsRequest = {
+      invoiceNumber: this.invoiceForm.value.invoicenumber,
+      customerName: this.invoiceForm.value.customername,
+      dueDate: this.invoiceForm.value.date,
+      productDescription: this.invoiceForm.value.proddesc,
+      quantity: this.invoiceForm.value.quantity,
+      price: this.invoiceForm.value.price,
+      status: this.invoiceForm.value.status,
+      companyId: sessionStorage.getItem('companyId')
+    };
+    this.invoiceSerivce.updateInvoice(this.id, invoiceDetailsRequest).subscribe({
+      next: (response) => {
+        alert('Invoice Updated sucussfully!');
+        console.log(response);
+        this.invoiceForm.reset();
+        this.router.navigate(['sales-table'], { skipLocationChange: true });
+      },
+      error: (error) => {
+        alert('Unsucessfull!' + error);
+        console.error(error);
+      }
+    })
   }
 }

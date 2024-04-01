@@ -7,7 +7,7 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Customer Name</label>
                     <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="customername"
-                        [(ngModel)]="invoice1.customername" class="form-control" id="name" aria-describedby="emailHelp"
+                        [(ngModel)]="invoice1.customerName" class="form-control" id="name" aria-describedby="emailHelp"
                         required>
                     <span class="text-danger"
                         *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer
@@ -19,7 +19,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Invoice Number</label>
-                    <input type="text" formControlName="invoicenumber" [(ngModel)]="invoice1.invoicenumber"
+                    <input type="text" formControlName="invoicenumber" [(ngModel)]="invoice1.invoiceNumber"
                         class="form-control" id="number" readonly required>
                     <span class="text-danger"
                         *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice
@@ -27,7 +27,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
-                    <input type="date" formControlName="date" [(ngModel)]="invoice1.date" class="form-control" id="date"
+                    <input type="date" formControlName="date" [(ngModel)]="invoice1.dueDate" class="form-control" id="date"
                         readonly required>
                     <span class="text-danger"
                         *ngIf="invoiceForm.controls['date'].dirty && invoiceForm.hasError('required', 'date')">*Date
@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <label for="product" class="form-label">Product Description</label>
                     <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc"
-                        [(ngModel)]="invoice1.proddesc" class="form-control" id="product" aria-describedby="emailHelp"
+                        [(ngModel)]="invoice1.productDescription" class="form-control" id="product" aria-describedby="emailHelp"
                         required>
                     <span class="text-danger"
                         *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('required', 'proddesc')">*Product

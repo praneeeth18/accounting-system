@@ -23,4 +23,8 @@ export class AccountsReceivableServiceService {
   getInvoiceByReceivableId(receivableId: number): Observable<any> {
     return this.httpClient.get(this.baseURL + `getEntryByReceivableId/${receivableId}`);
   }
+
+  updateInvoice(receivableId: number, invoiceDetails: any) {
+    return this.httpClient.put(this.baseURL + `updateReceivable/${receivableId}`, invoiceDetails);
+  }
 }
