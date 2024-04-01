@@ -168,4 +168,41 @@ public class UserService implements UserServiceInterface{
 	    }
 	}
 
+
+	@Override
+	public ResponseEntity<Map<String, String>> forgotPassword(String email, String newPassword) {
+	    Map<String, String> response = new HashMap<>();
+	    try {
+	        Optional<User> optionalUser = userRepository.findByEmail(email);
+	        if (optionalUser.isEmpty()) {
+	            response.put(MESSAGE, "User not found!");
+	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	        }
+
+	        User user = optionalUser.get();
+	        
+	        // Update user's password with the new password
+	        String hashedPassword = hashPassword(newPassword);
+	        user.setPassword(hashedPassword);
+	        userRepository.save(user);
+
+	        // Send confirmation email
+	        String subject = "Password Reset Confirmation";
+	        String body = "Dear " + user.getRepFirstName() + ",\n\nYour password has been successfully reset for the account associated with email " +
+	                user.getEmail() + ".\n\nIf you did not request this change, please contact support immediately.\n\nBest regards,\nThe Accounting System Team";
+	        emailSenderService.sendConfirmationEmail(user.getEmail(), subject, body);
+
+	        response.put(MESSAGE, "Password reset successful!");
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.put(MESSAGE, "Failed to reset password!");
+	        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+
+
+	
+
+
 }

@@ -14,4 +14,5 @@ public interface UserServiceInterface {
 	public ResponseEntity<Map<String, Object>> login(LoginRequest request);
 	public ResponseEntity<UserDetailsDTO> getUserDetailsByEmail(String email);
 	public ResponseEntity<UserDetailsDTO> getCompanyById(int id);
+	public ResponseEntity<Map<String, String>> forgotPassword(String email, String newPassword);
 }
