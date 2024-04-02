@@ -170,10 +170,10 @@ public class UserService implements UserServiceInterface{
 
 
 	@Override
-	public ResponseEntity<Map<String, String>> forgotPassword(String email, String newPassword) {
+	public ResponseEntity<Map<String, String>> forgotPassword(LoginRequest newCredentials) {
 	    Map<String, String> response = new HashMap<>();
 	    try {
-	        Optional<User> optionalUser = userRepository.findByEmail(email);
+	        Optional<User> optionalUser = userRepository.findByEmail(newCredentials.getEmail());
 	        if (optionalUser.isEmpty()) {
 	            response.put(MESSAGE, "User not found!");
 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -182,7 +182,7 @@ public class UserService implements UserServiceInterface{
 	        User user = optionalUser.get();
 	        
 	        // Update user's password with the new password
-	        String hashedPassword = hashPassword(newPassword);
+	        String hashedPassword = hashPassword(newCredentials.getPassword());
 	        user.setPassword(hashedPassword);
 	        userRepository.save(user);
 
