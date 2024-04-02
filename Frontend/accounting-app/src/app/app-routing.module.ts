@@ -50,7 +50,7 @@ const routes: Routes = [
   {path:'ledger-table',component:LedgerTableComponent},
   {path:'update-invoice/:id', component:UpdateInvoiceComponent},
   {path:'homepage', component:HomepageComponent},
-  {path:'reset-password', component:ResetPasswordComponent},
+  {path:'reset-password/:email', component:ResetPasswordComponent},
   {path:'forgot-password', component:ForgotPasswordComponent}
 ];
 

@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <label for="inputEmail4" class="form-label">Company Name</label>
                     <input formControlName="companyname" type="email" class="form-control" id="inputEmail4" required>
-                    <span class="text-danger" *ngIf="signupForm.controls['companyname'].dirty && signupForm.hasError('required', 'companyname')">*Company Name is required</span>
+                    <span class="text-danger" *ngIf="signupForm.get('companyname')?.invalid && signupForm.get('companyname')?.touched && signupForm.get('companyname')?.dirty">*Invalid Company Name</span>
                 </div>
     
                 <div class="col-md-6">
