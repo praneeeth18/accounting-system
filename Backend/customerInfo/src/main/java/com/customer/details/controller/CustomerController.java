@@ -24,39 +24,41 @@ import com.customer.details.service.CustomerService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
+    private final CustomerService customerService;
+
     @Autowired
-    private CustomerService customerService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomer() {
-        var customers = customerService.getAllCustomer();
+        List<Customer> customers = customerService.getAllCustomer();
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
         try {
-            var customer = customerService.getCustomerById(id);
+            Customer customer = customerService.getCustomerById(id);
             return new ResponseEntity<>(customer, HttpStatus.OK);
-        } 
-        catch (CustomerNotFoundException e) {
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        var createdCustomer = customerService.createCustomer(customer);
+        Customer createdCustomer = customerService.createCustomer(customer);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
         try {
-            var updatedCustomer = customerService.updateCustomer(customer, id);
+            Customer updatedCustomer = customerService.updateCustomer(customer, id);
             return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
-        } 
-        catch (CustomerNotFoundException e) {
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -66,8 +68,7 @@ public class CustomerController {
         try {
             customerService.deleteCustomer(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } 
-        catch (CustomerNotFoundException e) {
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
