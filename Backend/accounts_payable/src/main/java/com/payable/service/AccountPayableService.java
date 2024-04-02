@@ -11,5 +11,6 @@ public interface AccountPayableService {
 	public ResponseEntity<List<AccountPayable>> getAllAccountPayable();
 	public ResponseEntity<List<AccountPayable>> findByCompanyId(int companyId);
 	public ResponseEntity<AccountPayable> getInvoiceById(long id);
+	public ResponseEntity<?> updatePayable(Long payableId, AccountPayable updatedPayable);
 
 }

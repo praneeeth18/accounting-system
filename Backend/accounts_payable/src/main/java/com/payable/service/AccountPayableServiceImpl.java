@@ -1,31 +1,32 @@
 package com.payable.service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.payable.dao.AccountPayableDao;
-import com.payable.feign.UserServiceFeingInterface;
+import com.payable.feign.AccountPayableFeignInterface;
 import com.payable.model.AccountPayable;
 
 @Service
 public class AccountPayableServiceImpl implements AccountPayableService {
-	@Autowired
-	private AccountPayableDao accountPayableDao;
 	
-	@Autowired 
-	private UserServiceFeingInterface userServiceInterface;
+	private final AccountPayableDao accountPayableDao;
+    private final AccountPayableFeignInterface userServiceInterface;
+
+    public AccountPayableServiceImpl(AccountPayableDao accountPayableDao,
+                                         AccountPayableFeignInterface userServiceInterface) {
+        this.accountPayableDao = accountPayableDao;
+        this.userServiceInterface = userServiceInterface;
+    }
 	
-	@Override
+    @Override
 	public ResponseEntity<?> createPayable(AccountPayable accountPayable) {
 		try {
-			
 			// Check if the company ID exists
 	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountPayable.getCompanyId());
 	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
@@ -39,7 +40,7 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<List<AccountPayable>> getAllAccountPayable() {
 		try {
@@ -48,24 +49,6 @@ public class AccountPayableServiceImpl implements AccountPayableService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>()); // Return 404 if no data found
             }
 			return ResponseEntity.status(HttpStatus.OK).body(entries);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-	}
-	
-	@Override
-	public ResponseEntity<AccountPayable> getInvoiceById(long payableId) {
-		try {
-			// Find the invoice by ID
-	        AccountPayable invoice = accountPayableDao.findById(payableId).orElse(null);
-	        
-	        // Check if the invoice exists
-	        if (invoice != null) {
-	            return ResponseEntity.status(HttpStatus.OK).body(invoice); // Return the invoice if found
-	        } else {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if not found
-	        }
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -84,7 +67,62 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
+	}
 
+	@Override
+	public ResponseEntity<AccountPayable> getInvoiceById(long id) {
+		try {
+			// Find the invoice by ID
+	        AccountPayable invoice = accountPayableDao.findById(id).orElse(null);
+	        
+	        // Check if the invoice exists
+	        if (invoice != null) {
+	            return ResponseEntity.status(HttpStatus.OK).body(invoice); // Return the invoice if found
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if not found
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	@Override
+	public ResponseEntity<?> updatePayable(Long payableId, AccountPayable updatedPayable) {
+	    try {
+	        // Check if the receivableId exists
+	        if (!accountPayableDao.existsById(payableId)) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payable with ID " + payableId + " not found.");
+	        }
+
+	        // Check if the company ID exists
+	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(updatedPayable.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+	        }
+
+	        // Update the receivable
+	        AccountPayable existingPayable = accountPayableDao.findById(payableId).orElse(null);
+	        if (existingPayable != null) {
+	            existingPayable.setInvoiceNumber(updatedPayable.getInvoiceNumber());
+	            existingPayable.setProductDescription(updatedPayable.getProductDescription());
+	            existingPayable.setQuantity(updatedPayable.getQuantity());
+	            existingPayable.setPrice(updatedPayable.getPrice());
+	            existingPayable.setDueDate(updatedPayable.getDueDate());
+	            existingPayable.setTotalAmount(updatedPayable.getQuantity() * updatedPayable.getPrice());
+	            existingPayable.setStatus(updatedPayable.getStatus());
+	            existingPayable.setVendorName(updatedPayable.getVendorName());
+	            existingPayable.setCompanyId(updatedPayable.getCompanyId());
+
+	            accountPayableDao.save(existingPayable);
+	            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Payable updated successfully."));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payable with ID " + payableId + " not found.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating the Payable.");
+	    }
 	}
 	
 }
