@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 import com.payable.model.AccountPayable;
 import com.payable.service.AccountPayableServiceImpl;
  
 @RestController
-@RequestMapping("/acc_payable")
+@RequestMapping("/accountPayable")
 @CrossOrigin(origins="http://localhost:4200/")
 public class AccountPayableController {
 	
@@ -42,5 +43,10 @@ public class AccountPayableController {
 	@GetMapping("/getEntryByCompanyId/{companyId}")
 	public ResponseEntity<List<AccountPayable>> getEntryByCompanyId(@PathVariable int companyId) {
 		return accountPayableServiceImpl.findByCompanyId(companyId);
+	}	
+	
+	@PutMapping("/updatePayable/{payableId}")
+	public ResponseEntity<?> updatePayable(@PathVariable Long payableId, @RequestBody AccountPayable updatedPayable) {
+	        return accountPayableServiceImpl.updatePayable(payableId, updatedPayable);
 	}
 }

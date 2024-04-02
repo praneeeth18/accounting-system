@@ -29,4 +29,8 @@ export class UserServiceService {
   logout() {
     sessionStorage.clear();
   }
+
+  forgotPassword(newCredentials: LoginRequest): Observable<any> {
+    return this.http.put(baseURL + `forgotPassword`, newCredentials);
+  }
 }

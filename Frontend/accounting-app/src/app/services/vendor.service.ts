@@ -8,7 +8,7 @@ import { Vendor } from '../models/vendor';
 })
 export class VendorService {
 
-  private baseURL = "http://localhost:8080/details";
+  private baseURL = "http://localhost:8085/details";
   constructor( private httpClient: HttpClient) { }
 
 
