@@ -1,6 +1,7 @@
 package com.vendor.details.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,37 +24,43 @@ import com.vendor.details.service.VendorService;
 @RequestMapping("/details")
 public class VendorController {
 
+    private final VendorService vendorService;
+
     @Autowired
-    private VendorService vendorService;
+    public VendorController(VendorService vendorService) {
+        this.vendorService = vendorService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Vendor>> getAllVendors() {
-        var vendors = vendorService.getAllVendor();
+        List<Vendor> vendors = vendorService.getAllVendor();
         return new ResponseEntity<>(vendors, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable("id") int id) {
         try {
-            var vendor = vendorService.getVendorById(id);
+            Vendor vendor = vendorService.getVendorById(id);
             return new ResponseEntity<>(vendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-        var createdVendor = vendorService.createVendor(vendor);
+        Vendor createdVendor = vendorService.createVendor(vendor);
         return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Vendor> updateVendor(@PathVariable("id") int id, @RequestBody Vendor vendor) {
         try {
-            var updatedVendor = vendorService.updateVendor(vendor, id);
+            Vendor updatedVendor = vendorService.updateVendor(vendor, id);
             return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -64,6 +71,7 @@ public class VendorController {
             vendorService.deleteVendor(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (VendorNotFoundException e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
