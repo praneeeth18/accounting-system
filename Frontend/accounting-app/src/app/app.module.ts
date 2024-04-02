@@ -29,6 +29,8 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     EditCustomerComponent,
     LedgerTableComponent,
     UpdateInvoiceComponent,
-    HomepageComponent
+    HomepageComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

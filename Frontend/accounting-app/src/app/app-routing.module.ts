@@ -22,6 +22,8 @@ import { CustomerTableComponent } from './customer-table/customer-table.componen
 import { LedgerTableComponent } from './ledger-table/ledger-table.component';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'', pathMatch:'full'},
@@ -47,7 +49,9 @@ const routes: Routes = [
   {path:'ledger-entry',component:LedgerEntryComponent},
   {path:'ledger-table',component:LedgerTableComponent},
   {path:'update-invoice/:id', component:UpdateInvoiceComponent},
-  {path:'homepage', component:HomepageComponent}
+  {path:'homepage', component:HomepageComponent},
+  {path:'reset-password', component:ResetPasswordComponent},
+  {path:'forgot-password', component:ForgotPasswordComponent}
 ];
 
 @NgModule({
