@@ -36,10 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
             var existingCustomer = optionalExistingCustomer.get();
             existingCustomer.setCustomerName(customer.getCustomerName());
             existingCustomer.setCustomerEmail(customer.getCustomerEmail());
-            customerDao.save(existingCustomer);
-            return existingCustomer;
-        } 
-        else {
+            return customerDao.save(existingCustomer);
+        } else {
             throw new CustomerNotFoundException(getNotFoundExceptionMessage(customerId));
         }
     }
@@ -49,8 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
         var optionalCustomer = customerDao.findById(customerId);
         if (optionalCustomer.isPresent()) {
             return optionalCustomer.get();
-        } 
-        else {
+        } else {
             throw new CustomerNotFoundException(getNotFoundExceptionMessage(customerId));
         }
     }
@@ -60,8 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
         var optionalCustomer = customerDao.findById(customerId);
         if (optionalCustomer.isPresent()) {
             customerDao.deleteById(customerId);
-        } 
-        else {
+        } else {
             throw new CustomerNotFoundException(getNotFoundExceptionMessage(customerId));
         }
     }
