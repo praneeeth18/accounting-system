@@ -18,13 +18,14 @@ import com.vendor.details.entities.Vendor;
 import com.vendor.details.exception.VendorNotFoundException;
 import com.vendor.details.service.VendorService;
 
+import lombok.AllArgsConstructor;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/details")
 public class VendorController {
-
-    @Autowired
-    private VendorService vendorService;
+    private final VendorService vendorService;
 
     @GetMapping
     public ResponseEntity<List<Vendor>> getAllVendors() {

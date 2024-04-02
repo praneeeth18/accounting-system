@@ -6,7 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "vendordetails")
 public class Vendor {
@@ -15,42 +22,9 @@ public class Vendor {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "vendorId")
   private int vendorId;
-
+  @Column
   private String vendorName;
+  @Column
   private String vendorEmail;
 
-  // Constructor with default values
-  public Vendor() {
-    this.vendorName = "";
-    this.vendorEmail = "";
-  }
-
-  public int getVendorId() {
-    return vendorId;
-  }
-
-  public void setVendorId(int vendorId) {
-    this.vendorId = vendorId;
-  }
-
-  public String getVendorName() {
-    return vendorName;
-  }
-
-  public void setVendorName(String vendorName) {
-    this.vendorName = vendorName;
-  }
-
-  public String getVendorEmail() {
-    return vendorEmail;
-  }
-
-  public void setVendorEmail(String vendorEmail) {
-    this.vendorEmail = vendorEmail;
-  }
-
-  @Override
-  public String toString() {
-    return "Vendor [vendorId=" + vendorId + ", vendorName=" + vendorName + ", vendorEmail=" + vendorEmail + "]";
-  }
 }
