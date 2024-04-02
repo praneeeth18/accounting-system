@@ -1,6 +1,7 @@
 <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Accounting App</a>
+      <a *ngIf="!isLoggedIn()" class="navbar-brand" skipLocationChange routerLink="/">Accounting App</a>
+      <a *ngIf="isLoggedIn()" class="navbar-brand" skipLocationChange routerLink="/homepage">Accounting App</a>
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li *ngIf="isLoggedIn()" class="nav-item">
@@ -11,12 +12,23 @@
      
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
           <li *ngIf="isLoggedIn()" class="nav-item">
-            <a skipLocationChange class="nav-link" routerLink="/profile">Welcome, {{ getUsername() || 'User' }}</a>
+            <a skipLocationChange class="nav-link"  style="margin-right: 10px;" routerLink="/profile">Welcome, {{ getUsername() || 'User' }}</a>
           </li>
+         
           <li *ngIf="!isLoggedIn()" class="nav-item">
-            <a skipLocationChange routerLink="/login" class="nav-link" href="#">Sign In</a>
+            <a skipLocationChange routerLink="/login" class="nav-link">Sign In</a>
           </li>
         </ul>
+
+
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+         
+          <li *ngIf="isLoggedIn()" (click)="logout()" class="nav-item">
+            <a skipLocationChange routerLink="/login" class="nav-link">Logout</a>
+          </li>
+        </ul>
+
+       
         
     
     </div>

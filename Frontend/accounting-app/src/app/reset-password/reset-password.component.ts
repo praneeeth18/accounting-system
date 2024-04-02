@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit{
       this.userService.forgotPassword(newCredentials).subscribe({
         next: (response) => {
           alert("Password has been changed sucessfully!");
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { skipLocationChange: true});
         },
         error: (error) => {
           alert("Password reset unsuccessfull!" + error);
