@@ -23,7 +23,8 @@ public class LedgerServiceImpl implements LedgerServices{
 		double prevBal;
 		String transacttype;
 		boolean flag;
-			
+		
+		@Override
 		public boolean createLedger(Ledger ledger) {
             Optional<Ledger> optionalEntity = ledgerdao.findFirstByOrderByEntryidDesc();
 	        
@@ -64,11 +65,21 @@ public class LedgerServiceImpl implements LedgerServices{
     			ledger.setBalance(prevBal - ledger.getAmount());
     			ledgerdao.save(ledger);
     		}
-    		else {
+    		else 
+    		{
     			flag=false;
     		}
     	}
+	        
+    	else {
+    		flag=false;
+    	}
 			return flag;	
+		}
+
+		@Override
+		public List<Ledger> getLedgerByCompanyId(Integer companyId) {
+			return ledgerdao.findByCompanyId(companyId);
 		}
 
 }
