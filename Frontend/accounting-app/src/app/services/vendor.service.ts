@@ -22,7 +22,7 @@ public httpOptions = {
     return this.httpClient.get<Vendor[]>(`${this.baseURL}`);
   }
 
-  createVendor(vendor: Vendor): Observable<Object>{
+  createVendor(vendor: any): Observable<any>{
     return this.httpClient.post(`${this.baseURL}`, vendor);
   }
   deleteVendorById(vendorId: number): Observable<Object> {
@@ -34,5 +34,9 @@ public httpOptions = {
 
   updateVendor(vendor: Vendor): Observable<Object> {
     return this.httpClient.put(`${this.baseURL}/${vendor.vendorId}`, vendor);
+  }
+
+  getVendorByCompanyId(companyId: number): Observable<any> {
+    return this.httpClient.get(this.baseURL + `/getVendorByCompanyId/${companyId}`);
   }
 }

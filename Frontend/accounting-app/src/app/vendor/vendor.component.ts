@@ -27,18 +27,22 @@ export class VendorComponent implements OnInit{
 
   onSubmit() {
     if (this.vendorForm.valid) {
-      this.vendorService.createVendor(this.vendorForm.value).subscribe(
-        response => {
+      const vendorDetails = {
+        vendorName: this.vendorForm.value.vendorName,
+        vendorEmail: this.vendorForm.value.vendorEmail,
+        companyId: sessionStorage.getItem('companyId')
+      }
+      this.vendorService.createVendor(vendorDetails).subscribe({
+        next: (response) => {
           this.vendorForm.reset();
           alert('Vendor added successfully');
           this.router.navigate(['/vendortable']);
         },
-        error => {
-          
+        error: (error) => {
           console.error('Error adding vendor:', error);
           alert('Failed to add vendor. Please try again later.');
         }
-      );
+      });
     } else {
       
       this.vendorForm.markAllAsTouched();
