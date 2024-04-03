@@ -23,5 +23,5 @@ public class Vendor {
   private int vendorId;
   private String vendorName;
   private String vendorEmail;
-
+  private int companyId;
 }

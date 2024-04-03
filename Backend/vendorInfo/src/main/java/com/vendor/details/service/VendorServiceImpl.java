@@ -1,7 +1,10 @@
 package com.vendor.details.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.vendor.details.entities.Vendor;
@@ -66,5 +69,20 @@ public class VendorServiceImpl implements VendorService {
     // Utility method to get the "not found" message
     private static String getNotFoundExceptionMessage(int vendorId) {
         return "Vendor with ID " + vendorId + " not found";
+    }
+    
+    @Override
+    public ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId) {
+    	try {
+    		List<Vendor> vendors = vendorRepo.findByCompanyId(companyId);
+			if(vendors.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+			}
+			return ResponseEntity.status(HttpStatus.OK).body(vendors);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+    	
     }
 }

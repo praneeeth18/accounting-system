@@ -1,6 +1,9 @@
 package com.vendor.details.service;
 
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
 import com.vendor.details.entities.Vendor;
 
 public interface VendorService {
@@ -14,6 +17,7 @@ public interface VendorService {
 	Vendor updateVendor(Vendor vendor ,int vendorId);
 	
 	void deleteVendor(int vendorId);
-
+	
+	public ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId);
 
 }

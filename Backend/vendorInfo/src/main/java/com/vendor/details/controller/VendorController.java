@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vendor.details.entities.Vendor;
 import com.vendor.details.exception.VendorNotFoundException;
+import com.vendor.details.feign.UserServiceFeignInterface;
 import com.vendor.details.service.VendorService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,10 +26,12 @@ import com.vendor.details.service.VendorService;
 public class VendorController {
 
     private final VendorService vendorService;
+    private final UserServiceFeignInterface userServiceInterface;
 
     @Autowired
-    public VendorController(VendorService vendorService) {
+    public VendorController(VendorService vendorService, UserServiceFeignInterface userServiceInterface) {
         this.vendorService = vendorService;
+        this.userServiceInterface = userServiceInterface;
     }
 
     @GetMapping
@@ -50,8 +53,17 @@ public class VendorController {
 
     @PostMapping
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-        Vendor createdVendor = vendorService.createVendor(vendor);
-        return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
+    	try {
+    		ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	        }
+    		Vendor createdVendor = vendorService.createVendor(vendor);			
+    		return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
     }
 
     @PutMapping("/{id}")
@@ -74,5 +86,10 @@ public class VendorController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/getVendorByCompanyId/{companyId}")
+    public ResponseEntity<List<Vendor>> getVendorByCompanyId(@PathVariable int companyId) {
+    	return vendorService.getVendorByCompanyId(companyId);
     }
 }
