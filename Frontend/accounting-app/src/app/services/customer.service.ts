@@ -17,7 +17,7 @@ export class CustomerService {
     return this.httpClient.get<Customer[]>(`${this.baseURL}`);
   }
 
-  createCustomer(customer: Customer): Observable<Object>{
+  createCustomer(customer: any): Observable<any>{
     return this.httpClient.post(`${this.baseURL}`, customer);
   }
   deleteCustomerById(customerId: number): Observable<Object> {
@@ -29,5 +29,9 @@ export class CustomerService {
 
   updateCustomer(customer: Customer): Observable<Object> {
     return this.httpClient.put(`${this.baseURL}/${customer.customerId}`, customer);
+  }
+
+  getCustomerByCompanyId(companyId: number): Observable<any> {
+    return this.httpClient.get(this.baseURL + `/getCustomerByCompanyId/${companyId}`);
   }
 }

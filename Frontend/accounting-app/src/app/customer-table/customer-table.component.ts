@@ -13,23 +13,39 @@ import { CustomerService } from '../services/customer.service';
 export class CustomerTableComponent implements OnInit {
 
  
-  customer!: Customer[];
+  customer!: any[];
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private customerService: CustomerService) { }
 
 
   ngOnInit(): void {
-   
-
-    this.getCustomerDetails();
+    const companyId = sessionStorage.getItem('companyId');
+      if (companyId) {
+        // Parse companyId to number
+        const companyIdNumber = parseInt(companyId, 10);
+        
+        // Call the service method with the retrieved companyId
+        this.customerService.getCustomerByCompanyId(companyIdNumber).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.customer = response; // Assign the response data to the invoice property
+          },
+          error: (error) => {
+            console.error('Error fetching invoices:', error);
+          }
+        });
+      } else {
+        alert('Company ID does not exist');
+      }
+    // this.getCustomerDetails();
   }
 
 
-  getCustomerDetails() {
+  // getCustomerDetails() {
 
-    this.customerService.getCustomer().subscribe(data => {
-      this.customer = data;
-    });
-  }
+  //   this.customerService.getCustomer().subscribe(data => {
+  //     this.customer = data;
+  //   });
+  // }
   customerView(customerId: number) {
     console.log(customerId);
     this.router.navigate(['customer-view', customerId], { skipLocationChange: true });

@@ -28,18 +28,23 @@ export class CustomerDetailsComponent implements OnInit{
   customer() {
    
       if (this.customerForm.valid) {
-        this.customerService.createCustomer(this.customerForm.value).subscribe(
-          response => {
+        const customerDetails = {
+          customerName: this.customerForm.value.customerName,
+          customerEmail: this.customerForm.value.customerEmail,
+          customerAddress: this.customerForm.value.customerAddress,
+          companyId: sessionStorage.getItem('companyId')
+        }
+        this.customerService.createCustomer(customerDetails).subscribe({
+          next: (response) => {
             this.customerForm.reset();
             alert('Customer added successfully');
             this.router.navigate(['/customer-table']);
           },
-          error => {
-            
+          error: (error) => {
             console.error('Error adding customer:', error);
             alert('Failed to add customer. Please try again later.');
           }
-        );
+        });
       } else {
         
         this.customerForm.markAllAsTouched();
