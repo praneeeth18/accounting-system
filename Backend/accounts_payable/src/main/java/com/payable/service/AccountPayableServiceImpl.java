@@ -9,17 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.payable.dao.AccountPayableDao;
-import com.payable.feign.AccountPayableFeignInterface;
+import com.payable.feign.UserServiceFeingInterface;
 import com.payable.model.AccountPayable;
 
 @Service
 public class AccountPayableServiceImpl implements AccountPayableService {
 	
 	private final AccountPayableDao accountPayableDao;
-    private final AccountPayableFeignInterface userServiceInterface;
+    private final UserServiceFeingInterface userServiceInterface;
 
     public AccountPayableServiceImpl(AccountPayableDao accountPayableDao,
-                                         AccountPayableFeignInterface userServiceInterface) {
+                                         UserServiceFeingInterface userServiceInterface) {
         this.accountPayableDao = accountPayableDao;
         this.userServiceInterface = userServiceInterface;
     }
