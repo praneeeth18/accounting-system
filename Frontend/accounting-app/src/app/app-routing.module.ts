@@ -24,6 +24,7 @@ import { UpdateInvoiceComponent } from './update-invoice/update-invoice.componen
 import { HomepageComponent } from './homepage/homepage.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UpdatePurchaseInvoiceComponent } from './update-purchase-invoice/update-purchase-invoice.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'', pathMatch:'full'},
@@ -51,7 +52,8 @@ const routes: Routes = [
   {path:'update-invoice/:id', component:UpdateInvoiceComponent},
   {path:'homepage', component:HomepageComponent},
   {path:'reset-password/:email', component:ResetPasswordComponent},
-  {path:'forgot-password', component:ForgotPasswordComponent}
+  {path:'forgot-password', component:ForgotPasswordComponent},
+  {path:'update-purchase-invoice/:id', component:UpdatePurchaseInvoiceComponent}
 ];
 
 @NgModule({

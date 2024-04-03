@@ -22,4 +22,8 @@ export class AccountsPayableServiceService {
   getInvoiceByPayableId(payableId: number): Observable<any> {
     return this.httpClient.get(this.baseURL + `getEntryByPayableId/${payableId}`);
   }
+
+  updateInvoice(payableId: number, payableDetails: any) {
+    return this.httpClient.put(this.baseURL + `updatePayable/${payableId}`, payableDetails);
+  }
 }

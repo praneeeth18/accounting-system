@@ -31,6 +31,7 @@ import { UpdateInvoiceComponent } from './update-invoice/update-invoice.componen
 import { HomepageComponent } from './homepage/homepage.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdatePurchaseInvoiceComponent } from './update-purchase-invoice/update-purchase-invoice.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UpdateInvoiceComponent,
     HomepageComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UpdatePurchaseInvoiceComponent
   ],
   imports: [
     BrowserModule,
