@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Vendor } from '../models/vendor';
 import { VendorService } from '../services/vendor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor',
@@ -13,7 +14,7 @@ export class VendorComponent implements OnInit{
   vendorForm!:FormGroup
   vendor: Vendor[] = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private vendorService :VendorService){
+  constructor(private fb: FormBuilder, private http: HttpClient,private vendorService :VendorService,private router:Router){
   }
 
   ngOnInit(): void {
@@ -30,6 +31,7 @@ export class VendorComponent implements OnInit{
         response => {
           this.vendorForm.reset();
           alert('Vendor added successfully');
+          this.router.navigate(['/vendortable']);
         },
         error => {
           

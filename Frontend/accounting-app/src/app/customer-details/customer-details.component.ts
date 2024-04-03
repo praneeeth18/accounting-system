@@ -32,6 +32,7 @@ export class CustomerDetailsComponent implements OnInit{
           response => {
             this.customerForm.reset();
             alert('Customer added successfully');
+            this.router.navigate(['/customer-table']);
           },
           error => {
             

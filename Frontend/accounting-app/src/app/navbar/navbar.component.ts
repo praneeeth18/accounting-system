@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  constructor(private userService: UserServiceService, private router: Router) {}
+
   isLoggedIn(): boolean {
     return sessionStorage.getItem('currentUser') !== null;
   }
@@ -14,5 +18,11 @@ export class NavbarComponent {
   getUsername(): string {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
     return currentUser.repFirstName; // Adjust the key based on your user object structure
+  }
+
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['login'], { skipLocationChange: true });
   }
 }
