@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.details.exception.CustomerNotFoundException;
+import com.customer.details.feign.UserServiceFeignInterface;
 import com.customer.details.model.Customer;
 import com.customer.details.service.CustomerService;
 
@@ -25,10 +26,12 @@ import com.customer.details.service.CustomerService;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final UserServiceFeignInterface userServiceInterface;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, UserServiceFeignInterface userServiceInterface) {
         this.customerService = customerService;
+        this.userServiceInterface = userServiceInterface;
     }
 
     @GetMapping
@@ -49,8 +52,17 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = customerService.createCustomer(customer);
-        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+    	try {
+    		ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	        }
+    		Customer createdCustomer = customerService.createCustomer(customer);			
+    		return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
     }
 
     @PutMapping("/{id}")
@@ -71,5 +83,10 @@ public class CustomerController {
         } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/getCustomerByCompanyId/{companyId}")
+    public ResponseEntity<List<Customer>> getCustomerByCompanyId(@PathVariable int companyId) {
+    	return customerService.getCustomerByCompanyId(companyId);
     }
 }

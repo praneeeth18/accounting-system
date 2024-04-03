@@ -1,11 +1,15 @@
 package com.customer.details.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.customer.details.dao.CustomerDao;
 import com.customer.details.exception.CustomerNotFoundException;
+import com.customer.details.feign.UserServiceFeignInterface;
 import com.customer.details.model.Customer;
 
 @Service
@@ -65,5 +69,20 @@ public class CustomerServiceImpl implements CustomerService {
     // Utility method to get the "not found" message
     private static String getNotFoundExceptionMessage(int customerId) {
         return "Customer with ID " + customerId + " not found";
+    }
+    
+    @Override
+    public ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId) {
+    	try {
+    		List<Customer> vendors = customerDao.findByCompanyId(companyId);
+			if(vendors.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+			}
+			return ResponseEntity.status(HttpStatus.OK).body(vendors);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+    	
     }
 }

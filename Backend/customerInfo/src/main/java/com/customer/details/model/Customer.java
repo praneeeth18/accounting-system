@@ -26,4 +26,5 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email should be valid")
     private String customerEmail;
     private String customerAddress;
+    private int companyId;
 }

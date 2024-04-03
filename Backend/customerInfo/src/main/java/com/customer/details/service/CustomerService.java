@@ -1,8 +1,10 @@
 package com.customer.details.service;
 
 import java.util.List;
-import com.customer.details.model.Customer;
 
+import org.springframework.http.ResponseEntity;
+
+import com.customer.details.model.Customer;
 
 public interface CustomerService {
 
@@ -15,5 +17,6 @@ public interface CustomerService {
 	Customer updateCustomer(Customer customer ,int customerId);
 	
 	void deleteCustomer(int customerId);
-
+	
+	public ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId);
 }
