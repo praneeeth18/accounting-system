@@ -2,13 +2,23 @@ package com.dxc.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="LEDGER")
 public class Ledger {
@@ -16,55 +26,11 @@ public class Ledger {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int entryid;
+	private Integer companyId;
 	private Date transactiondate;
 	private String description;
 	private String transactiontype;
 	private double amount;
 	private double balance;
-	public Ledger() {
-		super();
-	}
-	public int getEntryid() {
-		return entryid;
-	}
-	public void setEntryid(int entryid) {
-		this.entryid = entryid;
-	}
-	public Date getTransactiondate() {
-		return transactiondate;
-	}
-	public void setTransactiondate(Date transactiondate) {
-		this.transactiondate = transactiondate;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getTransactiontype() {
-		return transactiontype;
-	}
-	public void setTransactiontype(String transactiontype) {
-		this.transactiontype = transactiontype;
-	}
-	public double getAmount() {
-		return amount;
-	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-	public double getBalance() {
-		return balance;
-	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	@Override
-	public String toString() {
-		return "Ledger [entryid=" + entryid + ", transactiondate=" + transactiondate + ", description=" + description
-				+ ", transactiontype=" + transactiontype + ", amount=" + amount + ", balance=" + balance + "]";
-	}
-	
-	
+
 }

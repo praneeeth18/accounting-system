@@ -2,13 +2,18 @@ package com.dxc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class LedgerApplication {
+public class LedgerApplication{
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		SpringApplication.run(LedgerApplication.class, args);
-		System.out.println("Accounting application started");
 		}
 
+	@Bean
+	protected RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
 }

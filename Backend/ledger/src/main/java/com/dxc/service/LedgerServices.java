@@ -10,4 +10,6 @@ public interface LedgerServices {
 	
 	public boolean createLedger(Ledger ledger);
 	
+	public List<Ledger> getLedgerByCompanyId(Integer companyId);
+	
 }
