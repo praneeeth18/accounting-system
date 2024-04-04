@@ -41,7 +41,8 @@ public class VendorServiceImpl implements VendorService {
             existingVendor.setVendorEmail(vendor.getVendorEmail());
             vendorRepo.save(existingVendor);
             return existingVendor;
-        } else {
+        } 
+        else {
             throw new VendorNotFoundException(getNotFoundExceptionMessage(vendorId));
         }
     }
@@ -51,7 +52,8 @@ public class VendorServiceImpl implements VendorService {
         var optionalVendor = vendorRepo.findById(vendorId);
         if (optionalVendor.isPresent()) {
             return optionalVendor.get();
-        } else {
+        }
+        else {
             throw new VendorNotFoundException(getNotFoundExceptionMessage(vendorId));
         }
     }
@@ -61,7 +63,8 @@ public class VendorServiceImpl implements VendorService {
         var optionalVendor = vendorRepo.findById(vendorId);
         if (optionalVendor.isPresent()) {
             vendorRepo.deleteById(vendorId);
-        } else {
+        }
+        else {
             throw new VendorNotFoundException(getNotFoundExceptionMessage(vendorId));
         }
     }
@@ -79,9 +82,11 @@ public class VendorServiceImpl implements VendorService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
             }
             return ResponseEntity.status(HttpStatus.OK).body(vendors);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 }
