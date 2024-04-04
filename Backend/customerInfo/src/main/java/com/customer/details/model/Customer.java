@@ -11,20 +11,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 
-@AllArgsConstructor 
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "customerdetails")
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
-    private String customerName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int customerId;
+  private String customerName;
 
-    @NotBlank(message = "Email cannot be blank")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email should be valid")
-    private String customerEmail;
-    private String customerAddress;
-    private int companyId;
+  @NotBlank(message = "Email cannot be blank")
+  @Pattern(regexp = "^[\\p{L}0-9._%+-]+@[\\p{L}0-9.-]+\\.[\\p{L}]{2,}$", message = "Email should be valid")
+  private String customerEmail;
+  private String customerAddress;
+  private int companyId;
 }

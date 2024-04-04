@@ -18,5 +18,5 @@ public interface CustomerService {
 	
 	void deleteCustomer(int customerId);
 	
-	public ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId);
+	ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId);
 }

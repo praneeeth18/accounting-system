@@ -52,17 +52,17 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-    	try {
-    		ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
-	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	        }
-    		Customer createdCustomer = customerService.createCustomer(customer);			
-    		return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
+        try {
+            ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
+            if (companyResponse.getStatusCode() != HttpStatus.OK) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+            Customer createdCustomer = customerService.createCustomer(customer);
+            return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @PutMapping("/{id}")
@@ -84,9 +84,9 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @GetMapping("/getCustomerByCompanyId/{companyId}")
     public ResponseEntity<List<Customer>> getCustomerByCompanyId(@PathVariable int companyId) {
-    	return customerService.getCustomerByCompanyId(companyId);
+        return customerService.getCustomerByCompanyId(companyId);
     }
 }

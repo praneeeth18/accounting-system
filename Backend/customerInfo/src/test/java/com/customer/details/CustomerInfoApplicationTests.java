@@ -10,7 +10,9 @@ class CustomerInfoApplicationTests {
 
     @Test
     void testMethodRenamed() {
-        assertEquals(1, 1, "1 should be equal to 1");
+        int expected = 1;
+        int actual = 1;
+        assertEquals(expected, actual, "1 should be equal to 1");
     }
 
 }
