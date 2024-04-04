@@ -36,14 +36,14 @@ public class VendorController {
 
     @GetMapping
     public ResponseEntity<List<Vendor>> getAllVendors() {
-        List<Vendor> vendors = vendorService.getAllVendor();
+        var vendors = vendorService.getAllVendor(); // Declare this local variable with "var" instead.
         return new ResponseEntity<>(vendors, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable("id") int id) {
         try {
-            Vendor vendor = vendorService.getVendorById(id);
+            var vendor = vendorService.getVendorById(id); // Declare this local variable with "var" instead.
             return new ResponseEntity<>(vendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
             e.printStackTrace();
@@ -53,23 +53,23 @@ public class VendorController {
 
     @PostMapping
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-    	try {
-    		ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId());
-	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	        }
-    		Vendor createdVendor = vendorService.createVendor(vendor);			
-    		return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
+        try {
+            var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); // Declare this local variable with "var" instead.
+            if (companyResponse.getStatusCode() != HttpStatus.OK) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+            var createdVendor = vendorService.createVendor(vendor); // Declare this local variable with "var" instead.
+            return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Vendor> updateVendor(@PathVariable("id") int id, @RequestBody Vendor vendor) {
         try {
-            Vendor updatedVendor = vendorService.updateVendor(vendor, id);
+            var updatedVendor = vendorService.updateVendor(vendor, id); // Declare this local variable with "var" instead.
             return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
             e.printStackTrace();
@@ -90,6 +90,6 @@ public class VendorController {
     
     @GetMapping("/getVendorByCompanyId/{companyId}")
     public ResponseEntity<List<Vendor>> getVendorByCompanyId(@PathVariable int companyId) {
-    	return vendorService.getVendorByCompanyId(companyId);
+        return vendorService.getVendorByCompanyId(companyId);
     }
 }

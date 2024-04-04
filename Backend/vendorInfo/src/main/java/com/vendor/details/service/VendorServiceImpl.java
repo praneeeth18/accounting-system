@@ -73,16 +73,15 @@ public class VendorServiceImpl implements VendorService {
     
     @Override
     public ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId) {
-    	try {
-    		List<Vendor> vendors = vendorRepo.findByCompanyId(companyId);
-			if(vendors.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
-			}
-			return ResponseEntity.status(HttpStatus.OK).body(vendors);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-    	
+        try {
+            List<Vendor> vendors = vendorRepo.findByCompanyId(companyId);
+            if (vendors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(vendors);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

@@ -11,7 +11,7 @@ class VendorInfoApplicationTests {
     @Test
     void testMethodRenamed() {
         // Example assertion to check if 1 is equal to 1 (which should always be true)
-        assertEquals(1, 1, "1 should be equal to 1"); // Added a message to the assertion
+        assertEquals(1, 1, "1 should be equal to 1"); // Changed to use assertEquals
     }
 
 }

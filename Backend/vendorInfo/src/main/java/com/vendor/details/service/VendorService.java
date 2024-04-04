@@ -18,6 +18,6 @@ public interface VendorService {
 	
 	void deleteVendor(int vendorId);
 	
-	public ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId);
+	ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId);
 
 }
