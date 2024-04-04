@@ -36,14 +36,14 @@ public class VendorController {
 
     @GetMapping
     public ResponseEntity<List<Vendor>> getAllVendors() {
-        var vendors = vendorService.getAllVendor(); // Declare this local variable with "var" instead.
+        var vendors = vendorService.getAllVendor(); 
         return new ResponseEntity<>(vendors, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Vendor> getVendorById(@PathVariable("id") int id) {
         try {
-            var vendor = vendorService.getVendorById(id); // Declare this local variable with "var" instead.
+            var vendor = vendorService.getVendorById(id); 
             return new ResponseEntity<>(vendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
             e.printStackTrace();
@@ -54,11 +54,11 @@ public class VendorController {
     @PostMapping
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
         try {
-            var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); // Declare this local variable with "var" instead.
+            var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); 
             if (companyResponse.getStatusCode() != HttpStatus.OK) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
-            var createdVendor = vendorService.createVendor(vendor); // Declare this local variable with "var" instead.
+            var createdVendor = vendorService.createVendor(vendor); 
             return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class VendorController {
     @PutMapping("/{id}")
     public ResponseEntity<Vendor> updateVendor(@PathVariable("id") int id, @RequestBody Vendor vendor) {
         try {
-            var updatedVendor = vendorService.updateVendor(vendor, id); // Declare this local variable with "var" instead.
+            var updatedVendor = vendorService.updateVendor(vendor, id); 
             return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class VendorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVendor(@PathVariable("id") int id) {
-        try {
+    	try {
             vendorService.deleteVendor(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (VendorNotFoundException e) {
