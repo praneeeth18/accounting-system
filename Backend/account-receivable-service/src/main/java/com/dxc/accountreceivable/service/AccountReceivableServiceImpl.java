@@ -2,7 +2,6 @@ package com.dxc.accountreceivable.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
     }
 
 	@Override
-	public ResponseEntity<?> createReceivable(AccountReceivable accountReceivable) {
+	public ResponseEntity<String> createReceivable(AccountReceivable accountReceivable) {
 		try {
 			// Check if the company ID exists
 	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountReceivable.getCompanyId());
@@ -34,7 +33,7 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	        }
 			accountReceivable.setAmount(accountReceivable.getQuantity() * accountReceivable.getPrice());
 			accountReceivableRepository.save(accountReceivable);
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Entry created!"));
+			return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
@@ -88,7 +87,7 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	}
 
 	@Override
-	public ResponseEntity<?> updateReceivable(Long receivableId, AccountReceivable updatedReceivable) {
+	public ResponseEntity<String> updateReceivable(Long receivableId, AccountReceivable updatedReceivable) {
 	    try {
 	        // Check if the receivableId exists
 	        if (!accountReceivableRepository.existsById(receivableId)) {
@@ -115,7 +114,7 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
 	            existingReceivable.setCompanyId(updatedReceivable.getCompanyId());
 
 	            accountReceivableRepository.save(existingReceivable);
-	            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Receivable updated successfully."));
+	            return ResponseEntity.status(HttpStatus.OK).body("Receivable updated successfully.");
 	        } else {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receivable with ID " + receivableId + " not found.");
 	        }

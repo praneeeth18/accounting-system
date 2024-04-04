@@ -27,7 +27,7 @@ public class AccountReceivableController {
     }
 	
 	@PostMapping("/createAccountReceivable")
-	public ResponseEntity<?> createReceivable(@RequestBody AccountReceivable accountReceivable) {
+	public ResponseEntity<String> createReceivable(@RequestBody AccountReceivable accountReceivable) {
 		return accountReceivableServiceImpl.createReceivable(accountReceivable);
 	}
 	
@@ -47,7 +47,7 @@ public class AccountReceivableController {
 	}
 	
 	@PutMapping("/updateReceivable/{receivableId}")
-    public ResponseEntity<?> updateReceivable(@PathVariable Long receivableId, @RequestBody AccountReceivable updatedReceivable) {
+    public ResponseEntity<String> updateReceivable(@PathVariable Long receivableId, @RequestBody AccountReceivable updatedReceivable) {
         return accountReceivableServiceImpl.updateReceivable(receivableId, updatedReceivable);
     }
 }
