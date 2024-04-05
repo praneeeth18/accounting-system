@@ -24,73 +24,71 @@ import com.vendor.details.service.VendorService;
 @RequestMapping("/details")
 public class VendorController {
 
-    private final VendorService vendorService;
-    private final UserServiceFeignInterface userServiceInterface;
+  private final VendorService vendorService;
+  private final UserServiceFeignInterface userServiceInterface;
 
-    public VendorController(VendorService vendorService, UserServiceFeignInterface userServiceInterface) {
-        this.vendorService = vendorService;
-        this.userServiceInterface = userServiceInterface;
+  public VendorController(VendorService vendorService, UserServiceFeignInterface userServiceInterface) {
+    this.vendorService = vendorService;
+    this.userServiceInterface = userServiceInterface;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Vendor>> getAllVendors() {
-        var vendors = vendorService.getAllVendor(); 
-        return new ResponseEntity<>(vendors, HttpStatus.OK);
+  @GetMapping
+  public ResponseEntity<List<Vendor>> getAllVendors() {
+    var vendors = vendorService.getAllVendor(); 
+    return new ResponseEntity<>(vendors, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Vendor> getVendorById(@PathVariable("id") int id) {
-        try {
-            var vendor = vendorService.getVendorById(id); 
-            return new ResponseEntity<>(vendor, HttpStatus.OK);
+  @GetMapping("/{id}")
+  public ResponseEntity<Vendor> getVendorById(@PathVariable("id") int id) {
+    try {
+      var vendor = vendorService.getVendorById(id); 
+      return new ResponseEntity<>(vendor, HttpStatus.OK);
+        } catch(VendorNotFoundException e){
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        catch (VendorNotFoundException e){
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
-    @PostMapping
-    public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-      try {
+  @PostMapping
+  public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
+    try {
       var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); 
-            if (companyResponse.getStatusCode() != HttpStatus.OK) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+      if (companyResponse.getStatusCode() != HttpStatus.OK) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
-            var createdVendor = vendorService.createVendor(vendor); 
-            return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
-        }
-      catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Vendor> updateVendor(@PathVariable("id") int id, @RequestBody Vendor vendor) {
-        try {
-            var updatedVendor = vendorService.updateVendor(vendor, id); 
-            return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
-        } catch (VendorNotFoundException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      var createdVendor = vendorService.createVendor(vendor); 
+      return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
+        } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVendor(@PathVariable("id") int id) {
-    	try {
-            vendorService.deleteVendor(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  @PutMapping("/{id}")
+  public ResponseEntity<Vendor> updateVendor(@PathVariable("id") int id, @RequestBody Vendor vendor) {
+    try {
+      var updatedVendor = vendorService.updateVendor(vendor, id); 
+      return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
         } catch (VendorNotFoundException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteVendor(@PathVariable("id") int id) {
+    try {
+      vendorService.deleteVendor(id);
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (VendorNotFoundException e) {
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
     
-    @GetMapping("/getVendorByCompanyId/{companyId}")
-    public ResponseEntity<List<Vendor>> getVendorByCompanyId(@PathVariable int companyId) {
-        return vendorService.getVendorByCompanyId(companyId);
+  @GetMapping("/getVendorByCompanyId/{companyId}")
+  public ResponseEntity<List<Vendor>> getVendorByCompanyId(@PathVariable int companyId) {
+    return vendorService.getVendorByCompanyId(companyId);
     }
 }
