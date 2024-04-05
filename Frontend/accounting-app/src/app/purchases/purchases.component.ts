@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountsPayableServiceService } from '../services/accounts-payable-service.service';
 import { dateNotInFuture } from '../custom-validators';
+import { Vendor } from '../models/vendor';
+import { VendorService } from '../services/vendor.service';
 
 @Component({
   selector: 'app-purchases',
@@ -12,7 +14,13 @@ import { dateNotInFuture } from '../custom-validators';
 })
 export class PurchasesComponent {
   public purchaseForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private payableService: AccountsPayableServiceService) {}
+  public vendors: Vendor[] = [];
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private payableService: AccountsPayableServiceService,
+    private vendorService: VendorService
+  ) {}
 
   ngOnInit(): void {
     this.purchaseForm = this.formBuilder.group({
@@ -24,6 +32,23 @@ export class PurchasesComponent {
       price:['', Validators.required],
       status:['', Validators.required]
     })
+
+    this.loadVendors();
+  }
+
+  loadVendors(): void {
+    const companyId = sessionStorage.getItem('companyId');
+    if (companyId) {
+      this.vendorService.getVendorByCompanyId(parseInt(companyId))
+        .subscribe(
+          (data: Vendor[]) => {
+            this.vendors = data;
+          },
+          (error) => {
+            console.error('Error fetching vendors:', error);
+          }
+        );
+    }
   }
 
   onSubmit() {

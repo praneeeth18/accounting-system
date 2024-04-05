@@ -6,7 +6,9 @@
             <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Vendor Name</label>
-                    <input type="text" formControlName="vendorName" class="form-control" id="name" aria-describedby="emailHelp" required>
+                    <select formControlName="vendorName" class="form-select" id="name" required>
+                        <option *ngFor="let vendor of vendors" [value]="vendor.vendorName">{{ vendor.vendorName }}</option>
+                    </select>
                     <span class="text-danger" *ngIf="purchaseForm.controls['vendorName'].dirty && purchaseForm.hasError('required', 'vendorName')">*Customer Name is required</span>
                 </div>
                 <div class="mb-3">
