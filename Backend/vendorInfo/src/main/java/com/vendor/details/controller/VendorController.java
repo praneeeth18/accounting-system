@@ -2,7 +2,6 @@ package com.vendor.details.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +27,6 @@ public class VendorController {
     private final VendorService vendorService;
     private final UserServiceFeignInterface userServiceInterface;
 
-    @Autowired
     public VendorController(VendorService vendorService, UserServiceFeignInterface userServiceInterface) {
         this.vendorService = vendorService;
         this.userServiceInterface = userServiceInterface;
@@ -45,7 +43,8 @@ public class VendorController {
         try {
             var vendor = vendorService.getVendorById(id); 
             return new ResponseEntity<>(vendor, HttpStatus.OK);
-        } catch (VendorNotFoundException e) {
+        }
+        catch (VendorNotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -53,14 +52,15 @@ public class VendorController {
 
     @PostMapping
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
-        try {
-            var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); 
+      try {
+      var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); 
             if (companyResponse.getStatusCode() != HttpStatus.OK) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
             var createdVendor = vendorService.createVendor(vendor); 
             return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
-        } catch (Exception e) {
+        }
+      catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
