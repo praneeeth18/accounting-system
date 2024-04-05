@@ -11,12 +11,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Invoice Number</label>
-                    <input type="text" [(ngModel)]="purchase.invoiceNumber" formControlName="invoiceNumber" class="form-control" id="number" required>
+                    <input type="text" [(ngModel)]="purchase.invoiceNumber" formControlName="invoiceNumber" class="form-control" id="number" readonly required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['invoiceNumber'].dirty && purchaseForm.hasError('required', 'invoiceNumber')">*Invoice Number is required</span>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
-                    <input type="date" [(ngModel)]="purchase.dueDate" formControlName="date" class="form-control" id="date" required>
+                    <input type="date" [(ngModel)]="purchase.dueDate" formControlName="date" class="form-control" id="date" readonly required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['date'].dirty && purchaseForm.hasError('required', 'date')">*Date is required</span>
                     <span class="text-danger" *ngIf="purchaseForm.get('date')?.errors?.['futureDate']">*Future date is not allowed</span>
 
