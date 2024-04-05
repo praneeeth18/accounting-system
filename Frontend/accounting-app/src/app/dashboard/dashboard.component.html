@@ -1,119 +1,106 @@
-        <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a skipLocationChange routerLink="/homepage">Dashboard</a>
-                </div>
+<div class="wrapper">
+    <aside id="sidebar">
+        <div class="d-flex">
+            <button class="toggle-btn" type="button">
+                <i class="lni lni-grid-alt"></i>
+            </button>
+            <div class="sidebar-logo">
+                <a skipLocationChange routerLink="/homepage">Dashboard</a>
             </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-agenda"></i>
-                        <span>Ledger</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/ledger-table" class="sidebar-link">Legder Table</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/ledger-entry" class="sidebar-link">Add new Entry</a>
-                        </li>
-                    </ul>
-                </li>
-            <!--    <li class="sidebar-item">
-                    <a routerLink="/sales-table" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Sales</span>
-                    </a>
-                </li>-->
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-target-revenue"></i>
-                        <span>Sales</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/sales-table" class="sidebar-link">Sale Details</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-wallet"></i>
-                        <span>Purchases</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/purchase-table" class="sidebar-link">Purchase Details</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/purchase-entry" class="sidebar-link">Generate New Invoice</a>
-                        </li>
-                    </ul>
-                </li>
-            
-                
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-customer"></i>
-                        <span>Customer</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/customer-table" class="sidebar-link">Customer Details</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/customer-details" class="sidebar-link">Add new Customer</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-revenue"></i>
-                        <span>Vendor</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/vendortable" class="sidebar-link">Vendor Details</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a skipLocationChange routerLink="/vendor" class="sidebar-link">Add new Vendor</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a skipLocationChange routerLink="/profile" class="sidebar-link">
-                            <i class="lni lni-user"></i>
-                            <span>Company Profile</span>
-                        </a>
-                    </li>
-                <li class="sidebar-item">
-                <a class="sidebar-link" (click)="logout()">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#ledger" aria-expanded="false" aria-controls="ledger">
+                    <i class="lni lni-agenda"></i>
+                    <span>Ledger</span>
                 </a>
+                <ul id="ledger" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/ledger-table" class="sidebar-link">Legder Table</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/ledger-entry" class="sidebar-link">Add new Entry</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#sales" aria-expanded="false" aria-controls="sales">
+                    <i class="lni lni-target-revenue"></i>
+                    <span>Sales</span>
+                </a>
+                <ul id="sales" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/sales-table" class="sidebar-link">Sale Details</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/invoice-details" class="sidebar-link">Generate New Invoice</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#purchases" aria-expanded="false" aria-controls="purchases">
+                    <i class="lni lni-wallet"></i>
+                    <span>Purchases</span>
+                </a>
+                <ul id="purchases" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/purchase-table" class="sidebar-link">Purchase Details</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/purchase-entry" class="sidebar-link">Generate New Invoice</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#customer" aria-expanded="false" aria-controls="customer">
+                    <i class="lni lni-customer"></i>
+                    <span>Customer</span>
+                </a>
+                <ul id="customer" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/customer-table" class="sidebar-link">Customer Details</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/customer-details" class="sidebar-link">Add new Customer</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    data-bs-target="#vendor" aria-expanded="false" aria-controls="vendor">
+                    <i class="lni lni-revenue"></i>
+                    <span>Vendor</span>
+                </a>
+                <ul id="vendor" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/vendortable" class="sidebar-link">Vendor Details</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a skipLocationChange routerLink="/vendor" class="sidebar-link">Add new Vendor</a>
+                    </li>
+                </ul>
             </li>
         </ul>
-            </div>
-        </aside>
-        
-    </div>
-    
-
+        <div class="sidebar-footer">
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a skipLocationChange routerLink="/profile" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Company Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" (click)="logout()">
+                        <i class="lni lni-exit"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>
 
