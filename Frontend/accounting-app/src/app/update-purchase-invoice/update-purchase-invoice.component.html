@@ -6,7 +6,10 @@
             <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Vendor Name</label>
-                    <input type="text" [(ngModel)]="purchase.vendorName" formControlName="vendorName" class="form-control" id="name" aria-describedby="emailHelp" required>
+                    <select class="form-select" [(ngModel)]="purchase.vendorName" formControlName="vendorName" required>
+                        <option value="" disabled>Select Vendor</option>
+                        <option *ngFor="let vendor of vendors" [value]="vendor.vendorName">{{ vendor.vendorName }}</option>
+                    </select>
                     <span class="text-danger" *ngIf="purchaseForm.controls['vendorName'].dirty && purchaseForm.hasError('required', 'vendorName')">*Customer Name is required</span>
                 </div>
                 <div class="mb-3">
@@ -40,8 +43,8 @@
                     <label for="status" class="form-label">Payment Status</label>&nbsp;
                     <select class="form-select" [(ngModel)]="purchase.status" formControlName="status" aria-label="Default select example" class="required">
                         <option value="" disabled="disabled">Select Status</option>
-                        <option value="paid">Paid</option>
-                        <option value="pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Pending">Pending</option>
                     </select>
                 </div>
                 <div class="d-grid mb-3 col-6 mx-auto">

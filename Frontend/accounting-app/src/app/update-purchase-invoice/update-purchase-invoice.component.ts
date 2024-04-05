@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { dateNotInFuture } from '../custom-validators';
 import { AccountsPayableServiceService } from '../services/accounts-payable-service.service';
+import { Vendor } from '../models/vendor';
+import { VendorService } from '../services/vendor.service';
 
 @Component({
   selector: 'app-update-purchase-invoice',
@@ -15,7 +17,14 @@ export class UpdatePurchaseInvoiceComponent implements OnInit{
   id!: number;
   purchase!: any | null;
   public purchaseForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private route: ActivatedRoute, private router: Router, private payableService: AccountsPayableServiceService) {}
+  public vendors: Vendor[] = [];
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private payableService: AccountsPayableServiceService,
+    private vendorService: VendorService
+  ) {}
 
   ngOnInit(): void {
     this.purchaseForm = this.formBuilder.group({
@@ -33,6 +42,7 @@ export class UpdatePurchaseInvoiceComponent implements OnInit{
       next: (response) => {
         this.purchase = response;
         this.purchaseForm.patchValue({
+          vendorName: this.purchase.vendorName,
           status: this.purchase.status
         });
       },
@@ -40,6 +50,23 @@ export class UpdatePurchaseInvoiceComponent implements OnInit{
         console.error('Error fetching invoice:', error);
       }
     })
+
+    this.loadVendors();
+  }
+
+  loadVendors(): void {
+    const companyId = sessionStorage.getItem('companyId');
+    if (companyId) {
+      this.vendorService.getVendorByCompanyId(parseInt(companyId))
+        .subscribe({
+          next: (data: Vendor[]) => {
+            this.vendors = data;
+          },
+          error: (error) => {
+            console.error('Error fetching vendors:', error);
+          }
+        });
+    }
   }
 
   onSubmit() {
