@@ -11,8 +11,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Invoice Number</label>
-                    <input type="text" formControlName="invoiceNumber" class="form-control" id="number" required>
+                    <input type="text" pattern="[a-zA-Z0-9]{3,10}" formControlName="invoiceNumber" class="form-control" id="number" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['invoiceNumber'].dirty && purchaseForm.hasError('required', 'invoiceNumber')">*Invoice Number is required</span>
+                    <span class="text-danger" *ngIf="purchaseForm.controls['invoiceNumber'].dirty && purchaseForm.hasError('pattern', 'invoiceNumber')">*Invoice Number must contain only Alphabets and numbers</span>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
@@ -23,8 +24,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="product" class="form-label">Product Description</label>
-                    <input type="text" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('required', 'proddesc')">*Product Description is required</span>
+                    <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('pattern', 'proddesc')">*Product Description must contain only Alphabets</span>
                 </div>
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label>
