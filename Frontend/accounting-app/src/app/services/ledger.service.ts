@@ -18,4 +18,8 @@ export class LedgerService {
   displayledger():Observable<Ledger[]>{
     return this.httpClient.get<Ledger[]>(`${this.baseURL}`);
   }
+
+  getLedgerByCompanyId(companyId: number): Observable<Ledger[]> {
+    return this.httpClient.get<Ledger[]>(this.baseURL + `/${companyId}`);
+  }
 }

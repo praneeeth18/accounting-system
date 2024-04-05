@@ -19,6 +19,17 @@ export class LedgerEntryComponent implements OnInit{
   ngOnInit(): void {}
 
   addEntry(){
+
+    // Fetch company ID from session storage
+    const companyId = sessionStorage.getItem('companyId');
+    if (!companyId) {
+      console.error('Company ID not found in session storage.');
+      return;
+    }
+
+    // Assign company ID to ledger object
+    this.ledger.companyId = parseInt(companyId, 10); // Assuming companyId is a number
+
       this.ledgerService.createledger(this.ledger).subscribe(data=>{
         console.log(data);
         alert("Entry added successfully");
@@ -29,6 +40,7 @@ export class LedgerEntryComponent implements OnInit{
         alert("Entry can't be made. Check the details");
       }   
       );
+      console.log(this.ledger);
   }
 
   onSubmit(){

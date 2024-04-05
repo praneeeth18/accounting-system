@@ -5,4 +5,5 @@ export class Ledger {
     transactiontype:String | undefined;
     amount:number | undefined;
     balance:number | undefined;
+    companyId:number | undefined;
 }
