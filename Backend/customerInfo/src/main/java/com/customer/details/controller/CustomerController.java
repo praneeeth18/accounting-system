@@ -2,7 +2,6 @@ package com.customer.details.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,68 +24,67 @@ import com.customer.details.service.CustomerService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
-    private final CustomerService customerService;
-    private final UserServiceFeignInterface userServiceInterface;
+  private final CustomerService customerService;
+  private final UserServiceFeignInterface userServiceInterface;
 
-    @Autowired
-    public CustomerController(CustomerService customerService, UserServiceFeignInterface userServiceInterface) {
-        this.customerService = customerService;
-        this.userServiceInterface = userServiceInterface;
+  public CustomerController(CustomerService customerService, UserServiceFeignInterface userServiceInterface) {
+    this.customerService = customerService;
+    this.userServiceInterface = userServiceInterface;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomer() {
-        List<Customer> customers = customerService.getAllCustomer();
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+  @GetMapping
+  public ResponseEntity<List<Customer>> getAllCustomer() {
+    List<Customer> customers = customerService.getAllCustomer();
+    return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
-        try {
-            Customer customer = customerService.getCustomerById(id);
-            return new ResponseEntity<>(customer, HttpStatus.OK);
+  @GetMapping("/{id}")
+  public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
+    try {
+      Customer customer = customerService.getCustomerById(id);
+      return new ResponseEntity<>(customer, HttpStatus.OK);
         } catch (CustomerNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        try {
-            ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
-            if (companyResponse.getStatusCode() != HttpStatus.OK) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+  @PostMapping
+  public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    try {
+      ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
+      if (companyResponse.getStatusCode() != HttpStatus.OK) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
-            Customer createdCustomer = customerService.createCustomer(customer);
-            return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+      Customer createdCustomer = customerService.createCustomer(customer);
+      return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+      e.printStackTrace();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
-        try {
-            Customer updatedCustomer = customerService.updateCustomer(customer, id);
-            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+  @PutMapping("/{id}")
+  public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
+    try {
+      Customer updatedCustomer = customerService.updateCustomer(customer, id);
+      return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
         } catch (CustomerNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") int id) {
-        try {
-            customerService.deleteCustomer(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteCustomer(@PathVariable("id") int id) {
+    try {
+      customerService.deleteCustomer(id);
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (CustomerNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/getCustomerByCompanyId/{companyId}")
-    public ResponseEntity<List<Customer>> getCustomerByCompanyId(@PathVariable int companyId) {
-        return customerService.getCustomerByCompanyId(companyId);
+  @GetMapping("/getCustomerByCompanyId/{companyId}")
+  public ResponseEntity<List<Customer>> getCustomerByCompanyId(@PathVariable int companyId) {
+    return customerService.getCustomerByCompanyId(companyId);
     }
 }
