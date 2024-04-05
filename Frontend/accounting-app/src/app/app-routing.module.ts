@@ -25,6 +25,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UpdatePurchaseInvoiceComponent } from './update-purchase-invoice/update-purchase-invoice.component';
+import { PurchaseByMonthComponent } from './dash-components/purchase-by-month/purchase-by-month.component';
+import { SalesByMonthComponent } from './dash-components/sales-by-month/sales-by-month.component';
+import { TopWidgetsComponent } from './dash-components/top-widgets/top-widgets.component';
+import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'', pathMatch:'full'},
@@ -53,7 +57,11 @@ const routes: Routes = [
   {path:'homepage', component:HomepageComponent},
   {path:'reset-password/:email', component:ResetPasswordComponent},
   {path:'forgot-password', component:ForgotPasswordComponent},
-  {path:'update-purchase-invoice/:id', component:UpdatePurchaseInvoiceComponent}
+  {path:'update-purchase-invoice/:id', component:UpdatePurchaseInvoiceComponent},
+  {path:'dashboard-charts', component:DashboardChartsComponent},
+  {path:'top-widget', component:TopWidgetsComponent},
+  {path:'sales-by-month', component:SalesByMonthComponent},
+  {path:'purchase-by-month', component:PurchaseByMonthComponent}
 ];
 
 @NgModule({

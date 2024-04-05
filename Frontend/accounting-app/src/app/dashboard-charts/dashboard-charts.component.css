@@ -1,0 +1,40 @@
+.custom-container {
+    /* Optional: Adjust height for vertical centering */
+    height: 100%;
+    display: flex;
+    background: linear-gradient(to bottom, #6f72ba 0%, #232756 100%);
+}
+
+.card{
+  display: flex;
+  height: 100%;
+  flex:1;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 10px;
+  box-shadow: 5px 5px 5px #939393;
+}
+
+
+.top-section {
+  display: flex;
+   
+  }
+  .middle-section {
+    display: flex;
+    justify-content: space-between;
+   
+    .widget {
+      height: 350px;
+      background-color: #fff;
+      border-radius: 5px;
+      margin: 10px;
+      box-shadow: 5px 5px 5px #939393;
+      &.left {
+        width: 890px;
+      }
+      &.right {
+        width: 450px;
+      }
+    }
+  }

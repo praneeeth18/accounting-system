@@ -32,6 +32,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UpdatePurchaseInvoiceComponent } from './update-purchase-invoice/update-purchase-invoice.component';
+import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.component';
+import { SalesByMonthComponent } from './dash-components/sales-by-month/sales-by-month.component';
+import { PurchaseByMonthComponent } from './dash-components/purchase-by-month/purchase-by-month.component';
+import { TopWidgetsComponent } from './dash-components/top-widgets/top-widgets.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +66,11 @@ import { UpdatePurchaseInvoiceComponent } from './update-purchase-invoice/update
     HomepageComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    UpdatePurchaseInvoiceComponent
+    UpdatePurchaseInvoiceComponent,
+    DashboardChartsComponent,
+    SalesByMonthComponent,
+    PurchaseByMonthComponent,
+    TopWidgetsComponent
   ],
   imports: [
     BrowserModule,
