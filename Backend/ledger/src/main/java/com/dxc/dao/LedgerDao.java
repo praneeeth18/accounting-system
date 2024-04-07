@@ -11,7 +11,6 @@ import com.dxc.model.Ledger;
 @Repository
 public interface LedgerDao extends JpaRepository<Ledger, Long>{
 	
-//	Optional<Ledger> findFirstByOrderByEntryidDesc();
 	Optional<Ledger> findFirstByCompanyIdOrderByEntryidDesc(Integer companyId);
 	List<Ledger> findByCompanyId(Integer companyId);
 	

@@ -25,7 +25,6 @@ import com.dxc.service.LedgerServices;
 @CrossOrigin(origins="http://localhost:4200")
 public class LedgerController {
 	
-	
 	 ResponseEntity response;
 	 boolean flag;
 	
@@ -63,11 +62,9 @@ public class LedgerController {
 	@Autowired
 	private RestTemplate restTemplate;	
 	
-	
 	@GetMapping("/{companyId}")
 	public ResponseEntity<?> getDetailsByCompanyId(@PathVariable Integer companyId){
 		Optional<User> user = null;
-		
 		String url = "http://localhost:8080/user/getDetailsByCompanyId/"+companyId;
 		
 		try {

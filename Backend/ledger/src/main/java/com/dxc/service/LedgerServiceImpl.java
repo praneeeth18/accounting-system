@@ -20,81 +20,24 @@ public class LedgerServiceImpl implements LedgerServices{
 	        return ledgerdao.findAll();
 	    }
 		
-		double prevBal;
-		String transacttype;
-		boolean flag;
-		
-//		@Override
-//		public boolean createLedger(Ledger ledger) {
-//            Optional<Ledger> optionalEntity = ledgerdao.findFirstByOrderByEntryidDesc();
-//	        
-//	        if (optionalEntity.isPresent()) {
-//	            Ledger ledgerprev = optionalEntity.get();
-//	            prevBal=ledgerprev.getBalance();
-//	        }
-//	        else {
-//	        	 prevBal=0;
-//	        }
-//	    
-//	        if(prevBal==0){
-//	    		transacttype=ledger.getTransactiontype();
-//	    		flag=true;
-//	    		
-//	    		if(transacttype!= null && transacttype.equals("CREDIT")) {
-//	    			ledger.setBalance(ledger.getAmount());
-//	    			ledgerdao.save(ledger);
-//	    		}
-//	    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
-//	    			ledger.setBalance(ledger.getBalance()-ledger.getAmount());
-//	    			ledgerdao.save(ledger);
-//	    		}
-//	    		else {
-//	    			flag=false;
-//	    		}
-//    	}
-//    	
-//    	else if(prevBal!=0) {
-//    		transacttype=ledger.getTransactiontype();
-//    		flag=true;
-//    		
-//    		if(transacttype!= null && transacttype.equals("CREDIT")) {
-//    			ledger.setBalance(prevBal + ledger.getAmount());
-//    			ledgerdao.save(ledger);
-//    		}
-//    		else if(transacttype!= null && transacttype.equals("DEBIT")) {
-//    			ledger.setBalance(prevBal - ledger.getAmount());
-//    			ledgerdao.save(ledger);
-//    		}
-//    		else 
-//    		{
-//    			flag=false;
-//    		}
-//    	}
-//	        
-//    	else {
-//    		flag=false;
-//    	}
-//			return flag;	
-//		}
-		
 		@Override
 	    public boolean createLedger(Ledger ledger) {
 	        Optional<Ledger> optionalEntity = ledgerdao.findFirstByCompanyIdOrderByEntryidDesc(ledger.getCompanyId());
 	        
-	        double prevBal = 0.0;
+	        double previousBal = 0.0;
 	        if (optionalEntity.isPresent()) {
-	            Ledger ledgerprev = optionalEntity.get();
-	            prevBal = ledgerprev.getBalance();
+	            Ledger previousledger = optionalEntity.get();
+	            previousBal = previousledger.getBalance();
 	        }
 
-	        String transacttype = ledger.getTransactiontype();
+	        String transactiontype = ledger.getTransactiontype();
 	        boolean flag = true;
 	        
-	        if (transacttype != null) {
-	            if (transacttype.equals("CREDIT")) {
-	                ledger.setBalance(prevBal + ledger.getAmount());
-	            } else if (transacttype.equals("DEBIT")) {
-	                ledger.setBalance(prevBal - ledger.getAmount());
+	        if (transactiontype != null) {                   
+	            if (transactiontype.equals("CREDIT")) {
+	                ledger.setBalance(previousBal + ledger.getAmount());
+	            } else if (transactiontype.equals("DEBIT")) {
+	                ledger.setBalance(previousBal - ledger.getAmount());
 	            } else {
 	                flag = false;
 	            }
