@@ -21,8 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="LEDGER")
-public class Ledger {
-	
+public class Ledger{	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int entryid;

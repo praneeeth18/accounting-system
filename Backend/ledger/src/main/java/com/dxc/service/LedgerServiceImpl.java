@@ -36,12 +36,15 @@ public class LedgerServiceImpl implements LedgerServices{
 	        if (transactiontype != null) {                   
 	            if (transactiontype.equals("CREDIT")) {
 	                ledger.setBalance(previousBal + ledger.getAmount());
-	            } else if (transactiontype.equals("DEBIT")) {
+	            } 
+	            else if (transactiontype.equals("DEBIT")) {
 	                ledger.setBalance(previousBal - ledger.getAmount());
-	            } else {
+	            } 
+	            else {
 	                flag = false;
 	            }
-	        } else {
+	        } 
+	        else {
 	            flag = false;
 	        }
 
