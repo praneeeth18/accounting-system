@@ -1,13 +1,13 @@
 <div class="custom-container">
     <app-dashboard></app-dashboard>
     <div class="card mt-4 mb-4">
-        <div class="card-body">
+        <div class="card-body customerForm">
             <h1 class="card-title text-center">Customer Details</h1>
             <form [formGroup]="customerForm" (ngSubmit)="customer()">
                 <div class="mb-3">
                     <label for="inputcustomername" class="form-label">Customer Name</label>
                     <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="customerName" class="form-control" id="inputcustomername"
-                        aria-describedby="emailHelp" required>
+                        aria-describedby="emailHelp" required placeholder="Enter Customer Name">
                         <span class="text-danger" *ngIf="customerForm.controls['customerName'].dirty && customerForm.hasError('required', 'customerName')">*Customer Name is required</span>
                         <span class="text-danger" *ngIf="customerForm.controls['customerName'].dirty && customerForm.hasError('pattern', 'customerName')">*Customer Name must contain only Alphabets</span>
                         
