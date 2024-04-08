@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AccountsReceivableServiceService } from '../../services/accounts-receivable-service.service';
 import { Customer } from '../../models/customer';
 import { CustomerService } from '../../services/customer.service';
-import { Purchase } from '../../models/purchase';
+
 import { VendorService } from '../../services/vendor.service';
 import { Invoice } from '../../models/invoice';
+import { Vendor } from '../../models/vendor';
 
 @Component({
   selector: 'app-top-widgets',
@@ -17,7 +18,7 @@ export class TopWidgetsComponent implements OnInit{
   formattedTime!: string;
   currentTime: string = '';
   customer!: Customer[];
-  purchase!: Purchase[];
+  vendor!: Vendor[];
   invoice!: Invoice[];
   count=0;
   sum=0;
@@ -79,9 +80,9 @@ export class TopWidgetsComponent implements OnInit{
     this.vendorService.getVendorByCompanyId(companyIdNumber).subscribe({
       next: (response) => {
         console.log(response);
-        this.purchase = response;
-        if(this.purchase!=null){
-          for(let i = 0; i < this.purchase.length; i++){
+        this.vendor = response;
+        if(this.vendor!=null){
+          for(let i = 0; i < this.vendor.length; i++){
          this.sum++;
          }
           this.sum;
@@ -98,7 +99,7 @@ export class TopWidgetsComponent implements OnInit{
 
 
 
-    //Fetching Total Customers
+    //Fetching Total Revenue
     const company_id = sessionStorage.getItem('companyId');
     if (company_id) {
       // Parse companyId to number

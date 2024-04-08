@@ -6,15 +6,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Vendor ID</th>
+                        <th scope="col">S.NO.</th>
                         <th scope="col">Vendor Name</th>
                         <th scope="col">Vendor Email</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let vendor of vendorList">
-                        <td>{{vendor.vendorId}}</td>
+                    <tr *ngFor="let vendor of vendorList, let i = index">
+                        <td>{{ i + 1 }}</td>
                         <td>{{vendor.vendorName}}</td>
                         <td>{{vendor.vendorEmail}}</td>
                         <td>

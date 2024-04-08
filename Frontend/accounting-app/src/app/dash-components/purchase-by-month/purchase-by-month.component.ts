@@ -29,7 +29,7 @@ export class PurchaseByMonthComponent implements OnInit{
         this.purchaseService.getInvoiceByCompanyId(companyIdNumber).subscribe({
           next: (response) => {
             console.log(response);
-            this.chartData = response;// Assign the response data to the invoice property
+            this.chartData = response;// Assign the response data to the chartData property
             if (this.chartData) {
               this.monthsData = this.aggregateSalesByMonth(this.chartData);
               this.renderChart(this.monthsData);
@@ -67,8 +67,8 @@ export class PurchaseByMonthComponent implements OnInit{
           datasets: [{
             label: 'Purchases per Month',
             data: data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(228, 138, 12, 0.2)',
+            borderColor: 'rgba(228, 138, 12, 1)',
             borderWidth: 1
           }]
         },
