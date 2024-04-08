@@ -40,14 +40,14 @@ export class PurchasesComponent {
     const companyId = sessionStorage.getItem('companyId');
     if (companyId) {
       this.vendorService.getVendorByCompanyId(parseInt(companyId))
-        .subscribe(
-          (data: Vendor[]) => {
+        .subscribe({
+          next: (data: Vendor[]) => {
             this.vendors = data;
           },
-          (error) => {
+          error: (error) => {
             console.error('Error fetching vendors:', error);
           }
-        );
+        });
     }
   }
 

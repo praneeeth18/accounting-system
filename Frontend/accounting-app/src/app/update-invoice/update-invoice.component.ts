@@ -6,6 +6,8 @@ import { Invoice } from '../models/invoice';
 import { dateNotInFuture } from '../custom-validators';
 import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.component';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
+import { Customer } from '../models/customer';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-update-invoice',
@@ -16,9 +18,15 @@ export class UpdateInvoiceComponent implements OnInit{
 
   id!: number;
   invoice1: any = {};
-//  invoice1: Invoice = new Invoice();
   public invoiceForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private invoiceSerivce: AccountsReceivableServiceService) {}
+  public customers: Customer[] = [];
+  constructor(
+    private formBuilder : FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private invoiceSerivce: AccountsReceivableServiceService,
+    private customerService: CustomerService
+  ) {}
 
 
 
@@ -33,16 +41,12 @@ export class UpdateInvoiceComponent implements OnInit{
       status:['', Validators.required]
     });
 
-  /*  this.id = this.route.snapshot.params['id'];
-    this.invoice1 = new Invoice();
-    this.invoiceService.getInvoiceById(this.id).subscribe(data => {
-      this.invoice1 = data;
-    });*/
     this.id = this.route.snapshot.params['id'];
     this.invoiceSerivce.getInvoiceByReceivableId(this.id).subscribe({
       next: (response) => {
         this.invoice1 = response;
         this.invoiceForm.patchValue({
+          customername: this.invoice1.customerName,
           status: this.invoice1.status
         });
       },
@@ -50,21 +54,25 @@ export class UpdateInvoiceComponent implements OnInit{
         console.error('Error fetching invoice:', error);
       }
     })
+
+    this.loadCustomers();
   }
 
-  
+  loadCustomers(): void {
+    const companyId = sessionStorage.getItem('companyId');
+    if(companyId) {
+      this.customerService.getCustomerByCompanyId(parseInt(companyId)).subscribe({
+        next: (response) => {
+          this.customers = response;
+        },
+        error: (error) => {
+          console.error('Error fetching customers:', error);
+        }
+      })
+    }
+  }
 
   invoice() {
-  /*  this.invoiceService.updateInvoice(this.invoice1)
-    .subscribe(res=>{
-      alert("Invoice Updated Successfully");
-     
-      this.router.navigate(['sales-table'], { skipLocationChange: true });
-
-    }, err=>{
-      alert("Something went wrong");
-    }
-    )*/
     const invoiceDetailsRequest = {
       invoiceNumber: this.invoiceForm.value.invoicenumber,
       customerName: this.invoiceForm.value.customername,

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
 import { Invoice } from '../models/invoice';
 import { dateNotInFuture } from '../custom-validators';
+import { Customer } from '../models/customer';
+import { CustomerService } from '../services/customer.service';
 
 
 
@@ -16,7 +18,13 @@ import { dateNotInFuture } from '../custom-validators';
 export class InvoiceDetailsComponent implements OnInit{
 
   public invoiceForm !: FormGroup;
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private invoiceSerivce: AccountsReceivableServiceService) {}
+  public customers: Customer[] = [];
+  constructor(
+    private formBuilder : FormBuilder,
+    private router: Router,
+    private invoiceSerivce: AccountsReceivableServiceService,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit(): void {
     this.invoiceForm = this.formBuilder.group({
@@ -28,14 +36,25 @@ export class InvoiceDetailsComponent implements OnInit{
       price:['', Validators.required],
       status:['', Validators.required]
     })
-
     
+    this.loadCustomers();
   }
 
-
+  loadCustomers(): void {
+    const companyId = sessionStorage.getItem('companyId');
+    if(companyId) {
+      this.customerService.getCustomerByCompanyId(parseInt(companyId)).subscribe({
+        next: (response) => {
+          this.customers = response;
+        },
+        error: (error) => {
+          console.error('Error fetching customers:', error);
+        }
+      })
+    }
+  }
 
   
-
   invoice() {
     if(this.invoiceForm.valid) {
      const invoiceDetailsRequest = {
@@ -50,10 +69,12 @@ export class InvoiceDetailsComponent implements OnInit{
      };
      this.invoiceSerivce.createInvoice(invoiceDetailsRequest).subscribe({
        next: (response) => {
-         alert('Invoice added sucussfully!');
-         console.log(response);
-         this.invoiceForm.reset();
-         this.router.navigate(['sales-table'], { skipLocationChange: true });
+        if(response === 'Entry created!') { 
+          alert('Invoice added sucussfully!');
+          console.log(response);
+          this.invoiceForm.reset();
+          this.router.navigate(['sales-table'], { skipLocationChange: true });
+        }
        },
        error: (error) => {
          alert('Unsucessfull!' + error);
@@ -61,6 +82,6 @@ export class InvoiceDetailsComponent implements OnInit{
        }
      })
     } 
-   }
+  }
 
 }

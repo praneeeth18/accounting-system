@@ -6,16 +6,11 @@
             <form [formGroup]="invoiceForm" (ngSubmit)="invoice()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Customer Name</label>
-                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="customername"
-                        [(ngModel)]="invoice1.customerName" class="form-control" id="name" aria-describedby="emailHelp"
-                        required>
-                    <span class="text-danger"
-                        *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer
-                        Name is required</span>
-                    <span class="text-danger"
-                        *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('pattern', 'customername')">*Customer
-                        Name must contain only Alphabets</span>
-
+                    <select class="form-select" [(ngModel)]="invoice1.customerName" formControlName="customername" required>
+                        <option value="" disabled>Select Customer</option>
+                        <option *ngFor="let customer of customers" [value]="customer.customerName">{{ customer.customerName }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer Name is required</span>
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Invoice Number</label>
@@ -76,8 +71,8 @@
                     <select class="form-select" formControlName="status" [(ngModel)]="invoice1.status"
                         aria-label="Default select example" class="required">
                         <option value="" disabled="disabled">Select Status</option>
-                        <option value="paid">Paid</option>
-                        <option value="pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Pending">Pending</option>
                     </select>
 
                 </div>

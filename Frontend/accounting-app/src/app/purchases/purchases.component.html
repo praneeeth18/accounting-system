@@ -9,7 +9,7 @@
                     <select formControlName="vendorName" class="form-select" id="name" required>
                         <option *ngFor="let vendor of vendors" [value]="vendor.vendorName">{{ vendor.vendorName }}</option>
                     </select>
-                    <span class="text-danger" *ngIf="purchaseForm.controls['vendorName'].dirty && purchaseForm.hasError('required', 'vendorName')">*Customer Name is required</span>
+                    <span class="text-danger" *ngIf="purchaseForm.controls['vendorName'].dirty && purchaseForm.hasError('required', 'vendorName')">*Vendor Name is required</span>
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Invoice Number</label>

@@ -13,7 +13,7 @@ export class AccountsReceivableServiceService {
   constructor(private httpClient:HttpClient) { }
 
   createInvoice(invoiceDetails: any): Observable<any> {
-    return this.httpClient.post(this.baseURL + 'createAccountReceivable', invoiceDetails);
+    return this.httpClient.post(this.baseURL + 'createAccountReceivable', invoiceDetails, { responseType: 'text' });
   }
 
   getInvoiceByCompanyId(companyId: number): Observable<any> {
