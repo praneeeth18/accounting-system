@@ -31,17 +31,9 @@ export class VendortableComponent implements OnInit {
       } else {
         alert('Company ID does not exist');
       }
-      // this.getvendorDetails();
+     
     }
-  // getvendorDetails() {
-      // this.vendorService.getVendor().subscribe(
-      //   data=>{
-      //     this.vendorList=data;
-      //     console.log(data);
-      //   },
-      //   (error)=>console.log(error)
-      // )
-  // }
+ 
   deleteVendor(vendorId: number) {
     this.vendorService.deleteVendorById(vendorId).subscribe(
       data => {

@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountsReceivableServiceService } from '../services/accounts-receivable-service.service';
-import { Invoice } from '../models/invoice';
+
 import { dateNotInFuture } from '../custom-validators';
 import { Customer } from '../models/customer';
 import { CustomerService } from '../services/customer.service';
@@ -17,11 +17,14 @@ import { CustomerService } from '../services/customer.service';
 })
 export class InvoiceDetailsComponent implements OnInit{
 
+
   public invoiceForm !: FormGroup;
+
   public customers: Customer[] = [];
   constructor(
     private formBuilder : FormBuilder,
     private router: Router,
+  
     private invoiceSerivce: AccountsReceivableServiceService,
     private customerService: CustomerService
   ) {}

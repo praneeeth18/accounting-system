@@ -36,16 +36,9 @@ export class CustomerTableComponent implements OnInit {
       } else {
         alert('Company ID does not exist');
       }
-    // this.getCustomerDetails();
+  
   }
 
-
-  // getCustomerDetails() {
-
-  //   this.customerService.getCustomer().subscribe(data => {
-  //     this.customer = data;
-  //   });
-  // }
   customerView(customerId: number) {
     console.log(customerId);
     this.router.navigate(['customer-view', customerId], { skipLocationChange: true });

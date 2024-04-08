@@ -36,6 +36,8 @@ import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.co
 import { SalesByMonthComponent } from './dash-components/sales-by-month/sales-by-month.component';
 import { PurchaseByMonthComponent } from './dash-components/purchase-by-month/purchase-by-month.component';
 import { TopWidgetsComponent } from './dash-components/top-widgets/top-widgets.component';
+import { NgxCurrencyDirective } from 'ngx-currency';
+
 
 @NgModule({
   declarations: [
@@ -77,7 +79,10 @@ import { TopWidgetsComponent } from './dash-components/top-widgets/top-widgets.c
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCurrencyDirective
+
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

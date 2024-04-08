@@ -38,7 +38,7 @@ export class CustomerDetailsComponent implements OnInit{
           next: (response) => {
             this.customerForm.reset();
             alert('Customer added successfully');
-            this.router.navigate(['/customer-table']);
+            this.router.navigate(['/customer-table'], {skipLocationChange:true});
           },
           error: (error) => {
             console.error('Error adding customer:', error);

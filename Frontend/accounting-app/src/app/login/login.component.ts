@@ -26,28 +26,7 @@ export class LoginComponent {
     })
   }
 
-  // login() {
-
-  //   this.http.get<any>("http://localhost:3000/signup")
-
-  //   .subscribe(res=>{
-  //     const user = res.find((a:any)=>{
-  //       return a.companyemail === this.loginForm.value.companyemail && a.password === this.loginForm.value.password
-  //     });
-
-  //     if(user){
-  //       alert("Login Success");
-  //       this.loginForm.reset();
-  //       this.router.navigate(['dashboard']);
-
-  //     }else{
-  //       alert("Company Not Found");
-  //     }
-  //   }, err=>{
-  //     alert("Something went wrong");
-  //   })
-  // }
-
+ 
   login() {
     if (this.loginForm.valid) {
       const loginRequest: LoginRequest = {
@@ -60,15 +39,12 @@ export class LoginComponent {
           alert("Login Success");
           console.log(response);
 
-          // if (response && response.email) {
-          //   sessionStorage.setItem('currentUserEmail', response.email);
-          // }
           sessionStorage.setItem('currentUser', JSON.stringify(response.user));
           sessionStorage.setItem('currentUserEmail', response.user.email);
           sessionStorage.setItem('companyId', response.user.companyId);
 
           this.loginForm.reset();
-          // this.router.navigate(['dashboard'], { skipLocationChange: true });
+        
           this.router.navigate(['/homepage'], { skipLocationChange: true });
         },
         error: (error) => {

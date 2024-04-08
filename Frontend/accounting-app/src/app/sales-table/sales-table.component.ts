@@ -45,6 +45,6 @@ export class SalesTableComponent {
   }
 
   updateInvoice(id:number){
-    this.router.navigate(['update-invoice', id]);
+    this.router.navigate(['update-invoice', id], { skipLocationChange: true });
     }
 }

@@ -30,19 +30,7 @@ export class RegisterComponent {
     })
   }
 
-  // signUp() {
-  //   this.http.post<any>("http://localhost:3000/signup",this.signupForm.value)
-  //   .subscribe(res=>{
-  //     alert("SignUp Successfull");
-  //     this.signupForm.reset();
-  //     this.router.navigate(['login']);
-
-  //   }, err=>{
-  //     alert("Something went wrong");
-  //   }
-  //   )
-  // }
-  
+ 
   signUp() {
     if (this.signupForm.valid) {
       const registrationRequest: RegistrationRequest = {

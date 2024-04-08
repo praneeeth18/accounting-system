@@ -40,7 +40,7 @@ export class PurchaseTableComponent implements OnInit{
   }
 
   updateInvoice(id:number){
-    this.router.navigate(['update-purchase-invoice', id]);
+    this.router.navigate(['update-purchase-invoice', id], { skipLocationChange: true });
     }
 
 }

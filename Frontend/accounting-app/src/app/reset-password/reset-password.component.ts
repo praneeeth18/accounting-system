@@ -41,6 +41,6 @@ export class ResetPasswordComponent implements OnInit{
  
   goBack() {
    
-    this.router.navigate(['/forgot-password']);
+    this.router.navigate(['/forgot-password'], { skipLocationChange: true });
   }
 }

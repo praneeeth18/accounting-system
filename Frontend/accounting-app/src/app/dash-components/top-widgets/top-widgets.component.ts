@@ -4,6 +4,7 @@ import { Customer } from '../../models/customer';
 import { CustomerService } from '../../services/customer.service';
 import { Purchase } from '../../models/purchase';
 import { VendorService } from '../../services/vendor.service';
+import { Invoice } from '../../models/invoice';
 
 @Component({
   selector: 'app-top-widgets',
@@ -17,8 +18,10 @@ export class TopWidgetsComponent implements OnInit{
   currentTime: string = '';
   customer!: Customer[];
   purchase!: Purchase[];
+  invoice!: Invoice[];
   count=0;
   sum=0;
+  revenue=0;
 
 
   constructor(private invoiceService: AccountsReceivableServiceService, private customerService: CustomerService, private vendorService: VendorService){}
@@ -91,6 +94,35 @@ export class TopWidgetsComponent implements OnInit{
   } else {
     alert('Company ID does not exist');
   }
+
+
+
+
+    //Fetching Total Customers
+    const company_id = sessionStorage.getItem('companyId');
+    if (company_id) {
+      // Parse companyId to number
+      const companyIdNumber = parseInt(company_id, 10);
+
+      this.invoiceService.getInvoiceByCompanyId(companyIdNumber).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.invoice = response; // Assign the response data to the invoice property
+          if(this.invoice!=null){
+            for(let i = 0; i < this.invoice.length; i++){
+           this.revenue += (this.invoice[i].price)*(this.invoice[i].quantity);
+           }
+            this.revenue;
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching invoices:', error);
+        }
+      });
+    } else {
+      alert('Company ID does not exist');
+    }
+
   }
   
 

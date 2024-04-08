@@ -36,7 +36,7 @@ export class VendorComponent implements OnInit{
         next: (response) => {
           this.vendorForm.reset();
           alert('Vendor added successfully');
-          this.router.navigate(['/vendortable']);
+          this.router.navigate(['/vendortable'], { skipLocationChange: true });
         },
         error: (error) => {
           console.error('Error adding vendor:', error);
