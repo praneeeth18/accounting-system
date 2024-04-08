@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Ledger } from '../models/ledger';
 import { LedgerService } from '../services/ledger.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dateNotInFuture } from '../custom-validators';
 
 @Component({
   selector: 'app-ledger-entry',
@@ -10,42 +11,48 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './ledger-entry.component.css'
 })
 export class LedgerEntryComponent implements OnInit{
-  constructor(private ledgerService: LedgerService,
-    private router: Router,private route:ActivatedRoute) {}
-
   
-  ledger:Ledger=new Ledger();
+  ledgerForm!: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private ledgerService: LedgerService,
+    private router: Router
+  ) {}
 
-  addEntry(){
-
-    // Fetch company ID from session storage
-    const companyId = sessionStorage.getItem('companyId');
-    if (!companyId) {
-      console.error('Company ID not found in session storage.');
-      return;
-    }
-
-    // Assign company ID to ledger object
-    this.ledger.companyId = parseInt(companyId, 10); // Assuming companyId is a number
-
-      this.ledgerService.createledger(this.ledger).subscribe(data=>{
-        console.log(data);
-        alert("Entry added successfully");
-        this.router.navigate(['/ledger-table'], { skipLocationChange: true })
-      },
-      error=>{
-        console.log(error);
-        alert("Entry can't be made. Check the details");
-      }   
-      );
-      console.log(this.ledger);
+  ngOnInit(): void {
+    this.ledgerForm = this.formBuilder.group({
+      transactiondate: [null, [Validators.required, dateNotInFuture()]],
+      description: ['', Validators.required],
+      transactiontype: ['', Validators.required],
+      amount: ['', Validators.required]
+    });
   }
 
-  onSubmit(){
-    console.log(this.ledger);
-    this.addEntry();
-    
+  onSubmit() {
+    if (this.ledgerForm.valid) {
+      const ledgerData: Ledger = {
+        transactiondate: this.ledgerForm.value.transactiondate,
+        description: this.ledgerForm.value.description,
+        transactiontype: this.ledgerForm.value.transactiontype,
+        amount: this.ledgerForm.value.amount,
+        companyId: parseInt(sessionStorage.getItem('companyId') || '0', 10),
+        entryid: undefined,
+        balance: undefined
+      };
+
+      this.ledgerService.createledger(ledgerData).subscribe({
+          next: (data) => {
+          console.log(data);
+          alert('Entry added successfully');
+          this.router.navigate(['/ledger-table'], { skipLocationChange: true });
+        },
+          error: (error) => {
+          console.error(error);
+          alert("Entry can't be made. Check the details");
+        }
+      });
+      console.log(this.ledgerForm.value);
+    }
   }
 }

@@ -1,66 +1,66 @@
 
 <div class="custom-container">
-    <app-dashboard></app-dashboard>
-    <div class="card mt-4 mb-4">
-<div class="card-body">
-  <h1 class="card-title text-center">Invoice Details</h1>
-<form [formGroup]="invoiceForm" (ngSubmit)="invoice()">
-<div class="mb-3">
-<label for="name" class="form-label">Customer Name</label>
-<select formControlName="customername" class="form-select" id="name" required>
-  <option *ngFor="let customer of customers" [value]="customer.customerName">{{ customer.customerName }}</option>
-</select>
-<span class="text-danger" *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer Name is required</span>
+  <app-dashboard></app-dashboard>
+  <div class="card mt-4 mb-4">
+    <div class="card-body">
+      <h1 class="card-title text-center">Invoice Details</h1>
+      <form [formGroup]="invoiceForm" (ngSubmit)="invoice()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Customer Name</label>
+          <select formControlName="customername" class="form-select" id="name" required>
+            <option *ngFor="let customer of customers" [value]="customer.customerName">{{ customer.customerName }}</option>
+          </select>
+          <span class="text-danger" *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer Name is required</span>
 
-</div>
-<div class="mb-3">
-<label for="number" class="form-label">Invoice Number</label>
-<input type="text" pattern="[a-zA-Z0-9]{3,10}" formControlName="invoicenumber" class="form-control" id="number" required>
-<span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice Number is required</span>
-<span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('pattern', 'invoicenumber')">*Invoice Number must contain only Alphabets and numbers, no spaces</span>
+        </div>
+        <div class="mb-3">
+          <label for="number" class="form-label">Invoice Number</label>
+          <input type="text" pattern="[a-zA-Z0-9]{3,10}" formControlName="invoicenumber" class="form-control" id="number" required>
+          <span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice Number is required</span>
+          <span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('pattern', 'invoicenumber')">*Invoice Number must contain only Alphabets and numbers, no spaces</span>
 
-</div>
-<div class="mb-3">
-<label for="date" class="form-label">Date</label>
-<input type="date" formControlName="date" class="form-control" id="date" required>
-<span class="text-danger" *ngIf="invoiceForm.controls['date'].dirty && invoiceForm.hasError('required', 'date')">*Date is required</span>
-<span class="text-danger" *ngIf="invoiceForm.get('date')?.errors?.['futureDate']">*Future date is not allowed</span>
-</div>
-<div class="mb-3">
-<label for="product" class="form-label">Product Description</label>
-<input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
-<span class="text-danger" *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('required', 'proddesc')">*Product Description is required</span>
-<span class="text-danger" *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('pattern', 'proddesc')">*Product Description must contain only Alphabets</span>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" formControlName="date" class="form-control" id="date" required>
+          <span class="text-danger" *ngIf="invoiceForm.controls['date'].dirty && invoiceForm.hasError('required', 'date')">*Date is required</span>
+          <span class="text-danger" *ngIf="invoiceForm.get('date')?.errors?.['futureDate']">*Future date is not allowed</span>
+        </div>
+        <div class="mb-3">
+          <label for="product" class="form-label">Product Description</label>
+          <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
+          <span class="text-danger" *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('required', 'proddesc')">*Product Description is required</span>
+          <span class="text-danger" *ngIf="invoiceForm.controls['proddesc'].dirty && invoiceForm.hasError('pattern', 'proddesc')">*Product Description must contain only Alphabets</span>
 
-</div>
-<div class="mb-3">
-<label for="quantity" class="form-label">Quantity</label>
-<input type="number" min="1" formControlName="quantity" class="form-control" id="quantity" required>
-<span class="text-danger" *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('required', 'quantity')">*Quantity is required</span>
-<span class="text-danger" *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('min', 'quantity')">*Quantity cannot be 0 or negative</span>
+        </div>
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input type="number" min="1" formControlName="quantity" class="form-control" id="quantity" required>
+          <span class="text-danger" *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('required', 'quantity')">*Quantity is required</span>
+          <span class="text-danger" *ngIf="invoiceForm.controls['quantity'].dirty && invoiceForm.hasError('min', 'quantity')">*Quantity cannot be 0 or negative</span>
 
-</div>
-<div class="mb-3">
-<label for="price" class="form-label">Price per Unit</label>
-<input type="number" min="0" formControlName="price" class="form-control" id="price" required>
-<span class="text-danger" *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('required', 'price')">*Price is required</span>
-<span class="text-danger" *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('min', 'price')">*Price cannot be negative</span>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price per Unit</label>
+          <input type="number" min="0" formControlName="price" class="form-control" id="price" required>
+          <span class="text-danger" *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('required', 'price')">*Price is required</span>
+          <span class="text-danger" *ngIf="invoiceForm.controls['price'].dirty && invoiceForm.hasError('min', 'price')">*Price cannot be negative</span>
 
-</div>
+        </div>
 
-<div class="mb-3">
-<label for="status" class="form-label">Payment Status</label>&nbsp;
-<select class="form-select" formControlName="status" aria-label="Default select example" class="required">
-<option value="" disabled="disabled">Select Status</option>
-<option value="Paid">Paid</option>
-<option value="Pending">Pending</option>
-</select>
+        <div class="mb-3">
+          <label for="status" class="form-label">Payment Status</label>&nbsp;
+          <select class="form-select" formControlName="status" aria-label="Default select example" class="required">
+            <option value="" disabled="disabled">Select Status</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+          </select>
 
-</div>
-<div class="d-grid mb-3 col-6 mx-auto">
-<button type="submit" class="btn btn-dark" [disabled]="!invoiceForm.valid">Submit</button>
-</div>
-</form>
-</div>
-</div>
+        </div>
+        <div class="d-grid mb-3 col-6 mx-auto">
+          
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
