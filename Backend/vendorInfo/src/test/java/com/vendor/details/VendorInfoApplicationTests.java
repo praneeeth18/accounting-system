@@ -40,9 +40,7 @@ class VendorInfoApplicationTests {
 		Vendor vendor = new Vendor(); // Create a Vendor object as per your requirements
 		when(vendorRepo.save(any())).thenReturn(vendor);
 		VendorServiceImpl vendorService = new VendorServiceImpl(vendorRepo);
-
 		Vendor actualVendor = vendorService.createVendor(vendor);
-
 		assertNotNull(actualVendor);
 	}
 
