@@ -60,14 +60,14 @@ export class SalesByMonthComponent implements OnInit {
         'July', 'August', 'September', 'October', 'November', 'December'
       ];
       const myChart = new Chart("myChart", {
-        type: 'line',
+        type: 'bar',
         data: {
           labels: months,
           datasets: [{
             label: 'Sales per Month',
             data: data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(206, 17, 162, 0.2)',
+            borderColor: 'rgba(206, 17, 162, 1)',
             borderWidth: 1
           }]
         },
