@@ -81,9 +81,7 @@ class VendorInfoApplicationTests {
 		VendorRepository vendorRepo = mock(VendorRepository.class);
 		int vendorId = 1; // Define a vendorId for testing
 		when(vendorRepo.findById(vendorId)).thenReturn(Optional.of(new Vendor()));
-
 		VendorServiceImpl vendorService = new VendorServiceImpl(vendorRepo);
-
 		assertDoesNotThrow(() -> vendorService.deleteVendor(vendorId));
 
 	}
@@ -94,11 +92,8 @@ class VendorInfoApplicationTests {
 		int companyId = 1; // Define a companyId for testing
 		List<Vendor> expectedVendors = new ArrayList<>(); // Define expected vendors for testing
 		when(vendorRepo.findByCompanyId(companyId)).thenReturn(expectedVendors);
-
 		VendorServiceImpl vendorService = new VendorServiceImpl(vendorRepo);
-
 		ResponseEntity<List<Vendor>> response = vendorService.getVendorByCompanyId(companyId);
-
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 		assertEquals(expectedVendors, response.getBody());
 	}
