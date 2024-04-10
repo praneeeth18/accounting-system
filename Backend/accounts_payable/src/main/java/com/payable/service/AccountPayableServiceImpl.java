@@ -2,7 +2,6 @@ package com.payable.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class AccountPayableServiceImpl implements AccountPayableService {
     }
 	
     @Override
-	public ResponseEntity<?> createPayable(AccountPayable accountPayable) {
+	public ResponseEntity<String> createPayable(AccountPayable accountPayable) {
 		try {
 			// Check if the company ID exists
 	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountPayable.getCompanyId());
@@ -34,7 +33,7 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 	        }
 			accountPayable.setTotalAmount(accountPayable.getQuantity() * accountPayable.getPrice());
 			accountPayableDao.save(accountPayable);
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Entry created!"));
+			return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
@@ -88,7 +87,7 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 	}
 
 	@Override
-	public ResponseEntity<?> updatePayable(Long payableId, AccountPayable updatedPayable) {
+	public ResponseEntity<String> updatePayable(Long payableId, AccountPayable updatedPayable) {
 	    try {
 	        // Check if the receivableId exists
 	        if (!accountPayableDao.existsById(payableId)) {
@@ -115,7 +114,7 @@ public class AccountPayableServiceImpl implements AccountPayableService {
 	            existingPayable.setCompanyId(updatedPayable.getCompanyId());
 
 	            accountPayableDao.save(existingPayable);
-	            return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "Payable updated successfully."));
+	            return ResponseEntity.status(HttpStatus.OK).body("Payable updated successfully.");
 	        } else {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payable with ID " + payableId + " not found.");
 	        }
