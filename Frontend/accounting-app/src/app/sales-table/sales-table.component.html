@@ -1,48 +1,45 @@
-
-
-
 <div class="custom-container">
-    <app-dashboard></app-dashboard>
-    <div class="table-container">
-            <div class="text-center">
-                <h1>Sale Details</h1>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Invoice No.</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Product Description</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">View</th>
-                        <th scope="col">Update</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                      <tr *ngFor="let item of invoice">
-                       
-                        <td>{{item.invoiceNumber}}</td>
-                        <td>{{item.dueDate}}</td>
-                        <td>{{item.customerName}}</td>
-                        <td>{{item.productDescription}}</td>
-                        <td>{{item.quantity * item.price}}</td>
-                        <td>{{item.status}}</td>
-                        <td><button (click)="invoiceView(item.receivableId)" class="btn btn-success"
-                            style="margin-left: 10px;">View</button>
-                            </td>
-                            <td>  <button (click)="updateInvoice(item.receivableId)" class="btn btn-primary"
-                              style="margin-left: 10px;">Update</button></td>
-                      </tr>
-                     
-                    </tbody>
-                  </table>
+  <app-dashboard></app-dashboard>
+  <div class="table-container mt-4 mb-4">
+    <div class="text-center">
+      <h1>Sale Details</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Invoice No.</th>
+            <th scope="col">Date</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Product Description</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">View</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let item of paginatedData">
 
-                  <button skipLocationChange routerLink="/invoice-details" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
-            </div>
-        </div>
- 
+            <td>{{item.invoiceNumber}}</td>
+            <td>{{item.dueDate}}</td>
+            <td>{{item.customerName}}</td>
+            <td>{{item.productDescription}}</td>
+            <td>{{item.quantity * item.price}}</td>
+            <td>{{item.status}}</td>
+            <td><button (click)="invoiceView(item.receivableId)" class="btn btn-success"
+                style="margin-left: 10px;">View</button>
+            </td>
+            <td> <button (click)="updateInvoice(item.receivableId)" class="btn btn-primary"
+                style="margin-left: 10px;">Update</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+      <app-pagination [totalItems]="invoice.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+        (onClick)="changePage($event)"></app-pagination>
+
+      <button skipLocationChange routerLink="/invoice-details" class="col-md-12" type="button"
+        class="btn btn-warning">Generate Invoice</button>
     </div>
+  </div>
 
-
-
+</div>

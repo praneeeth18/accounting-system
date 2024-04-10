@@ -9,6 +9,10 @@ import { LedgerService } from '../services/ledger.service';
 export class LedgerTableComponent {
 
   ledger:any;
+
+  itemsPerPage = 4;
+  currentPage = 1;
+
   constructor(
     private ledgerService:LedgerService
    ){} 
@@ -35,5 +39,19 @@ export class LedgerTableComponent {
         }
       });
     }
+  }
+
+
+
+  get paginatedData(){
+    const start = (this.currentPage - 1) * (this.itemsPerPage);
+    const end = start + this.itemsPerPage;
+
+    return this.ledger.slice(start, end);
+  }
+
+
+  changePage(page: number){
+    this.currentPage = page;
   }
 }

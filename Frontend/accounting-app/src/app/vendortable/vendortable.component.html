@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let vendor of vendorList, let i = index">
+                    <tr *ngFor="let vendor of paginatedData, let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>{{vendor.vendorName}}</td>
                         <td>{{vendor.vendorEmail}}</td>
@@ -28,6 +28,8 @@
                 </tbody>
             </table>
 
+            <app-pagination [totalItems]="vendorList.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+            (onClick)="changePage($event)"></app-pagination>
            
             
             <button skipLocationChange routerLink="/vendor" class="col-md-12" type="button" class="btn btn-warning">Add Vendor</button>

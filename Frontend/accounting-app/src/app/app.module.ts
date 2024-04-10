@@ -37,6 +37,7 @@ import { SalesByMonthComponent } from './dash-components/sales-by-month/sales-by
 import { PurchaseByMonthComponent } from './dash-components/purchase-by-month/purchase-by-month.component';
 import { TopWidgetsComponent } from './dash-components/top-widgets/top-widgets.component';
 import { NgxCurrencyDirective } from 'ngx-currency';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { NgxCurrencyDirective } from 'ngx-currency';
     DashboardChartsComponent,
     SalesByMonthComponent,
     PurchaseByMonthComponent,
-    TopWidgetsComponent
+    TopWidgetsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

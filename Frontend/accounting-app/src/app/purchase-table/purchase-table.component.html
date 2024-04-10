@@ -3,7 +3,7 @@
 
 <div class="custom-container">
     <app-dashboard></app-dashboard>
-    <div class="table-container">
+    <div class="table-container mt-4 mb-4">
             <div class="text-center">
                 <h1>Purchase Details</h1>
                 <table class="table">
@@ -20,7 +20,7 @@
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                      <tr *ngFor="let item of purchase">
+                      <tr *ngFor="let item of paginatedData">
                        
                         <td>{{item.invoiceNumber}}</td>
                         <td>{{item.dueDate}}</td>
@@ -37,6 +37,10 @@
                      
                     </tbody>
                   </table>
+
+                  <app-pagination [totalItems]="purchase.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                  (onClick)="changePage($event)"></app-pagination>
+          
 
                   <button skipLocationChange routerLink="/purchase-entry" class="col-md-12" type="button" class="btn btn-warning">Generate Invoice</button>
             </div>

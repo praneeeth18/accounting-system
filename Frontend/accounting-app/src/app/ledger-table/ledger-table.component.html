@@ -1,7 +1,7 @@
 
 <div class="custom-container">
     <app-dashboard></app-dashboard>
-    <div class="table-container">
+    <div class="table-container mt-4 mb-4">
             <div class="text-center">
                 <h1>Ledger Entries</h1>
                 <table class="table">
@@ -16,7 +16,7 @@
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                      <tr *ngFor="let ledgerone of ledger; let i = index">
+                      <tr *ngFor="let ledgerone of paginatedData; let i = index">
                        
                         <td>{{ i + 1 }}</td>
                         <td>{{ledgerone.transactiondate | date}}</td>
@@ -29,6 +29,11 @@
                     </tbody>
                   </table>
 
+
+
+                  <app-pagination [totalItems]="ledger.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+                  (onClick)="changePage($event)"></app-pagination>
+          
                   <button skipLocationChange routerLink="/ledger-entry" class="col-md-12" type="button" class="btn btn-warning">Add Entry</button>
             </div>
         </div>

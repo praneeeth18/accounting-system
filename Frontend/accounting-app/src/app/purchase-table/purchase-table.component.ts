@@ -10,6 +10,8 @@ import { AccountsPayableServiceService } from '../services/accounts-payable-serv
 export class PurchaseTableComponent implements OnInit{
   
   purchase!: any;
+  itemsPerPage = 4;
+  currentPage = 1;
 
   constructor(private router: Router, private payableService: AccountsPayableServiceService) {}
 
@@ -43,4 +45,16 @@ export class PurchaseTableComponent implements OnInit{
     this.router.navigate(['update-purchase-invoice', id], { skipLocationChange: true });
     }
 
+
+    get paginatedData(){
+      const start = (this.currentPage - 1) * (this.itemsPerPage);
+      const end = start + this.itemsPerPage;
+
+      return this.purchase.slice(start, end);
+    }
+  
+
+    changePage(page: number){
+      this.currentPage = page;
+    }
 }

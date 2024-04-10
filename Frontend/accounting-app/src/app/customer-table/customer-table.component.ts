@@ -14,6 +14,10 @@ export class CustomerTableComponent implements OnInit {
 
  
   customer!: any[];
+
+  itemsPerPage = 4;
+  currentPage = 1;
+
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private customerService: CustomerService) { }
 
 
@@ -58,6 +62,20 @@ export class CustomerTableComponent implements OnInit {
      console.log(customerId);
     this.router.navigate(['edit-customer', customerId], { skipLocationChange: true });
    }
+
+
+
+   get paginatedData(){
+    const start = (this.currentPage - 1) * (this.itemsPerPage);
+    const end = start + this.itemsPerPage;
+
+    return this.customer.slice(start, end);
+  }
+
+
+  changePage(page: number){
+    this.currentPage = page;
+  }
 
 }
 
