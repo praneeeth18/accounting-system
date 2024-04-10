@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UserServiceFeingInterface {
 
 	@GetMapping("/user/getDetailsByCompanyId/{id}")
-	public ResponseEntity<?> getDetailsByCompanyId(@PathVariable int id);
+	public ResponseEntity<String> getDetailsByCompanyId(@PathVariable int id);
 }

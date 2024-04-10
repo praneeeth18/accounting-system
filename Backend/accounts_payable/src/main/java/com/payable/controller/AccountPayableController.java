@@ -2,7 +2,6 @@ package com.payable.controller;
  
 import java.util.List;
  
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +20,14 @@ import com.payable.service.AccountPayableServiceImpl;
 @CrossOrigin(origins="http://localhost:4200/")
 public class AccountPayableController {
 	
-	@Autowired
-	private AccountPayableServiceImpl accountPayableServiceImpl;
+	private final AccountPayableServiceImpl accountPayableServiceImpl;
+	
+	public AccountPayableController(AccountPayableServiceImpl accountPayableServiceImpl) {
+        this.accountPayableServiceImpl = accountPayableServiceImpl;
+    }
 	
 	@PostMapping("/createAccountPayable")
-	public ResponseEntity<?> createPayable(@RequestBody AccountPayable accountPayable) {
+	public ResponseEntity<String> createPayable(@RequestBody AccountPayable accountPayable) {
 		return accountPayableServiceImpl.createPayable(accountPayable);
 	}
 	
@@ -46,7 +48,7 @@ public class AccountPayableController {
 	}	
 	
 	@PutMapping("/updatePayable/{payableId}")
-	public ResponseEntity<?> updatePayable(@PathVariable Long payableId, @RequestBody AccountPayable updatedPayable) {
+	public ResponseEntity<String> updatePayable(@PathVariable Long payableId, @RequestBody AccountPayable updatedPayable) {
 	        return accountPayableServiceImpl.updatePayable(payableId, updatedPayable);
 	}
 }
