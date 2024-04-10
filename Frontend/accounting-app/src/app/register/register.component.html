@@ -44,7 +44,7 @@
                     <span class="text-danger" *ngIf="signupForm.controls['address'].dirty && signupForm.hasError('required', 'address')">*Address is required</span>
                 </div>
                 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
                     <input formControlName="city" type="text" class="form-control" id="inputCity" required>
                     <span class="text-danger" *ngIf="signupForm.controls['city'].dirty && signupForm.hasError('required', 'city')">*City is required</span>
@@ -53,7 +53,24 @@
                     <label for="inputState" class="form-label">State</label>
                     <input formControlName="state" type="text" id="inputState" class="form-control" required>
                     <span class="text-danger" *ngIf="signupForm.controls['state'].dirty && signupForm.hasError('required','state')">*State is required</span>
-                </div>
+                </div> -->
+                <div class="col-md-6">
+                    <label for="inputState" class="form-label">State</label>
+                    <select formControlName="state" id="inputState" class="form-select" required>
+                      <option *ngFor="let state of indianStates" [value]="state">{{ state }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="signupForm.controls['state'].dirty && signupForm.hasError('required', 'state')">*State is required</span>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <select formControlName="city" id="inputCity" class="form-select" required>
+                      <option *ngIf="!signupForm.value.state" disabled selected>Select State first</option>
+                      <option *ngFor="let city of citiesByState[signupForm.value.state]" [value]="city">{{ city }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="signupForm.controls['city'].dirty && signupForm.hasError('required', 'city')">*City is required</span>
+                  </div>
+                  
                 <div class="col-md-6">
                     <label for="inputCode" class="form-label">Pincode</label>
                     <input formControlName="pincode" type="text" class="form-control" id="inputCode" required pattern="[0-9]{6}">
