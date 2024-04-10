@@ -3,7 +3,6 @@ package com.dxc.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dxc.dao.LedgerDao;
@@ -12,8 +11,11 @@ import com.dxc.model.Ledger;
 @Service
 public class LedgerServiceImpl implements LedgerServices{
 	
-		@Autowired
-	    private LedgerDao ledgerdao;
+		private final LedgerDao ledgerdao;
+		
+		public LedgerServiceImpl(LedgerDao ledgerdao) {
+	        this.ledgerdao = ledgerdao;
+	    }
 		
 		@Override
 		public List<Ledger> getAllLedger() {

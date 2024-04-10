@@ -1,6 +1,6 @@
 package com.dxc.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class Ledger{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int entryid;
 	private Integer companyId;
-	private Date transactiondate;
+	private LocalDate transactiondate;
 	private String description;
 	private String transactiontype;
 	private double amount;

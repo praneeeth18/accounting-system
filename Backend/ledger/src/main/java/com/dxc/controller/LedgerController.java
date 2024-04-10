@@ -1,9 +1,8 @@
 package com.dxc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import com.dxc.feign.UserServiceFeignInterface;
 import com.dxc.model.Ledger;
-import com.dxc.model.User;
+
 
 import com.dxc.service.LedgerServices;
 
@@ -25,56 +24,59 @@ import com.dxc.service.LedgerServices;
 @CrossOrigin(origins="http://localhost:4200")
 public class LedgerController {
 	
-	ResponseEntity response;
+	private final LedgerServices ledgerservice;
+	private final UserServiceFeignInterface userServiceInterface;
 	
-	@Autowired
-	private RestTemplate restTemplate;	
-	
-	@Autowired
-	private  LedgerServices ledgerservice;
+	public LedgerController(LedgerServices ledgerservice, UserServiceFeignInterface userServiceInterface) {
+        this.ledgerservice = ledgerservice;
+        this.userServiceInterface = userServiceInterface;
+    }
 	
 	@GetMapping("/ledger")
     public ResponseEntity<List<Ledger>> getAllLedger() {
-		List<Ledger> ledger= ledgerservice.getAllLedger();
-		response=new ResponseEntity<List<Ledger>>(ledger, HttpStatus.ACCEPTED);
-        return response;
+		try {
+            List<Ledger> ledger = ledgerservice.getAllLedger();
+            if (ledger.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+            }
+            return new ResponseEntity<>(ledger, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 	
 	@GetMapping("/ledger/{companyId}")
 	public ResponseEntity<List<Ledger>> getLedgerByCompanyId(@PathVariable Integer companyId){
-		List<Ledger> ledger1= ledgerservice.getLedgerByCompanyId(companyId);
-			response=new ResponseEntity<List<Ledger>>(ledger1, HttpStatus.ACCEPTED);
-		return response;
-		
+		try {
+            List<Ledger> ledger1 = ledgerservice.getLedgerByCompanyId(companyId);
+            if (ledger1.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+            }
+            return new ResponseEntity<>(ledger1, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
 	}
 	
 	@PostMapping("/ledger")
     public ResponseEntity<Ledger> postLedger(@RequestBody Ledger ledger) {
-		boolean flag;
-		flag=ledgerservice.createLedger(ledger);
-		
-		if(flag) {
-			response=new ResponseEntity<Ledger>(ledger, HttpStatus.ACCEPTED);
-		}
-		else {
-			response = new ResponseEntity<String>("Check the details ", HttpStatus.BAD_REQUEST);
-		}
-		return response;
+		try {
+			ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(ledger.getCompanyId());
+	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	        }
+            boolean flag = ledgerservice.createLedger(ledger);
+            if (flag) {
+                return new ResponseEntity<>(ledger, HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 	
-	@GetMapping("/{companyId}")
-	public ResponseEntity<Optional<User>> getDetailsByCompanyId(@PathVariable Integer companyId){
-		String url = "http://localhost:8080/user/getDetailsByCompanyId/"+companyId;
-		
-		try {
-			Optional<User> user =restTemplate.getForObject(url, Optional.class);
-			response=new ResponseEntity<Optional<User>>(user, HttpStatus.ACCEPTED);
-		}
-		catch(Exception ex) {
-			
-			ex.printStackTrace();
-		}
-		return response;
-	}
-	 
 }

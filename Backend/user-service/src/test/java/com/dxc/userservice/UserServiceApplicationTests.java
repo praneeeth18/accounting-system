@@ -68,31 +68,23 @@ class UserServiceApplicationTests {
     
     @Test
     void testLogin_Success() throws NoSuchAlgorithmException {
-        // Create a LoginRequest object with valid email and password
+  
         LoginRequest request = new LoginRequest();
         request.setEmail("test@example.com");
         request.setPassword("testPassword");
 
-        // Create a User object with matching email and hashed password
         User user = new User();
         user.setEmail("test@example.com");
-        String hashedPassword = hashPassword("testPassword"); // Hashing the password
+        String hashedPassword = hashPassword("testPassword");
         user.setPassword(hashedPassword);
 
-        // Mocking UserRepository to return optionalUser when findByEmail is called
         Optional<User> optionalUser = Optional.of(user);
         when(userRepository.findByEmail(request.getEmail())).thenReturn(optionalUser);
 
-        // Calling the login method of UserService
         ResponseEntity<Map<String, Object>> responseEntity = userService.login(request);
-
-        // Expected response status code is HttpStatus.OK
+        
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-        // Expected response message is "Login successful!"
         assertEquals("Login successful!", responseEntity.getBody().get("message"));
-
-        // Additional assertion to verify if the returned user object is as expected
         assertEquals(user, responseEntity.getBody().get("user"));
     }
 
