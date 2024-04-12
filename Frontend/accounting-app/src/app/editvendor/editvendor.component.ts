@@ -20,7 +20,7 @@ export class EditvendorComponent implements OnInit{
       ngOnInit(){
   
         this.vendorForm = this.fb.group({
-          vendorName: ['', [Validators.required, Validators.pattern('[a-zA-Z]{2,}')]],
+          vendorName: ['', Validators.required],
           vendorEmail: ['', Validators.required]
         });
         this.vendorId=this.route.snapshot.params['vendorId'];

@@ -12,7 +12,7 @@ export class AccountsPayableServiceService {
   constructor(private httpClient:HttpClient) { }
 
   createPayableInvoice(payableDetails: any): Observable<any> {
-    return this.httpClient.post(this.baseURL + `createAccountPayable`, payableDetails);
+    return this.httpClient.post(this.baseURL + `createAccountPayable`, payableDetails, { responseType: 'text' });
   }
 
   getInvoiceByCompanyId(companyId: number): Observable<any> {
@@ -24,6 +24,6 @@ export class AccountsPayableServiceService {
   }
 
   updateInvoice(payableId: number, payableDetails: any) {
-    return this.httpClient.put(this.baseURL + `updatePayable/${payableId}`, payableDetails);
+    return this.httpClient.put(this.baseURL + `updatePayable/${payableId}`, payableDetails, { responseType: 'text' });
   }
 }

@@ -25,6 +25,6 @@ export class AccountsReceivableServiceService {
   }
 
   updateInvoice(receivableId: number, invoiceDetails: any) {
-    return this.httpClient.put(this.baseURL + `updateReceivable/${receivableId}`, invoiceDetails);
+    return this.httpClient.put(this.baseURL + `updateReceivable/${receivableId}`, invoiceDetails, { responseType: 'text' });
   }
 }
