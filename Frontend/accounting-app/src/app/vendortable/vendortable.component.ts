@@ -12,6 +12,11 @@ export class VendortableComponent implements OnInit {
   constructor( private vendorService :VendorService ,private router:Router){}
 
   public vendorList:any;
+
+  itemsPerPage = 4;
+  currentPage = 1;
+
+  
     ngOnInit(): void {
       const companyId = sessionStorage.getItem('companyId');
       if (companyId) {
@@ -47,6 +52,19 @@ export class VendortableComponent implements OnInit {
   }
 editVendor(vendorId:number){
   this.router.navigate(['/edit',vendorId], { skipLocationChange: true })
+}
+
+
+get paginatedData(){
+  const start = (this.currentPage - 1) * (this.itemsPerPage);
+  const end = start + this.itemsPerPage;
+
+  return this.vendorList.slice(start, end);
+}
+
+
+changePage(page: number){
+  this.currentPage = page;
 }
   
 }

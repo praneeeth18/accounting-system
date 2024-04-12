@@ -16,6 +16,9 @@ export class SalesTableComponent {
 
   invoice!: any;
 
+  itemsPerPage = 4;
+  currentPage = 1;
+
   ngOnInit(){
 
     
@@ -29,6 +32,8 @@ export class SalesTableComponent {
         next: (response) => {
           console.log(response);
           this.invoice = response; // Assign the response data to the invoice property
+           
+          
         },
         error: (error) => {
           console.error('Error fetching invoices:', error);
@@ -46,5 +51,17 @@ export class SalesTableComponent {
 
   updateInvoice(id:number){
     this.router.navigate(['update-invoice', id], { skipLocationChange: true });
+    }
+
+    get paginatedData(){
+      const start = (this.currentPage - 1) * (this.itemsPerPage);
+      const end = start + this.itemsPerPage;
+
+      return this.invoice.slice(start, end);
+    }
+  
+
+    changePage(page: number){
+      this.currentPage = page;
     }
 }
