@@ -8,7 +8,9 @@ import { Ledger } from '../models/ledger';
 })
 export class LedgerService {
 
-  private baseURL = "http://localhost:8081/ledger";
+  private baseURL = "http://localhost:8765/ledger";
+
+
   constructor(private httpClient:HttpClient) { }
 
   createledger(ledger: Ledger):Observable<Object>{
@@ -20,6 +22,6 @@ export class LedgerService {
   }
 
   getLedgerByCompanyId(companyId: number): Observable<Ledger[]> {
-    return this.httpClient.get<Ledger[]>(this.baseURL + `/${companyId}`);
+    return this.httpClient.get<Ledger[]>(this.baseURL + `/ledger/${companyId}`);
   }
 }

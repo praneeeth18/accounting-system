@@ -21,11 +21,6 @@ export class LedgerTableComponent {
   }
 
   get(){
-  //   this.ledgerService.displayledger().subscribe(data=>
-  //     {
-  //       this.ledger=data; 
-  //       console.log(this.ledger);
-  //     });
   const companyId = sessionStorage.getItem('companyId');
     if (companyId) {
       // Parse companyId to number

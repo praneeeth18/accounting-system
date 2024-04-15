@@ -8,16 +8,10 @@ import { Vendor } from '../models/vendor';
 })
 export class VendorService {
 
-  private baseURL = "http://localhost:8085/details";
+  private baseURL = "http://localhost:8765/vendorinfo/details";
+
   constructor( private httpClient: HttpClient) { }
-
-
-public httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin':'*',
-      'Authorization':'authkey'
-    })
-  }
+  
   getVendor(): Observable<Vendor[]>{
     return this.httpClient.get<Vendor[]>(`${this.baseURL}`);
   }

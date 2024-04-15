@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AccountsPayableServiceService {
 
-  private baseURL = "http://localhost:8083/accountPayable/";
+  private baseURL = "http://localhost:8765/accounts-payable/accountPayable/";
 
   constructor(private httpClient:HttpClient) { }
 
