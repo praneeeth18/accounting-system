@@ -10,7 +10,7 @@ export class LedgerTableComponent {
 
   ledger:any;
 
-  itemsPerPage = 4;
+  itemsPerPage = 1;
   currentPage = 1;
 
   constructor(

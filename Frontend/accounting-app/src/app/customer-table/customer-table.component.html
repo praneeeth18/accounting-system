@@ -6,15 +6,15 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">S.NO.</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Customer Name</th>
                         <th scope="col">Customer Email</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let item of paginatedData, let i = index">
-                        <td>{{ i + 1 }}</td>
+                    <tr *ngFor="let item of paginatedData">
+                        <td>{{ item.customerId }}</td>
                         <td>{{item.customerName}}</td>
                         <td>{{item.customerEmail}}</td>
                         <td>

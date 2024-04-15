@@ -16,9 +16,9 @@
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                      <tr *ngFor="let ledgerone of paginatedData; let i = index">
+                      <tr *ngFor="let ledgerone of paginatedData">
                        
-                        <td>{{ i + 1 }}</td>
+                        <td>{{ ledgerone.entryid }}</td>
                         <td>{{ledgerone.transactiondate | date}}</td>
                         <td>{{ledgerone.description}}</td>
                         <td>{{ledgerone.transactiontype}}</td>
