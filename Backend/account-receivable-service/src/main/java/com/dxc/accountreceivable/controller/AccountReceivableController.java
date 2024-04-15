@@ -17,7 +17,6 @@ import com.dxc.accountreceivable.service.AccountReceivableServiceImpl;
 
 @RestController
 @RequestMapping("/accountReceivable")
-@CrossOrigin(origins="http://localhost:4200/")
 public class AccountReceivableController {
 
 	private final AccountReceivableServiceImpl accountReceivableServiceImpl;

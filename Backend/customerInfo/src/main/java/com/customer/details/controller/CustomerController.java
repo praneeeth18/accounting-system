@@ -21,7 +21,6 @@ import com.customer.details.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
   private final CustomerService customerService;

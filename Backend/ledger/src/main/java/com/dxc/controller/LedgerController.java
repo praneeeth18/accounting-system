@@ -21,7 +21,6 @@ import com.dxc.service.LedgerServices;
 
 @RestController
 @RequestMapping
-@CrossOrigin(origins="http://localhost:4200")
 public class LedgerController {
 	
 	private final LedgerServices ledgerservice;

@@ -17,7 +17,6 @@ import com.payable.service.AccountPayableServiceImpl;
  
 @RestController
 @RequestMapping("/accountPayable")
-@CrossOrigin(origins="http://localhost:4200/")
 public class AccountPayableController {
 	
 	private final AccountPayableServiceImpl accountPayableServiceImpl;

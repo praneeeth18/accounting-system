@@ -19,7 +19,6 @@ import com.vendor.details.exception.VendorNotFoundException;
 import com.vendor.details.feign.UserServiceFeignInterface;
 import com.vendor.details.service.VendorService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/details")
 public class VendorController {
