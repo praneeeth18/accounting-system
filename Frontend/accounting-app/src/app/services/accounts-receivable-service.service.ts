@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AccountsReceivableServiceService {
 
-  private baseURL = "http://localhost:8082/accountReceivable/";
+  private baseURL = "http://localhost:8765/accounts-receivable-service/accountReceivable/";
 
   constructor(private httpClient:HttpClient) { }
 

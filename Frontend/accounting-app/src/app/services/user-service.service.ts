@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RegistrationRequest } from '../models/registration-request';
 
-
-const baseURL = 'http://localhost:8080/user/';
+const baseURL = 'http://localhost:8765/user-service/user/';
 
 @Injectable({
   providedIn: 'root'

@@ -8,14 +8,14 @@
             <form [formGroup]="signupForm" (ngSubmit)="signUp()" class="row g-3">
                 <div class="col-12">
                     <label for="inputEmail4" class="form-label">Company Name</label>
-                    <input formControlName="companyname" type="email" class="form-control" id="inputEmail4" pattern="[a-zA-Z\s]{2,60}" required>
+                    <input formControlName="companyname" type="email" class="form-control" pattern="[a-zA-Z\s]{2,60}" required>
                     <span class="text-danger" *ngIf="signupForm.controls['companyname'].dirty && signupForm.hasError('required', 'companyname')">*Company Name is required</span>
                     <span class="text-danger" *ngIf="signupForm.controls['companyname'].dirty && signupForm.hasError('pattern', 'companyname')">*Company Name must contain only Alphabets</span>
                 </div>
     
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Company Email</label>
-                    <input formControlName="companyemail" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="form-control" id="inputEmail4" placeholder="characters@characters.domain">
+                    <input formControlName="companyemail" type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" class="form-control" placeholder="characters@characters.domain">
                     <span class="text-danger" *ngIf="signupForm.controls['companyemail'].dirty && signupForm.hasError('required', 'companyemail')">*Company Email Id is required</span>
                     <span class="text-danger" *ngIf="signupForm.controls['companyemail'].dirty && signupForm.hasError('pattern', 'companyemail')">*Invalid Company Email Id</span>
                 </div>
@@ -28,13 +28,13 @@
                 </div>
                 <div class="col-md-6">
                     <label for="name" class="form-label">CREP First Name</label>
-                    <input formControlName="firstname" type="text" class="form-control" id="name" required pattern="[a-zA-Z\s]{2,60}">
+                    <input formControlName="firstname" type="text" class="form-control" id="firstname" required pattern="[a-zA-Z\s]{2,60}">
                     <span class="text-danger" *ngIf="signupForm.controls['firstname'].dirty && signupForm.hasError('required', 'firstname')">*First Name is required</span>
                     <span class="text-danger" *ngIf="signupForm.controls['firstname'].dirty && signupForm.hasError('pattern', 'firstname')">*Invalid First Name</span>
                 </div>
                 <div class="col-md-6">
                     <label for="name" class="form-label">CREP Last Name</label>
-                    <input formControlName="lastname" type="text" class="form-control" id="name" required  pattern="[a-zA-Z\s]{2,60}">
+                    <input formControlName="lastname" type="text" class="form-control" id="lastname" required  pattern="[a-zA-Z\s]{2,60}">
                     <span class="text-danger" *ngIf="signupForm.controls['lastname'].dirty && signupForm.hasError('required', 'lastname')">*Last Name is required</span>
                     <span class="text-danger" *ngIf="signupForm.controls['lastname'].dirty && signupForm.hasError('pattern', 'lastname')">*Invalid Last Name</span>
                 </div>

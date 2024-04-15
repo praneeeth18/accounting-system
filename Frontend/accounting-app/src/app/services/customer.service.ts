@@ -8,7 +8,7 @@ import { Customer } from '../models/customer';
 })
 export class CustomerService {
 
-  private baseURL = "http://localhost:8084/customer"
+  private baseURL = "http://localhost:8765/customerinfo/customer"
 
   constructor(private httpClient:HttpClient) { }
 
