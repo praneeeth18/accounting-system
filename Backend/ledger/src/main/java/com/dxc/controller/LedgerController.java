@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,7 @@ import com.dxc.model.Ledger;
 import com.dxc.service.LedgerServices;
 
 @RestController
-@RequestMapping
+@RequestMapping("/ledger")
 public class LedgerController {
 	
 	private final LedgerServices ledgerservice;
@@ -31,7 +30,7 @@ public class LedgerController {
         this.userServiceInterface = userServiceInterface;
     }
 	
-	@GetMapping("/ledger")
+	@GetMapping("/getAllEntries")
     public ResponseEntity<List<Ledger>> getAllLedger() {
 		try {
             List<Ledger> ledger = ledgerservice.getAllLedger();
@@ -45,7 +44,7 @@ public class LedgerController {
         }
     }
 	
-	@GetMapping("/ledger/{companyId}")
+	@GetMapping("/getLedgerByCompanyId/{companyId}")
 	public ResponseEntity<List<Ledger>> getLedgerByCompanyId(@PathVariable Integer companyId){
 		try {
             List<Ledger> ledger1 = ledgerservice.getLedgerByCompanyId(companyId);
@@ -59,7 +58,7 @@ public class LedgerController {
         }
 	}
 	
-	@PostMapping("/ledger")
+	@PostMapping("/addEntry")
     public ResponseEntity<Ledger> postLedger(@RequestBody Ledger ledger) {
 		try {
 			ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(ledger.getCompanyId());
