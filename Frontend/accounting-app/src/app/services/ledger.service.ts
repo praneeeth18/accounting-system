@@ -8,20 +8,20 @@ import { Ledger } from '../models/ledger';
 })
 export class LedgerService {
 
-  private baseURL = "http://localhost:8765/ledger";
+  private baseURL = "http://localhost:8765/ledger-service/ledger";
 
 
   constructor(private httpClient:HttpClient) { }
 
   createledger(ledger: Ledger):Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}`,ledger);
+    return this.httpClient.post(`${this.baseURL}/addEntry`,ledger);
   }
 
   displayledger():Observable<Ledger[]>{
-    return this.httpClient.get<Ledger[]>(`${this.baseURL}`);
+    return this.httpClient.get<Ledger[]>(`${this.baseURL}/getAllEntries`);
   }
 
   getLedgerByCompanyId(companyId: number): Observable<Ledger[]> {
-    return this.httpClient.get<Ledger[]>(this.baseURL + `/ledger/${companyId}`);
+    return this.httpClient.get<Ledger[]>(this.baseURL + `/getLedgerByCompanyId/${companyId}`);
   }
 }
