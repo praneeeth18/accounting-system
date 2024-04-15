@@ -12,12 +12,6 @@
                     <span class="text-danger" *ngIf="purchaseForm.controls['vendorName'].dirty && purchaseForm.hasError('required', 'vendorName')">*Vendor Name is required</span>
                 </div>
                 <div class="mb-3">
-                    <label for="number" class="form-label">Invoice Number</label>
-                    <input type="text" pattern="[a-zA-Z0-9]{3,10}" formControlName="invoiceNumber" class="form-control" id="number" required>
-                    <span class="text-danger" *ngIf="purchaseForm.controls['invoiceNumber'].dirty && purchaseForm.hasError('required', 'invoiceNumber')">*Invoice Number is required</span>
-                    <span class="text-danger" *ngIf="purchaseForm.controls['invoiceNumber'].dirty && purchaseForm.hasError('pattern', 'invoiceNumber')">*Invoice Number must contain only Alphabets and numbers</span>
-                </div>
-                <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <input type="date" formControlName="date" class="form-control" id="date" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['date'].dirty && purchaseForm.hasError('required', 'date')">*Date is required</span>

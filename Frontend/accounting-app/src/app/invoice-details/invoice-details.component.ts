@@ -32,7 +32,6 @@ export class InvoiceDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.invoiceForm = this.formBuilder.group({
       customername: ['', Validators.required],
-      invoicenumber:['', Validators.required],
       date:[null, [Validators.required, dateNotInFuture()]],
       proddesc: ['', Validators.required],
       quantity: ['', Validators.required],
@@ -61,7 +60,6 @@ export class InvoiceDetailsComponent implements OnInit{
   invoice() {
     if(this.invoiceForm.valid) {
      const invoiceDetailsRequest = {
-       invoiceNumber: this.invoiceForm.value.invoicenumber,
        customerName: this.invoiceForm.value.customername,
        dueDate: this.invoiceForm.value.date,
        productDescription: this.invoiceForm.value.proddesc,

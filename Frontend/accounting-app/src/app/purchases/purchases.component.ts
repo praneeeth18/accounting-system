@@ -25,7 +25,6 @@ export class PurchasesComponent {
   ngOnInit(): void {
     this.purchaseForm = this.formBuilder.group({
       vendorName: ['', Validators.required],
-      invoiceNumber:['', Validators.required],
       date:[null, [Validators.required, dateNotInFuture()]],
       proddesc: ['', Validators.required],
       quantity: ['', Validators.required],
@@ -54,7 +53,6 @@ export class PurchasesComponent {
   onSubmit() {
     if(this.purchaseForm.valid) {
       const purchaseRequest = {
-        invoiceNumber: this.purchaseForm.value.invoiceNumber,
         vendorName: this.purchaseForm.value.vendorName,
         dueDate: this.purchaseForm.value.date,
         productDescription: this.purchaseForm.value.proddesc,

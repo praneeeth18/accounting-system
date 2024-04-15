@@ -13,13 +13,13 @@
           <span class="text-danger" *ngIf="invoiceForm.controls['customername'].dirty && invoiceForm.hasError('required', 'customername')">*Customer Name is required</span>
 
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="number" class="form-label">Invoice Number</label>
           <input type="text" pattern="[a-zA-Z0-9]{3,10}" formControlName="invoicenumber" class="form-control" id="number" required>
           <span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('required', 'invoicenumber')">*Invoice Number is required</span>
           <span class="text-danger" *ngIf="invoiceForm.controls['invoicenumber'].dirty && invoiceForm.hasError('pattern', 'invoicenumber')">*Invoice Number must contain only Alphabets and numbers, no spaces</span>
 
-        </div>
+        </div> -->
         <div class="mb-3">
           <label for="date" class="form-label">Date</label>
           <input type="date" formControlName="date" class="form-control" id="date" required>
