@@ -22,23 +22,31 @@ public class AccountReceivableServiceImpl implements AccountReceivableService{
         this.accountReceivableRepository = accountReceivableRepository;
         this.userServiceInterface = userServiceInterface;
     }
+    
+    @Override
+    public ResponseEntity<String> createReceivable(AccountReceivable accountReceivable) {
+        try {
+            // Check if the company ID exists
+            ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountReceivable.getCompanyId());
+            if (companyResponse.getStatusCode() != HttpStatus.OK) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+            }
+     
+            accountReceivable.setAmount(accountReceivable.getQuantity() * accountReceivable.getPrice());
+     
+            AccountReceivable savedReceivable = accountReceivableRepository.save(accountReceivable);
 
-	@Override
-	public ResponseEntity<String> createReceivable(AccountReceivable accountReceivable) {
-		try {
-			// Check if the company ID exists
-	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountReceivable.getCompanyId());
-	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
-	        }
-			accountReceivable.setAmount(accountReceivable.getQuantity() * accountReceivable.getPrice());
-			accountReceivableRepository.save(accountReceivable);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
-		}
-	}
+            String invoiceNumber = "ACCR" + savedReceivable.getReceivableId();
+     
+            savedReceivable.setInvoiceNumber(invoiceNumber);
+            accountReceivableRepository.save(savedReceivable);
+     
+            return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
+        }
+    }
 
 	@Override
 	public ResponseEntity<List<AccountReceivable>> getAllAccountReceivable() {

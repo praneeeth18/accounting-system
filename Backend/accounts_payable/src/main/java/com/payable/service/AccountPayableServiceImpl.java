@@ -24,21 +24,30 @@ public class AccountPayableServiceImpl implements AccountPayableService {
     }
 	
     @Override
-	public ResponseEntity<String> createPayable(AccountPayable accountPayable) {
-		try {
-			// Check if the company ID exists
-	        ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountPayable.getCompanyId());
-	        if (companyResponse.getStatusCode() != HttpStatus.OK) {
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
-	        }
-			accountPayable.setTotalAmount(accountPayable.getQuantity() * accountPayable.getPrice());
-			accountPayableDao.save(accountPayable);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
-		}
-	}
+    public ResponseEntity<String> createPayable(AccountPayable accountPayable) {
+        try {
+            // Check if the company ID exists
+            ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(accountPayable.getCompanyId());
+            if (companyResponse.getStatusCode() != HttpStatus.OK) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid company ID!");
+            }
+            
+            accountPayable.setTotalAmount(accountPayable.getQuantity() * accountPayable.getPrice());
+            
+            AccountPayable savedPayable = accountPayableDao.save(accountPayable);
+            
+            String invoiceNumber = "ACCP" + savedPayable.getPayableId(); 
+            
+            savedPayable.setInvoiceNumber(invoiceNumber);
+            accountPayableDao.save(savedPayable);
+            
+            return ResponseEntity.status(HttpStatus.CREATED).body("Entry created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the entry!");
+        }
+    }
+
 
 	@Override
 	public ResponseEntity<List<AccountPayable>> getAllAccountPayable() {
