@@ -10,4 +10,5 @@ import com.customer.details.model.Customer;
 @Repository
 public interface CustomerDao extends JpaRepository<Customer,Integer>  {
 	List<Customer> findByCompanyId(int companyId);
+	Customer findByCustomerEmail(String email);
 }

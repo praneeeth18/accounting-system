@@ -19,4 +19,6 @@ public interface CustomerService {
 	void deleteCustomer(int customerId);
 	
 	ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId);
+	
+	Customer getCustomerByEmail(String email);
 }

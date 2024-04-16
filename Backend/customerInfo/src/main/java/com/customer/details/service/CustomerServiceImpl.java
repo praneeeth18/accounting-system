@@ -69,6 +69,12 @@ public class CustomerServiceImpl implements CustomerService {
   private static String getNotFoundExceptionMessage(int customerId) {
     return "Customer with ID " + customerId + " not found";
     }
+  
+  @Override
+  public Customer getCustomerByEmail(String email) {
+	    return customerDao.findByCustomerEmail(email);
+	}
+
     
   @Override
   public ResponseEntity<List<Customer>> getCustomerByCompanyId(int companyId) {

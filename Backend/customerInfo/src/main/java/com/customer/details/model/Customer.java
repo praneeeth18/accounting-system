@@ -25,6 +25,5 @@ public class Customer {
   @NotBlank(message = "Email cannot be blank")
   @Pattern(regexp = "^[\\p{L}0-9._%+-]+@[\\p{L}0-9.-]+\\.[\\p{L}]{2,}$", message = "Email should be valid")
   private String customerEmail;
-  private String customerAddress;
   private int companyId;
 }

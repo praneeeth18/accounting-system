@@ -47,19 +47,31 @@ public class CustomerController {
     }
 
   @PostMapping
-  public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-    try {
-      ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
-      if (companyResponse.getStatusCode() != HttpStatus.OK) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-            }
-      Customer createdCustomer = customerService.createCustomer(customer);
-      return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
-        } catch (Exception e) {
-      e.printStackTrace();
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+  public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
+      try {
+
+          Customer existingCustomer = customerService.getCustomerByEmail(customer.getCustomerEmail());
+          if (existingCustomer != null) {
+              return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+          }
+
+          ResponseEntity<?> companyResponse = userServiceInterface.getDetailsByCompanyId(customer.getCompanyId());
+          if (companyResponse.getStatusCode() != HttpStatus.OK) {
+              return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to retrieve company details");
+          }
+
+          Customer createdCustomer = customerService.createCustomer(customer);
+          if (createdCustomer != null) {
+              return ResponseEntity.status(HttpStatus.CREATED).body("Customer created successfully");
+          } else {
+              return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create customer");
+          }
+      } catch (Exception e) {
+          e.printStackTrace();
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+      }
+  }
+
 
   @PutMapping("/{id}")
   public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
