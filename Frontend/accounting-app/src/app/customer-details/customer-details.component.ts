@@ -17,7 +17,6 @@ export class CustomerDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
       customerName: ['', Validators.required],
-      customerAddress:['', Validators.required],
       customerEmail:['', Validators.required]
      
     })
@@ -31,7 +30,6 @@ export class CustomerDetailsComponent implements OnInit{
         const customerDetails = {
           customerName: this.customerForm.value.customerName,
           customerEmail: this.customerForm.value.customerEmail,
-          customerAddress: this.customerForm.value.customerAddress,
           companyId: sessionStorage.getItem('companyId')
         }
         this.customerService.createCustomer(customerDetails).subscribe({

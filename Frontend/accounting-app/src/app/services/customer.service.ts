@@ -13,12 +13,12 @@ export class CustomerService {
   constructor(private httpClient:HttpClient) { }
 
 
-  getCustomer(): Observable<Customer[]>{
+  getCustomer(): Observable<any>{
     return this.httpClient.get<Customer[]>(`${this.baseURL}`);
   }
 
   createCustomer(customer: any): Observable<any>{
-    return this.httpClient.post(`${this.baseURL}`, customer);
+    return this.httpClient.post(`${this.baseURL}`, customer, { responseType: 'text' });
   }
   deleteCustomerById(customerId: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}/${customerId}`);

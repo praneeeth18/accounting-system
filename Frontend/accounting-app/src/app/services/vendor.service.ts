@@ -17,7 +17,7 @@ export class VendorService {
   }
 
   createVendor(vendor: any): Observable<any>{
-    return this.httpClient.post(`${this.baseURL}`, vendor);
+    return this.httpClient.post(`${this.baseURL}`, vendor, { responseType: 'text' });
   }
   deleteVendorById(vendorId: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}/${vendorId}`);

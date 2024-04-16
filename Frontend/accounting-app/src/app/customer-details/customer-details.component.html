@@ -14,12 +14,12 @@
                 </div>
 
 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="Address" class="form-label">Customer Address</label>
                     <input type="text" formControlName="customerAddress" class="form-control" id="Address" required>
                     <span class="text-danger" *ngIf="customerForm.controls['customerAddress'].dirty && customerForm.hasError('required', 'customerAddress')">*Address is required</span>
                    
-                </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Customer Email</label>
                     <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" formControlName="customerEmail" class="form-control" id="email" placeholder="characters@characters.domain" required>
