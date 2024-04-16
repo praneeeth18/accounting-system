@@ -1,25 +1,29 @@
 <div class="custom-container">
     <app-dashboard></app-dashboard>
-  <div class="invoice-container">
+    <div class="invoice-container mt-4 mb-4">
       <h1 class="text-center">Invoice Details</h1>
-    <!--  <div class="company-details">
-        <h2>Company Details</h2>
-        <p><strong>Company Name:</strong> {{ company.companyname }}</p>
-        <p><strong>Email:</strong> {{ company.companyemail }}</p>
-        <p><strong>Address:</strong> {{ company.address }}, {{ company.city }}, {{ company.state }}, {{ company.country }}, {{ company.pincode }}</p>
-      </div>-->
+      <div class="company-details">
+        <h5>Company Details</h5>
+        <p><strong>Company Name:</strong> {{ currentUser?.companyName }}</p>
+        <p><strong>Email:</strong> {{ currentUser?.email }}</p>
+        <p><strong>Address:</strong> {{ currentUser?.address}}, {{ currentUser?.city}}, {{ currentUser?.state}}-{{ currentUser?.pinCode}} {{ currentUser?.country}}</p>
+      </div>
+      <br>
       <div class="invoice-details">
        
         <p><strong>Invoice Number:</strong> {{ purchase.invoiceNumber }}</p>
         <p><strong>Date:</strong> {{ purchase.dueDate }}</p>
+        <br>
+        <h5>Vendor Details</h5>
         <p><strong>Vendor Name:</strong> {{ purchase.vendorName }}</p>
       </div>
+      <br>
       <div class="product-details">
         <h2>Product Details</h2>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Product Description</th>
+              <th scope="col">Product Name</th>
               <th scope="col">Price/Unit</th>
               <th scope="col">Quantity</th>
               <th scope="col">Amount</th>

@@ -12,7 +12,7 @@
                         <th scope="col">Invoice No.</th>
                         <th scope="col">Date</th>
                         <th scope="col">Vendor Name</th>
-                        <th scope="col">Product Description</th>
+                        <th scope="col">Product Name</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col">Status</th>
                         <th scope="col">View</th>
@@ -20,7 +20,7 @@
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                      <tr *ngFor="let item of purchase">
+                      <tr *ngFor="let item of paginatedData">
                        
                         <td>{{item.invoiceNumber}}</td>
                         <td>{{item.dueDate}}</td>

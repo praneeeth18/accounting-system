@@ -22,6 +22,6 @@
 }
 
 .table {
-    width: 50rem; /* Set desired width of the table */
+    width: 100%; /* Set desired width of the table */
     overflow-y: auto; /* Add vertical scrollbar if necessary */
 }

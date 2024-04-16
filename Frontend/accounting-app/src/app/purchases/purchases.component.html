@@ -15,11 +15,11 @@
                     <label for="date" class="form-label">Date</label>
                     <input type="date" formControlName="date" class="form-control" id="date" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['date'].dirty && purchaseForm.hasError('required', 'date')">*Date is required</span>
-                    <span class="text-danger" *ngIf="purchaseForm.get('date')?.errors?.['futureDate']">*Future date is not allowed</span>
+                    <span class="text-danger" *ngIf="purchaseForm.get('date')?.errors?.['futureDate']">*Future date or date less than 7 days from current date is not allowed</span>
 
                 </div>
                 <div class="mb-3">
-                    <label for="product" class="form-label">Product Description</label>
+                    <label for="product" class="form-label">Product Name</label>
                     <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('required', 'proddesc')">*Product Description is required</span>
                     <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('pattern', 'proddesc')">*Product Description must contain only Alphabets</span>
