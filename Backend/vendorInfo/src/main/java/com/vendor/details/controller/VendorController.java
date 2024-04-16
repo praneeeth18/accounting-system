@@ -48,18 +48,26 @@ public class VendorController {
     }
 
   @PostMapping
-  public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor) {
+  public ResponseEntity<String> createVendor(@RequestBody Vendor vendor) {
     try {
+      Vendor existingVendor = vendorService.getVendorByEmail(vendor.getVendorEmail());
+      if (existingVendor != null) {
+          return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+      }
       var companyResponse = userServiceInterface.getDetailsByCompanyId(vendor.getCompanyId()); 
       if (companyResponse.getStatusCode() != HttpStatus.OK) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
       var createdVendor = vendorService.createVendor(vendor); 
-      return new ResponseEntity<>(createdVendor, HttpStatus.CREATED);
-        } catch (Exception e) {
-      e.printStackTrace();
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+      if (createdVendor != null) {
+          return ResponseEntity.status(HttpStatus.CREATED).body("Vendor created successfully");
+      } else {
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create vendor");
+      }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+      }
     }
 
   @PutMapping("/{id}")

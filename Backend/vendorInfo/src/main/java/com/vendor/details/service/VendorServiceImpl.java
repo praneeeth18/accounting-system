@@ -85,4 +85,9 @@ public class VendorServiceImpl implements VendorService {
     }
   }
 
+	@Override
+	public Vendor getVendorByEmail(String email) {
+		return vendorRepo.findByVendorEmail(email);
+	}
+
 }

@@ -20,4 +20,5 @@ public interface VendorService {
 	
 	ResponseEntity<List<Vendor>> getVendorByCompanyId(int companyId);
 
+	Vendor getVendorByEmail(String email);
 }
