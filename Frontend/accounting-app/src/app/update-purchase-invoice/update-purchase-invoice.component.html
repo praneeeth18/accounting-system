@@ -26,8 +26,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="product" class="form-label">Product Description</label>
-                    <input type="text" pattern="[a-zA-Z\s]{2,60}" [(ngModel)]="purchase.productDescription" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
+                    <input type="text" pattern="[a-zA-Z\s]{2,60}" formControlName="proddesc" class="form-control" id="product" aria-describedby="emailHelp" required>
                     <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('required', 'proddesc')">*Product Description is required</span>
+                    <span class="text-danger" *ngIf="purchaseForm.controls['proddesc'].dirty && purchaseForm.hasError('pattern', 'proddesc')">*Product Description must contain only Alphabets</span>
                 </div>
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label>
