@@ -15,8 +15,8 @@
                         <th scope="col">Product Name</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col">Status</th>
-                        <th scope="col">View</th>
-                        <th scope="col">Update</th>
+                        <th scope="col">Actions</th>
+                        
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -28,11 +28,11 @@
                         <td>{{item.productDescription}}</td>
                         <td>{{item.quantity * item.price}}</td>
                         <td>{{item.status}}</td>
-                        <td><button (click)="purchaseView(item.payableId)" class="btn btn-success"
-                            style="margin-left: 10px;">View</button>
-                            </td>
-                            <td>  <button (click)="updateInvoice(item.payableId)" class="btn btn-primary"
-                              style="margin-left: 10px;">Update</button></td>
+                        <td><button (click)="purchaseView(item.payableId)" class="btn btn-info"
+                            style="margin-right: 10px;"><i class="lni lni-eye"></i></button>
+                            
+                          <button (click)="updateInvoice(item.payableId)" class="btn btn-success"
+                              ><i class="lni lni-pencil"></i></button></td>
                       </tr>
                      
                     </tbody>

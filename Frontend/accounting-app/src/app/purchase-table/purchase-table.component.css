@@ -25,3 +25,25 @@
     width: 100%; /* Set desired width of the table */
     overflow-y: auto; /* Add vertical scrollbar if necessary */
 }
+
+.btn-success{
+    background-color: rgb(184, 116, 237);
+    border-color: rgb(184, 116, 237);
+    border-radius: 80%;
+    
+    }
+  
+    .btn-success:hover{
+      background-color: rgb(127, 10, 216);
+      
+      }
+  
+    .btn-info{
+      background-color: rgb(43, 186, 226);
+      border-color: rgb(43, 186, 226);
+      border-radius: 80%;
+      }
+  
+      .btn-info:hover{
+          background-color: rgb(13, 132, 165);
+          }
