@@ -25,12 +25,12 @@
                         type="text"
                         formControlName="description"
                         id="description"
-                        pattern="[a-zA-Z\s]{5,30}"
+                        pattern="[a-zA-Z\s]{5,100}"
                         placeholder="Description about sales/purchase"
                         required
                     />
                     <span class="text-danger" *ngIf="ledgerForm.get('description')?.touched && ledgerForm.get('description')?.errors?.['required']">Description is required.</span>
-                    <span class="text-danger" *ngIf="ledgerForm.get('description')?.touched && ledgerForm.get('description')?.errors?.['pattern']">Description must be between 5 to 30 characters and can contain only letters and spaces.</span>
+                    <span class="text-danger" *ngIf="ledgerForm.get('description')?.touched && ledgerForm.get('description')?.errors?.['pattern']">Description must be between 5 to 100 characters and can contain only letters and spaces.</span>
                 </div>
                 
                 <div class="mb-3">
