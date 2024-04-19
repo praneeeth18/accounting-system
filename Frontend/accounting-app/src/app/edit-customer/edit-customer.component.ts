@@ -23,7 +23,6 @@ export class EditCustomerComponent implements OnInit {
 
     this.customerForm = this.formBuilder.group({
       customerName: ['', Validators.required],
-      customerAddress:['', Validators.required],
       customerEmail:['', Validators.required]
      
     });

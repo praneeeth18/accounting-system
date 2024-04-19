@@ -34,7 +34,7 @@ export class UpdateInvoiceComponent implements OnInit{
     this.invoiceForm = this.formBuilder.group({
       customername: ['', Validators.required],
       invoicenumber:['', Validators.required],
-      date:[null, [Validators.required, dateNotInFuture()]],
+      date:[null, Validators.required],
       proddesc: ['', Validators.required],
       quantity: ['', Validators.required],
       price:['', Validators.required],
