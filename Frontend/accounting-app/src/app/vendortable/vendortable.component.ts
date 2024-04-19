@@ -13,7 +13,7 @@ export class VendortableComponent implements OnInit {
 
   public vendorList:any;
 
-  itemsPerPage = 4;
+  itemsPerPage = 5;
   currentPage = 1;
 
   

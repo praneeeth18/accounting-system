@@ -10,7 +10,7 @@ import { AccountsPayableServiceService } from '../services/accounts-payable-serv
 export class PurchaseTableComponent implements OnInit{
   
   purchase!: any;
-  itemsPerPage = 4;
+  itemsPerPage = 5;
   currentPage = 1;
 
   constructor(private router: Router, private payableService: AccountsPayableServiceService) {}

@@ -15,7 +15,7 @@ export class CustomerTableComponent implements OnInit {
  
   customer!: any[];
 
-  itemsPerPage = 4;
+  itemsPerPage = 5;
   currentPage = 1;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private customerService: CustomerService) { }

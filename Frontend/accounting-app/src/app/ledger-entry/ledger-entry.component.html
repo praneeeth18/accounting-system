@@ -15,7 +15,7 @@
                         required
                     />
                     <span class="text-danger" *ngIf="ledgerForm.get('transactiondate')?.touched && ledgerForm.get('transactiondate')?.errors?.['required']">Transaction Date is required.</span>
-                    <span class="text-danger" *ngIf="ledgerForm.get('transactiondate')?.touched && ledgerForm.get('transactiondate')?.errors?.['futureDate']">Future date is not allowed.</span>
+                    <span class="text-danger" *ngIf="ledgerForm.get('transactiondate')?.touched && ledgerForm.get('transactiondate')?.errors?.['futureDate']">*Future date or date less than 7 days from current date is not allowed.</span>
                 </div>
                 
                 <div class="mb-3">

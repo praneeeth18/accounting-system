@@ -16,7 +16,7 @@ export class SalesTableComponent {
 
   invoice!: any;
 
-  itemsPerPage = 4;
+  itemsPerPage = 5;
   currentPage = 1;
 
   ngOnInit(){
